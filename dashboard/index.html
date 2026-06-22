@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pretty Good AI Dashboard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1115;
+      --panel: #171b22;
+      --panel-2: #1f2430;
+      --border: #2d3442;
+      --text: #e8edf7;
+      --muted: #9aa7bd;
+      --accent: #4f8cff;
+      --green: #2fbf71;
+      --yellow: #f1c453;
+      --red: #ef6461;
+      --blue: #5aa9ff;
+      --gray: #7f8aa3;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      background: linear-gradient(180deg, #0d1014, #11161d 60%, #0d1014);
+      color: var(--text);
+    }
+    .app {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 12, 16, 0.86);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.01em;
+    }
+    .brand .subtle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray); }
+    .dot.ok { background: var(--green); }
+    .dot.busy { background: var(--yellow); }
+    main {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 14px;
+      padding: 14px;
+      min-height: 0;
+    }
+    .sidebar, .content {
+      min-height: 0;
+      display: grid;
+      gap: 14px;
+    }
+    .sidebar { grid-template-rows: auto auto 1fr; }
+    .content { grid-template-rows: auto 1fr auto; }
+    .panel {
+      background: rgba(23, 27, 34, 0.96);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 0;
+    }
+    .panel.collapsed .panel-body {
+      display: none;
+    }
+    .panel .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    }
+    .panel .panel-head h2 {
+      margin: 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .panel .panel-head .icon-button {
+      width: auto;
+      min-width: 0;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: transparent;
+      border-color: var(--border);
+    }
+    .panel .panel-body {
+      padding: 16px;
+      min-height: 0;
+    }
+    select, button, input {
+      font: inherit;
+      color: var(--text);
+      background: #11161d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    button {
+      background: linear-gradient(180deg, #5c8fff, #4f8cff);
+      border-color: #4f8cff;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .stack { display: grid; gap: 12px; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .muted { color: var(--muted); }
+    .objective {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .scenario-list {
+      display: grid;
+      gap: 8px;
+      max-height: 240px;
+      overflow: auto;
+    }
+    .scenario-card {
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      cursor: default;
+    }
+    .scenario-card.active {
+      border-color: #5d86d9;
+      box-shadow: inset 0 0 0 1px rgba(79, 140, 255, 0.2);
+    }
+    .scenario-card .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .scenario-card .name {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .scenario-card .desc {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .scenario-facts {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      display: grid;
+      gap: 4px;
+    }
+    .scenario-card input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+    }
+    .list {
+      display: grid;
+      gap: 8px;
+      max-height: 100%;
+      overflow: auto;
+    }
+    .list-item {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel-2);
+      cursor: pointer;
+    }
+    .list-item:hover { border-color: #4461a8; }
+    .list-item .topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .list-item .bottomline {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .history-body, .bugs-body, .transcript-body {
+      overflow: auto;
+      max-height: 100%;
+    }
+    .bubble {
+      padding: 12px 14px;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      max-width: 84%;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .bubble.office {
+      margin-right: auto;
+      background: #202634;
+    }
+    .bubble.patient {
+      margin-left: auto;
+      background: #16304f;
+      border-color: #28568c;
+    }
+    .bubble .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .banner {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #10161f;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .banner.good { border-color: rgba(47, 191, 113, 0.4); color: #bff4d2; }
+    .banner.warn { border-color: rgba(241, 196, 83, 0.4); color: #f7e4b0; }
+    .kv {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 8px 12px;
+      font-size: 13px;
+    }
+    .kv div { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .kv .key { color: var(--muted); }
+    .severity.high { background: rgba(239,100,97,0.18); color: #ffb6b4; }
+    .severity.medium { background: rgba(241,196,83,0.18); color: #ffe29d; }
+    .severity.low { background: rgba(127,138,163,0.18); color: #d1d7e4; }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .table th, .table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-align: left;
+      vertical-align: top;
+    }
+    .table th { color: var(--muted); font-weight: 600; }
+    .table tr:hover td { background: rgba(255,255,255,0.02); }
+    .empty {
+      color: var(--muted);
+      padding: 24px 4px;
+      text-align: center;
+    }
+    .footer-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .recording-playback {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #0f141c;
+    }
+    .recording-playback audio {
+      width: 100%;
+    }
+    .terminal-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .terminal-tab {
+      width: auto;
+      min-width: 0;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: transparent;
+      border-color: var(--border);
+    }
+    .terminal-tab.active {
+      background: #22314a;
+      border-color: #4f8cff;
+    }
+    .terminal {
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #090d13;
+      color: #d9e2f2;
+      font-family: Consolas, "Cascadia Mono", "SFMono-Regular", monospace;
+      font-size: 12px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 240px;
+      overflow: auto;
+    }
+    .terminal .dim {
+      color: #8ea0bf;
+    }
+    @media (max-width: 1100px) {
+      main { grid-template-columns: 1fr; }
+      .sidebar { grid-template-rows: auto auto auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <h1>Pretty Good AI Dashboard</h1>
+        <div class="subtle">Live call control, transcript stream, and bug review</div>
+      </div>
+      <div class="header-meta">
+        <span class="chip"><span id="server-dot" class="dot"></span><span id="server-status">loading</span></span>
+        <span class="chip" id="engine-chip">engine: -</span>
+        <span class="chip" id="baseurl-chip">base: -</span>
+        <span class="chip" id="call-chip">call: none</span>
+        <span class="chip" id="batch-chip">batch: idle</span>
+        <span class="chip" id="timer-chip">00:00</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="sidebar">
+        <div class="panel">
+          <div class="panel-head"><h2>Scenario picker</h2></div>
+          <div class="panel-body stack">
+            <select id="scenario-select"></select>
+            <div class="objective" id="scenario-objective">Select a scenario to see the objective.</div>
+            <div class="row">
+              <button id="call-button">Start selected</button>
+              <button id="queue-button" type="button">Run selected queue</button>
+              <button id="run-all-button" type="button">Run all</button>
+            </div>
+            <div class="scenario-list" id="scenario-list"></div>
+            <div class="footer-note" id="call-result"></div>
+          </div>
+        </div>
+
+        <div class="panel" id="history-panel">
+          <div class="panel-head">
+            <h2>Call history</h2>
+            <div class="row">
+              <span class="muted" id="history-count">0</span>
+              <button class="icon-button" id="history-toggle" type="button" aria-expanded="true">Collapse</button>
+            </div>
+          </div>
+          <div class="panel-body history-body">
+            <div class="list" id="call-history"></div>
+          </div>
+        </div>
+
+        <div class="panel" id="bugs-panel">
+          <div class="panel-head">
+            <h2>Bugs</h2>
+            <div class="row">
+              <span class="muted" id="bug-count">0</span>
+              <button class="icon-button" id="bugs-toggle" type="button" aria-expanded="true">Collapse</button>
+            </div>
+          </div>
+          <div class="panel-body bugs-body">
+            <table class="table">
+              <thead>
+                <tr><th>ID</th><th>Severity</th><th>Scenario</th><th>Title</th></tr>
+              </thead>
+              <tbody id="bug-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Live call</h2>
+            <div class="header-meta">
+              <span class="chip" id="live-scenario">scenario: -</span>
+              <span class="chip" id="live-status">status: idle</span>
+              <span class="chip" id="live-call-sid">sid: -</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div id="live-banner" class="banner">No live call selected.</div>
+            <div class="transcript-body" id="live-transcript"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Live terminals</h2>
+            <div class="terminal-tabs">
+              <button class="terminal-tab active" data-log-source="app" type="button">App</button>
+              <button class="terminal-tab" data-log-source="uvicorn" type="button">Uvicorn</button>
+              <button class="terminal-tab" data-log-source="ngrok" type="button">ngrok</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="muted" id="live-log-status">Showing app logs.</div>
+            <div class="terminal" id="live-terminal">Waiting for logs...</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Call memory</h2>
+            <div class="muted" id="memory-updated">not loaded</div>
+          </div>
+          <div class="panel-body">
+            <div id="memory-empty" class="empty">No call loaded.</div>
+            <div class="kv" id="memory-grid" hidden></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Loaded transcript</h2>
+            <div class="row">
+              <span class="muted" id="detail-path">-</span>
+              <button id="return-live-button" type="button">Return to live</button>
+            </div>
+          </div>
+          <div class="panel-body transcript-body" id="detail-transcript"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const state = {
+      scenarios: [],
+      bugs: [],
+      calls: [],
+      currentCallSid: null,
+      currentScenarioId: null,
+      eventSource: null,
+      callStartedAt: null,
+      timerHandle: null,
+      pendingDetailRefresh: null,
+      viewingMode: "live",
+      batchRunning: false,
+      completionWaiter: null,
+      completionResolver: null,
+      suppressDisconnectedBanner: false,
+      selectedScenarioIds: [],
+      liveLogSource: "app",
+      liveLogTimer: null,
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function setStatus(text, ok = false) {
+      $("server-status").textContent = text;
+      $("server-dot").className = "dot " + (ok ? "ok" : "");
+    }
+
+    function formatDuration(startedAt) {
+      if (!startedAt) return "00:00";
+      const start = new Date(startedAt).getTime();
+      if (Number.isNaN(start)) return "00:00";
+      const elapsed = Math.max(0, Math.floor((Date.now() - start) / 1000));
+      const mm = String(Math.floor(elapsed / 60)).padStart(2, "0");
+      const ss = String(elapsed % 60).padStart(2, "0");
+      return `${mm}:${ss}`;
+    }
+
+    function startTimer() {
+      stopTimer();
+      state.timerHandle = setInterval(() => {
+        $("timer-chip").textContent = formatDuration(state.callStartedAt);
+      }, 1000);
+      $("timer-chip").textContent = formatDuration(state.callStartedAt);
+    }
+
+    function stopTimer() {
+      if (state.timerHandle) {
+        clearInterval(state.timerHandle);
+        state.timerHandle = null;
+      }
+    }
+
+    function clearNode(node) {
+      while (node.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function sanitizeRecordingPath(record) {
+      if (!record) return "";
+      if (record.recording_path) {
+        const filename = String(record.recording_path).split(/[\\/]/).pop();
+        return `/recordings/${encodeURIComponent(filename)}`;
+      }
+      return record.recording_url || "";
+    }
+
+    function appendBanner(text, kind = "") {
+      const banner = $("live-banner");
+      banner.textContent = text;
+      banner.className = kind ? `banner ${kind}` : "banner";
+    }
+
+    function syncBatchChip() {
+      if (state.batchRunning) {
+        $("batch-chip").textContent = `batch: running (${state.selectedScenarioIds.length || 1} selected)`;
+        $("batch-chip").style.borderColor = "#5c8fff";
+        return;
+      }
+      const selectedCount = state.selectedScenarioIds.length;
+      $("batch-chip").textContent = selectedCount ? `batch: ${selectedCount} selected` : "batch: idle";
+      $("batch-chip").style.borderColor = "";
+    }
+
+    function setCompletionWaiter(callSid) {
+      if (state.completionResolver) {
+        state.completionResolver({ callSid: null, reason: "superseded" });
+      }
+      state.completionWaiter = callSid;
+      return new Promise((resolve) => {
+        state.completionResolver = resolve;
+      });
+    }
+
+    function resolveCompletionWaiter(payload) {
+      if (state.completionResolver) {
+        state.completionResolver(payload);
+      }
+      state.completionResolver = null;
+      state.completionWaiter = null;
+    }
+
+    function addTranscriptBubble(turn) {
+      const body = $("live-transcript");
+      const bubble = document.createElement("div");
+      const speaker = String(turn.speaker || "unknown");
+      bubble.className = `bubble ${speaker === "office" ? "office" : "patient"}`;
+
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      const left = document.createElement("span");
+      left.textContent = speaker;
+      const right = document.createElement("span");
+      right.textContent = turn.ts ? new Date(turn.ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+      meta.append(left, right);
+
+      const text = document.createElement("div");
+      text.textContent = turn.text || "";
+
+      bubble.append(meta, text);
+      body.appendChild(bubble);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function addDetailBubble(turn) {
+      const body = $("detail-transcript");
+      const bubble = document.createElement("div");
+      bubble.className = `bubble ${turn.speaker === "office" ? "office" : "patient"}`;
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      meta.innerHTML = `<span>${turn.speaker || "unknown"}</span><span>${turn.ts ? new Date(turn.ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : ""}</span>`;
+      const text = document.createElement("div");
+      text.textContent = turn.text || "";
+      bubble.append(meta, text);
+      body.appendChild(bubble);
+    }
+
+    function appendRecordingPlayback(record, target) {
+      const url = sanitizeRecordingPath(record);
+      if (!url) return;
+      const wrap = document.createElement("div");
+      wrap.className = "recording-playback";
+      const label = document.createElement("div");
+      label.className = "muted";
+      label.textContent = record.recording_path || record.recording_url || "Recording available";
+      const audio = document.createElement("audio");
+      audio.controls = true;
+      audio.preload = "none";
+      audio.src = url;
+      wrap.append(label, audio);
+      target.appendChild(wrap);
+    }
+
+    function setLiveLogSource(source) {
+      state.liveLogSource = source;
+      document.querySelectorAll(".terminal-tab").forEach((button) => {
+        button.classList.toggle("active", button.dataset.logSource === source);
+      });
+      $("live-log-status").textContent = `Showing ${source} logs.`;
+      refreshLiveLogs();
+    }
+
+    async function refreshLiveLogs() {
+      try {
+        const data = await fetchJson(`/api/live-logs?source=${encodeURIComponent(state.liveLogSource)}&limit=120`);
+        const items = data.items || [];
+        const text = items.length
+          ? items.map((item) => item.line || "").join("\n")
+          : "No log lines yet.";
+        $("live-terminal").textContent = text;
+        $("live-terminal").scrollTop = $("live-terminal").scrollHeight;
+      } catch (error) {
+        $("live-terminal").textContent = `Unable to load logs: ${error.message}`;
+      }
+    }
+
+    function renderMemory(record) {
+      const memory = record && record.call_memory ? record.call_memory : {};
+      const grid = $("memory-grid");
+      const empty = $("memory-empty");
+      clearNode(grid);
+
+      const confirmed = memory.confirmed_facts || {};
+      const rows = [
+        ["scenario", memory.scenario_id || record.scenario_id || "-"],
+        ["phase", memory.phase || "-"],
+        ["turn count", memory.turn_count ?? record.turn_count ?? 0],
+        ["last office question", memory.last_office_question || "-"],
+        ["last patient answer", memory.last_patient_answer || "-"],
+      ];
+      Object.entries(confirmed).forEach(([key, value]) => {
+        rows.push([`confirmed ${key}`, value]);
+      });
+
+      if (!rows.length) {
+        empty.hidden = false;
+        grid.hidden = true;
+        return;
+      }
+
+      empty.hidden = true;
+      grid.hidden = false;
+      rows.forEach(([key, value]) => {
+        const k = document.createElement("div");
+        k.className = "key";
+        k.textContent = key;
+        const v = document.createElement("div");
+        v.textContent = String(value);
+        grid.append(k, v);
+      });
+      $("memory-updated").textContent = `updated ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+    }
+
+    function renderScenarioList() {
+      const container = $("scenario-list");
+      clearNode(container);
+      state.scenarios.forEach((scenario) => {
+        const card = document.createElement("div");
+        card.className = `scenario-card ${scenario.id === $("scenario-select").value ? "active" : ""}`;
+        const head = document.createElement("div");
+        head.className = "head";
+        const label = document.createElement("div");
+        label.innerHTML = `<div class="name">${scenario.id}</div><div class="desc">${scenario.objective || "-"}</div>`;
+        const check = document.createElement("input");
+        check.type = "checkbox";
+        check.checked = state.selectedScenarioIds.includes(scenario.id);
+        check.title = "Include in batch run";
+        check.addEventListener("change", () => {
+          if (check.checked) {
+            if (!state.selectedScenarioIds.includes(scenario.id)) {
+              state.selectedScenarioIds.push(scenario.id);
+            }
+          } else {
+            state.selectedScenarioIds = state.selectedScenarioIds.filter((item) => item !== scenario.id);
+          }
+          syncBatchChip();
+        });
+        head.append(label, check);
+        const facts = document.createElement("div");
+        facts.className = "scenario-facts";
+        facts.innerHTML = `
+          <div><strong>Required:</strong> ${(scenario.required_facts || []).join(", ") || "none"}</div>
+          <div><strong>Optional:</strong> ${(scenario.optional_facts || []).join(", ") || "none"}</div>
+        `;
+        card.append(head, facts);
+        label.addEventListener("click", () => {
+          $("scenario-select").value = scenario.id;
+          updateScenarioObjective();
+          renderScenarioList();
+        });
+        container.appendChild(card);
+      });
+    }
+
+    function setCurrentCall(record, mode = "detail") {
+      state.currentCallSid = record.call_sid;
+      state.currentScenarioId = record.scenario_id;
+      state.viewingMode = mode;
+      $("live-call-sid").textContent = `sid: ${record.call_sid || "-"}`;
+      $("live-scenario").textContent = `scenario: ${record.scenario_id || "-"}`;
+      $("live-status").textContent = `status: ${record.status || "-"}`;
+      $("detail-path").textContent = record.transcript_json_path || "-";
+      $("call-chip").textContent = `call: ${record.call_sid || "none"}`;
+      if (record.started_at) {
+        state.callStartedAt = record.started_at;
+        startTimer();
+      }
+      renderMemory(record);
+    }
+
+    function renderTranscript(record, detailOnly = false) {
+      const target = detailOnly ? $("detail-transcript") : $("live-transcript");
+      clearNode(target);
+      const turns = record.turns || [];
+      if (!turns.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "No transcript turns yet.";
+        target.appendChild(empty);
+      } else {
+        turns.forEach((turn) => {
+          const bubble = document.createElement("div");
+          bubble.className = `bubble ${turn.speaker === "office" ? "office" : "patient"}`;
+          const meta = document.createElement("div");
+          meta.className = "meta";
+          meta.innerHTML = `<span>${turn.speaker || "unknown"}</span><span>${turn.ts ? new Date(turn.ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : ""}</span>`;
+          const text = document.createElement("div");
+          text.textContent = turn.text || "";
+          bubble.append(meta, text);
+          target.appendChild(bubble);
+        });
+      }
+      appendRecordingPlayback(record, target);
+      if (!detailOnly) {
+        target.scrollTop = target.scrollHeight;
+      }
+    }
+
+    function renderHistory(items) {
+      state.calls = items;
+      $("history-count").textContent = String(items.length);
+      const container = $("call-history");
+      clearNode(container);
+      if (!items.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "No calls yet.";
+        container.appendChild(empty);
+        return;
+      }
+      items.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "list-item";
+        row.innerHTML = `
+          <div class="topline">
+            <strong>${item.scenario_id || "-"}</strong>
+            <span>${item.status || "-"}</span>
+          </div>
+          <div class="bottomline">
+            <span>${item.turn_count ?? 0} turns</span>
+            <span>${item.started_at ? new Date(item.started_at).toLocaleString() : "-"}</span>
+          </div>
+        `;
+        row.addEventListener("click", () => loadCall(item.call_sid, true));
+        container.appendChild(row);
+      });
+    }
+
+    function renderBugs(items) {
+      $("bug-count").textContent = String(items.length);
+      const body = $("bug-table");
+      clearNode(body);
+      if (!items.length) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="4" class="empty">No bugs loaded.</td>`;
+        body.appendChild(row);
+        return;
+      }
+      items.forEach((item) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${item.id}</td>
+          <td><span class="chip severity ${String(item.severity || "").toLowerCase()}">${item.severity || "-"}</span></td>
+          <td>${item.scenario || "-"}</td>
+          <td>${item.title || "-"}</td>
+        `;
+        body.appendChild(row);
+      });
+    }
+
+    function updateScenarioObjective() {
+      const selected = state.scenarios.find((item) => item.id === $("scenario-select").value);
+      $("scenario-objective").innerHTML = selected
+        ? `<strong>Objective:</strong> ${selected.objective || "-"}<br><span class="muted">Required: ${(selected.required_facts || []).join(", ") || "none"}</span><br><span class="muted">Optional: ${(selected.optional_facts || []).join(", ") || "none"}</span>`
+        : "Select a scenario to see the objective.";
+      renderScenarioList();
+    }
+
+    async function fetchJson(url, options) {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`${response.status} ${text}`);
+      }
+      return response.json();
+    }
+
+    async function fetchScenarios() {
+      const data = await fetchJson("/api/scenarios");
+      state.scenarios = data.items || [];
+      const select = $("scenario-select");
+      clearNode(select);
+      state.scenarios.forEach((scenario, index) => {
+        const option = document.createElement("option");
+        option.value = scenario.id;
+        option.textContent = scenario.id;
+        if (index === 0) option.selected = true;
+        select.appendChild(option);
+      });
+      updateScenarioObjective();
+      renderScenarioList();
+    }
+
+    async function fetchBugs() {
+      const data = await fetchJson("/api/bugs");
+      state.bugs = data.items || [];
+      renderBugs(state.bugs);
+    }
+
+    async function loadCallHistory() {
+      const data = await fetchJson("/api/calls?limit=20");
+      renderHistory(data.items || []);
+    }
+
+    async function loadCall(callSid, detailOnly = false) {
+      const record = await fetchJson(`/api/calls/${encodeURIComponent(callSid)}`);
+      setCurrentCall(record, detailOnly ? "detail" : "live");
+      renderTranscript(record, detailOnly);
+      if (!detailOnly) {
+        connectSSE(callSid);
+      } else {
+        closeSSE(true);
+      }
+      return record;
+    }
+
+    async function refreshCurrentCall() {
+      if (!state.currentCallSid) return;
+      clearTimeout(state.pendingDetailRefresh);
+      state.pendingDetailRefresh = setTimeout(async () => {
+        try {
+          const record = await fetchJson(`/api/calls/${encodeURIComponent(state.currentCallSid)}`);
+          setCurrentCall(record, state.viewingMode);
+          renderMemory(record);
+        } catch (error) {
+          console.warn(error);
+        }
+      }, 250);
+    }
+
+    function closeSSE(silent = true) {
+      if (silent) {
+        state.suppressDisconnectedBanner = true;
+      }
+      if (state.eventSource) {
+        state.eventSource.close();
+        state.eventSource = null;
+      }
+    }
+
+    function connectSSE(callSid) {
+      closeSSE(true);
+      state.suppressDisconnectedBanner = false;
+      $("live-transcript").innerHTML = "";
+      appendBanner(`Live stream attached for ${callSid}.`, "good");
+      state.eventSource = new EventSource(`/events/${encodeURIComponent(callSid)}`);
+      state.eventSource.addEventListener("session_started", (event) => {
+        const payload = JSON.parse(event.data);
+        $("live-transcript").innerHTML = "";
+        $("live-scenario").textContent = `scenario: ${payload.scenario_id || "-"}`;
+        $("live-call-sid").textContent = `sid: ${payload.call_sid || callSid}`;
+        appendBanner("Session started.", "good");
+        refreshCurrentCall();
+      });
+      state.eventSource.addEventListener("transcript_line", (event) => {
+        const payload = JSON.parse(event.data);
+        addTranscriptBubble(payload);
+        refreshCurrentCall();
+      });
+      state.eventSource.addEventListener("call_status", (event) => {
+        const payload = JSON.parse(event.data);
+        $("live-status").textContent = `status: ${payload.call_status || "-"}`;
+      });
+      state.eventSource.addEventListener("recording_ready", (event) => {
+        const payload = JSON.parse(event.data);
+        const note = document.createElement("div");
+        note.className = "banner";
+        note.textContent = `Recording ready: ${payload.recording_path || payload.recording_url || "unknown"}`;
+        $("live-transcript").appendChild(note);
+        refreshCurrentCall();
+      });
+      state.eventSource.addEventListener("call_completed", (event) => {
+        const payload = JSON.parse(event.data);
+        $("live-status").textContent = `status: ${payload.status || "completed"}`;
+        appendBanner(`Call completed: ${payload.reason || "done"}`, "warn");
+        stopTimer();
+        state.suppressDisconnectedBanner = true;
+        closeSSE(true);
+        resolveCompletionWaiter(payload);
+        loadCallHistory();
+      });
+      state.eventSource.onerror = () => {
+        if (!state.suppressDisconnectedBanner) {
+          appendBanner("Live stream disconnected.", "");
+        }
+      };
+    }
+
+    async function startCall(scenarioId, options = {}) {
+      const { refresh = true } = options;
+      const result = await fetchJson("/api/call", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ scenario: scenarioId }),
+      });
+      $("call-result").textContent = result.sid ? `Call started: ${result.sid}` : JSON.stringify(result);
+      if (result.sid) {
+        state.currentCallSid = result.sid;
+        state.currentScenarioId = scenarioId;
+        $("call-chip").textContent = `call: ${result.sid}`;
+        connectSSE(result.sid);
+        if (refresh) {
+          await loadCallHistory();
+          await refreshCurrentCall();
+        }
+      }
+      return result;
+    }
+
+    async function runScenarioQueue(scenarioIds) {
+      if (!scenarioIds.length) return;
+      state.batchRunning = true;
+      syncBatchChip();
+      $("call-result").textContent = `Running ${scenarioIds.length} scenario(s)...`;
+      $("queue-button").disabled = true;
+      $("run-all-button").disabled = true;
+      $("call-button").disabled = true;
+      try {
+        for (const scenarioId of scenarioIds) {
+          $("scenario-select").value = scenarioId;
+          updateScenarioObjective();
+          renderScenarioList();
+          const result = await startCall(scenarioId, { refresh: false });
+          if (!result.sid) continue;
+          const completion = await setCompletionWaiter(result.sid);
+          if (completion && completion.reason) {
+            $("call-result").textContent = `${scenarioId}: ${completion.reason}`;
+          }
+          await loadCallHistory();
+          await refreshCurrentCall();
+        }
+      } finally {
+        state.batchRunning = false;
+        syncBatchChip();
+        $("queue-button").disabled = false;
+        $("run-all-button").disabled = false;
+        $("call-button").disabled = false;
+      }
+      await loadCallHistory();
+    }
+
+    async function loadBootState() {
+      const root = await fetchJson("/");
+      setStatus("online", true);
+      $("engine-chip").textContent = `engine: ${root.engine || "-"}`;
+      $("baseurl-chip").textContent = `base: ${root.base_url || "-"}`;
+      syncBatchChip();
+      $("timer-chip").textContent = "00:00";
+      await refreshLiveLogs();
+    }
+
+    function wireEvents() {
+      $("scenario-select").addEventListener("change", updateScenarioObjective);
+      $("call-button").addEventListener("click", async () => {
+        const scenarioId = $("scenario-select").value;
+        $("call-button").disabled = true;
+        try {
+          await startCall(scenarioId);
+        } catch (error) {
+          $("call-result").textContent = `Failed: ${error.message}`;
+          appendBanner(`Failed to start call: ${error.message}`, "warn");
+        } finally {
+          $("call-button").disabled = false;
+        }
+      });
+      $("queue-button").addEventListener("click", async () => {
+        const selected = state.selectedScenarioIds.length ? state.selectedScenarioIds : [$("scenario-select").value];
+        await runScenarioQueue([...new Set(selected)]);
+      });
+      $("run-all-button").addEventListener("click", async () => {
+        await runScenarioQueue(state.scenarios.map((item) => item.id));
+      });
+      $("return-live-button").addEventListener("click", async () => {
+        if (state.currentCallSid) {
+          await loadCall(state.currentCallSid, false);
+        }
+      });
+      $("history-toggle").addEventListener("click", () => {
+        const panel = $("history-panel");
+        const collapsed = panel.classList.toggle("collapsed");
+        $("history-toggle").textContent = collapsed ? "Expand" : "Collapse";
+        $("history-toggle").setAttribute("aria-expanded", collapsed ? "false" : "true");
+      });
+      document.querySelectorAll(".terminal-tab").forEach((button) => {
+        button.addEventListener("click", () => setLiveLogSource(button.dataset.logSource || "app"));
+      });
+      $("bugs-toggle").addEventListener("click", () => {
+        const panel = $("bugs-panel");
+        const collapsed = panel.classList.toggle("collapsed");
+        $("bugs-toggle").textContent = collapsed ? "Expand" : "Collapse";
+        $("bugs-toggle").setAttribute("aria-expanded", collapsed ? "false" : "true");
+      });
+      state.liveLogTimer = setInterval(refreshLiveLogs, 2000);
+    }
+
+    async function boot() {
+      wireEvents();
+      try {
+        await loadBootState();
+        await Promise.all([fetchScenarios(), fetchBugs(), loadCallHistory()]);
+        updateScenarioObjective();
+      } catch (error) {
+        setStatus("offline", false);
+        appendBanner(`Failed to load dashboard: ${error.message}`, "warn");
+      } finally {
+        if (state.liveLogTimer) {
+          clearInterval(state.liveLogTimer);
+          state.liveLogTimer = setInterval(refreshLiveLogs, 2000);
+        }
+      }
+    }
+
+    boot();
+  </script>
+</body>
+</html>

@@ -12,9 +12,12 @@ The same call path can be driven one scenario at a time or by the sequential bat
 2. Twilio requests `/twiml` on `app.py`.
 3. The server creates or resumes a per-call session and returns TwiML with a speech `Gather`.
 4. Twilio converts the remote party's speech into a text result and posts it to `/voice`.
+   The app also publishes per-turn transcript events to `/events/{call_sid}` for the dashboard.
 5. The reply engine generates the next patient response.
 6. The server returns the next TwiML turn, or hangs up if the call is done.
 7. Twilio posts status and recording callbacks, and the server stores transcripts, readable transcript text, and recordings under `artifacts/`.
+8. A read-only dashboard API exposes `/api/scenarios`, `/api/calls`, and `/api/calls/{call_sid}` using transcript files as the canonical data source.
+9. The dashboard UI is served from `/dashboard`, and `launcher.py` starts the app plus ngrok for local use.
 
 ## Why this design
 

@@ -2,17 +2,19 @@ from __future__ import annotations
 
 import json
 import logging
+import re
+from queue import Empty, Queue
 import threading
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 from urllib.parse import parse_qsl
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import Response
+from fastapi.responses import FileResponse, Response, StreamingResponse
 
 from clients import (
     download_binary,
@@ -21,18 +23,27 @@ from clients import (
     say_verb,
     validate_twilio_signature,
 )
+from call_service import CallRequest, start_call
 from config import get_settings
 from engine import OpenAICompatibleReplyEngine, Reply, ReplyEngine, RuleBasedReplyEngine
-from scenarios import SCENARIOS
+from scenarios import DEFAULT_PATIENT_PROFILE, SCENARIOS
 
 
 APP_NAME = "python_voice_caller"
 ARTIFACT_ROOT = Path("artifacts")
 LOG_ROOT = ARTIFACT_ROOT / "logs"
+CURRENT_LOG_PATH = LOG_ROOT / "app.log"
 TRANSCRIPT_ROOT = ARTIFACT_ROOT / "transcripts"
 RECORDING_ROOT = ARTIFACT_ROOT / "recordings"
+BUG_REPORT_ROOT = Path("bug_reports")
 HARD_STOP_MESSAGE = "I have everything I need. Thank you for your help. Goodbye."
 RUN_LABEL = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+CALL_EVENT_HISTORY_LIMIT = 200
+LIVE_LOG_SOURCES = {
+    "app": CURRENT_LOG_PATH,
+    "uvicorn": LOG_ROOT / "launcher-uvicorn.log",
+    "ngrok": LOG_ROOT / "launcher-ngrok.log",
+}
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -63,6 +74,16 @@ if not logger.handlers:
         logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s")
     )
     logger.addHandler(file_handler)
+    current_file_handler = RotatingFileHandler(
+        CURRENT_LOG_PATH,
+        maxBytes=1_000_000,
+        backupCount=3,
+        encoding="utf-8",
+    )
+    current_file_handler.setFormatter(
+        logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s")
+    )
+    logger.addHandler(current_file_handler)
 
 
 app = FastAPI(title="Python Voice Caller")
@@ -142,12 +163,144 @@ def log_event(event: str, payload: dict[str, Any]) -> None:
     logger.info("%s %s", event, json.dumps(payload, sort_keys=True))
 
 
+def tail_text_file(path: Path, *, limit_lines: int = 120) -> list[str]:
+    if not path.exists():
+        return []
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    if limit_lines <= 0:
+        return []
+    return lines[-limit_lines:]
+
+
+class CallEventHub:
+    def __init__(self, *, history_limit: int = CALL_EVENT_HISTORY_LIMIT) -> None:
+        self._history_limit = history_limit
+        self._lock = threading.RLock()
+        self._history: dict[str, list[dict[str, Any]]] = {}
+        self._subscribers: dict[str, list[Queue[dict[str, Any]]]] = {}
+
+    def publish(self, call_sid: str, event_type: str, payload: dict[str, Any]) -> dict[str, Any]:
+        event = {
+            "call_sid": call_sid,
+            "event_type": event_type,
+            "ts": utc_now(),
+            **payload,
+        }
+        with self._lock:
+            history = self._history.setdefault(call_sid, [])
+            history.append(event)
+            if len(history) > self._history_limit:
+                del history[: len(history) - self._history_limit]
+            for subscriber in self._subscribers.get(call_sid, []):
+                subscriber.put_nowait(event)
+        return event
+
+    def snapshot(self, call_sid: str) -> list[dict[str, Any]]:
+        with self._lock:
+            return list(self._history.get(call_sid, []))
+
+    def subscribe(self, call_sid: str) -> Queue[dict[str, Any]]:
+        queue: Queue[dict[str, Any]] = Queue()
+        with self._lock:
+            self._subscribers.setdefault(call_sid, []).append(queue)
+        return queue
+
+    def unsubscribe(self, call_sid: str, queue: Queue[dict[str, Any]]) -> None:
+        with self._lock:
+            subscribers = self._subscribers.get(call_sid)
+            if not subscribers:
+                return
+            try:
+                subscribers.remove(queue)
+            except ValueError:
+                return
+            if not subscribers:
+                self._subscribers.pop(call_sid, None)
+
+
+call_event_hub = CallEventHub()
+
+
+def format_sse_event(event: dict[str, Any]) -> str:
+    data = json.dumps(event, sort_keys=True)
+    return f"event: {event['event_type']}\ndata: {data}\n\n"
+
+
+@dataclass
+class CallMemory:
+    scenario_id: str
+    objective: str
+    patient_profile: dict[str, str] = field(default_factory=dict)
+    required_facts: list[str] = field(default_factory=list)
+    optional_facts: list[str] = field(default_factory=list)
+    phase: str = "opening"
+    turn_count: int = 0
+    recent_office_questions: list[str] = field(default_factory=list)
+    recent_patient_answers: list[str] = field(default_factory=list)
+    confirmed_facts: dict[str, str] = field(default_factory=dict)
+    last_office_question: str | None = None
+    last_patient_answer: str | None = None
+
+    @classmethod
+    def from_scenario(cls, scenario: dict[str, Any]) -> "CallMemory":
+        profile = {
+            str(key): str(value)
+            for key, value in dict(scenario.get("patient_profile", DEFAULT_PATIENT_PROFILE)).items()
+        }
+        return cls(
+            scenario_id=str(scenario.get("id", "unknown")),
+            objective=str(scenario.get("objective", "")),
+            patient_profile=profile,
+            required_facts=[str(item) for item in scenario.get("required_facts", [])],
+            optional_facts=[str(item) for item in scenario.get("optional_facts", [])],
+        )
+
+    def _append_limited(self, items: list[str], value: str, *, limit: int = 5) -> None:
+        items.append(value)
+        if len(items) > limit:
+            del items[: len(items) - limit]
+
+    def record_turn(self, *, speaker: str, text: str) -> None:
+        self.turn_count += 1
+        if speaker == "office":
+            self.phase = "office_turn"
+            self.last_office_question = text
+            self._append_limited(self.recent_office_questions, text)
+            return
+
+        self.phase = "patient_turn"
+        self.last_patient_answer = text
+        self._append_limited(self.recent_patient_answers, text)
+        lower = text.lower()
+        for key, value in self.patient_profile.items():
+            normalized_value = value.lower()
+            if normalized_value and normalized_value in lower:
+                self.confirmed_facts[key] = value
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "scenario_id": self.scenario_id,
+            "objective": self.objective,
+            "patient_profile": self.patient_profile,
+            "required_facts": self.required_facts,
+            "optional_facts": self.optional_facts,
+            "phase": self.phase,
+            "turn_count": self.turn_count,
+            "recent_office_questions": self.recent_office_questions,
+            "recent_patient_answers": self.recent_patient_answers,
+            "confirmed_facts": self.confirmed_facts,
+            "last_office_question": self.last_office_question,
+            "last_patient_answer": self.last_patient_answer,
+        }
+
+
 @dataclass
 class CallSession:
     call_sid: str
     scenario_id: str
     to_number: str
     from_number: str
+    call_memory: "CallMemory"
     started_at: str
     updated_at: str
     status: str = "started"
@@ -162,6 +315,7 @@ class CallSession:
     turns: list[dict[str, Any]] = field(default_factory=list)
 
     def add_turn(self, *, speaker: str, text: str, raw: dict[str, Any] | None = None) -> None:
+        self.call_memory.record_turn(speaker=speaker, text=text)
         self.turns.append(
             {
                 "speaker": speaker,
@@ -179,6 +333,7 @@ class CallSession:
             "scenario_id": self.scenario_id,
             "to_number": self.to_number,
             "from_number": self.from_number,
+            "call_memory": self.call_memory.to_dict(),
             "started_at": self.started_at,
             "updated_at": self.updated_at,
             "status": self.status,
@@ -215,6 +370,30 @@ class CallSession:
         lines.append(f"started_at: {self.started_at}")
         lines.append(f"updated_at: {self.updated_at}")
         lines.append(f"status: {self.status}")
+        lines.append(f"turn_count: {self.turn_count}")
+        lines.append(f"call_memory_phase: {self.call_memory.phase}")
+        if self.call_memory.required_facts:
+            lines.append(
+                "required_facts: "
+                + ", ".join(self.call_memory.required_facts)
+            )
+        if self.call_memory.optional_facts:
+            lines.append(
+                "optional_facts: "
+                + ", ".join(self.call_memory.optional_facts)
+            )
+        if self.call_memory.confirmed_facts:
+            lines.append("confirmed_facts:")
+            for key, value in self.call_memory.confirmed_facts.items():
+                lines.append(f"  - {key}: {value}")
+        if self.call_memory.recent_office_questions:
+            lines.append("recent_office_questions:")
+            for item in self.call_memory.recent_office_questions:
+                lines.append(f"  - {item}")
+        if self.call_memory.recent_patient_answers:
+            lines.append("recent_patient_answers:")
+            for item in self.call_memory.recent_patient_answers:
+                lines.append(f"  - {item}")
         if self.end_reason:
             lines.append(f"end_reason: {self.end_reason}")
         if self.recording_path:
@@ -235,6 +414,205 @@ class CallSession:
     def save(self) -> None:
         atomic_write_text(self.transcript_path(), json.dumps(self.to_dict(), indent=2))
         atomic_write_text(self.transcript_text_path(), self.render_transcript_text())
+
+
+def publish_call_event(session: CallSession, event_type: str, payload: dict[str, Any]) -> dict[str, Any]:
+    event = call_event_hub.publish(session.call_sid, event_type, payload)
+    session.metadata.setdefault("event_counts", {})
+    event_counts = session.metadata["event_counts"]
+    if isinstance(event_counts, dict):
+        event_counts[event_type] = int(event_counts.get(event_type, 0)) + 1
+    session.metadata["last_event"] = event
+    return event
+
+
+def call_summary(session: CallSession) -> dict[str, Any]:
+    return {
+        "call_sid": session.call_sid,
+        "scenario_id": session.scenario_id,
+        "started_at": session.started_at,
+        "updated_at": session.updated_at,
+        "status": session.status,
+        "turn_count": session.turn_count,
+        "no_speech_count": session.no_speech_count,
+        "end_reason": session.end_reason,
+        "recording_sid": session.recording_sid,
+        "recording_url": session.recording_url,
+        "recording_path": session.recording_path,
+        "artifact_stem": session.artifact_stem(),
+        "transcript_json_path": str(session.transcript_path()),
+        "transcript_text_path": str(session.transcript_text_path()),
+    }
+
+
+def transcript_record_from_file(path: Path) -> dict[str, Any]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    turns = data.get("turns", [])
+    return {
+        "call_sid": data.get("call_sid"),
+        "scenario_id": data.get("scenario_id"),
+        "started_at": data.get("started_at"),
+        "updated_at": data.get("updated_at"),
+        "status": data.get("status"),
+        "turn_count": data.get("turn_count", len(turns)),
+        "no_speech_count": data.get("no_speech_count", 0),
+        "end_reason": data.get("end_reason"),
+        "recording_sid": data.get("recording_sid"),
+        "recording_url": data.get("recording_url"),
+        "recording_path": data.get("recording_path"),
+        "artifact_stem": path.stem,
+        "transcript_json_path": str(path),
+        "transcript_text_path": str(path.with_suffix(".txt")),
+        "call_memory": data.get("call_memory", {}),
+        "turns": turns,
+        "metadata": data.get("metadata", {}),
+    }
+
+
+def transcript_summary_from_file(path: Path) -> dict[str, Any]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    turns = data.get("turns", [])
+    return {
+        "call_sid": data.get("call_sid"),
+        "scenario_id": data.get("scenario_id"),
+        "started_at": data.get("started_at"),
+        "updated_at": data.get("updated_at"),
+        "status": data.get("status"),
+        "turn_count": data.get("turn_count", len(turns)),
+        "no_speech_count": data.get("no_speech_count", 0),
+        "end_reason": data.get("end_reason"),
+        "recording_sid": data.get("recording_sid"),
+        "recording_path": data.get("recording_path"),
+        "artifact_stem": path.stem,
+        "transcript_json_path": str(path),
+        "transcript_text_path": str(path.with_suffix(".txt")),
+    }
+
+
+def transcript_index(*, scenario_id: str | None = None, limit: int | None = None) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for path in sorted(TRANSCRIPT_ROOT.glob("*.json"), key=lambda item: item.stat().st_mtime, reverse=True):
+        try:
+            summary = transcript_summary_from_file(path)
+            if scenario_id and summary.get("scenario_id") != scenario_id:
+                continue
+            records.append(summary)
+            if limit is not None and len(records) >= limit:
+                break
+        except Exception as exc:
+            records.append(
+                {
+                    "artifact_stem": path.stem,
+                    "transcript_json_path": str(path),
+                    "error": str(exc),
+                }
+            )
+    return records
+
+
+def find_transcript_path(call_sid: str) -> Path | None:
+    for path in TRANSCRIPT_ROOT.glob("*.json"):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if data.get("call_sid") == call_sid:
+            return path
+    return None
+
+
+def resolve_call_record(call_sid: str) -> dict[str, Any]:
+    session = get_session(call_sid)
+    if session is not None:
+        return {
+            **call_summary(session),
+            "call_memory": session.call_memory.to_dict(),
+            "turns": session.turns,
+            "metadata": session.metadata,
+        }
+    path = find_transcript_path(call_sid)
+    if path is not None:
+        return transcript_record_from_file(path)
+    raise HTTPException(status_code=404, detail=f"Unknown call SID: {call_sid}")
+
+
+def parse_frontmatter_markdown(path: Path) -> dict[str, str]:
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return {}
+    fields: dict[str, str] = {}
+    for line in lines[1:]:
+        stripped = line.strip()
+        if stripped == "---":
+            break
+        if not stripped or ":" not in stripped:
+            continue
+        key, value = stripped.split(":", 1)
+        fields[key.strip()] = value.strip()
+    return fields
+
+
+def parse_bug_index_md(path: Path) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    current: dict[str, Any] | None = None
+    bug_heading = re.compile(r"^##\s+Bug\s+(\d+)\s+[—-]\s+(.*)$")
+    metadata_line = re.compile(r"^-\s+([^:]+):\s+(.*)$")
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        heading_match = bug_heading.match(raw_line.strip())
+        if heading_match:
+            if current:
+                items.append(current)
+            current = {
+                "id": int(heading_match.group(1)),
+                "title": heading_match.group(2).strip(),
+            }
+            continue
+        if current is None:
+            continue
+        metadata_match = metadata_line.match(raw_line.strip())
+        if not metadata_match:
+            continue
+        key = metadata_match.group(1).strip().lower()
+        value = metadata_match.group(2).strip()
+        if key == "file":
+            current["file"] = value.split("]", 1)[-1].strip("()") if value.startswith("[") else value
+        elif key == "severity":
+            current["severity"] = value
+        elif key in {"scenario", "scenarios"}:
+            current["scenario"] = value
+    if current:
+        items.append(current)
+    return items
+
+
+def bug_index() -> list[dict[str, Any]]:
+    index_path = BUG_REPORT_ROOT / "INDEX.md"
+    items = parse_bug_index_md(index_path) if index_path.exists() else []
+    file_by_name = {path.name: path for path in BUG_REPORT_ROOT.glob("*.md")}
+    for item in items:
+        file_name = str(item.get("file", "")).strip()
+        if file_name.startswith("[") and "](" in file_name:
+            file_name = file_name.split("](", 1)[1].rstrip(")")
+        path = file_by_name.get(file_name)
+        if not path:
+            continue
+        fields = parse_frontmatter_markdown(path)
+        if fields:
+            item["id"] = int(fields.get("id", item["id"]))
+            item["title"] = fields.get("title", item["title"])
+            item["severity"] = fields.get("severity", item.get("severity", "Unknown"))
+            item["scenario"] = fields.get("scenario", item.get("scenario", ""))
+            item["call_sid"] = fields.get("call_sid", "")
+            item["date"] = fields.get("date", "")
+        item["file"] = str(path)
+        item.setdefault("call_sid", "")
+        item.setdefault("date", "")
+        item.setdefault("severity", "Unknown")
+        item.setdefault("scenario", "")
+    items.sort(key=lambda item: item["id"])
+    return items
 
 
 def get_engine() -> ReplyEngine:
@@ -259,6 +637,14 @@ def scenario_context(scenario_id: str) -> dict[str, Any]:
     context = dict(SCENARIOS[scenario_id])
     context["id"] = scenario_id
     context["max_turns"] = _settings.max_turns
+    profile = dict(DEFAULT_PATIENT_PROFILE)
+    profile.update(
+        {
+            str(key): str(value)
+            for key, value in dict(context.get("patient_profile", {}) or {}).items()
+        }
+    )
+    context["patient_profile"] = profile
     return context
 
 
@@ -277,21 +663,34 @@ def upsert_session(
 ) -> CallSession:
     with _session_lock:
         session = _sessions.get(call_sid)
+        scenario = scenario_context(scenario_id)
         if session is None:
             session = CallSession(
                 call_sid=call_sid,
                 scenario_id=scenario_id,
                 to_number=to_number,
                 from_number=from_number,
+                call_memory=CallMemory.from_scenario(scenario),
                 started_at=utc_now(),
                 updated_at=utc_now(),
                 metadata=metadata or {},
             )
             _sessions[call_sid] = session
+            publish_call_event(
+                session,
+                "session_started",
+                {
+                    "scenario_id": session.scenario_id,
+                    "to_number": session.to_number,
+                    "from_number": session.from_number,
+                },
+            )
         else:
             session.scenario_id = scenario_id or session.scenario_id
             session.to_number = to_number or session.to_number
             session.from_number = from_number or session.from_number
+            if session.call_memory.scenario_id != session.scenario_id:
+                session.call_memory = CallMemory.from_scenario(scenario)
             if metadata:
                 session.metadata.update(metadata)
             session.updated_at = utc_now()
@@ -382,11 +781,12 @@ def prompt_reply(session: CallSession, office_speech: str | None = None) -> Repl
     engine = get_engine()
     try:
         if office_speech is None:
-            return engine.initial_reply(scenario=scenario)
+            return engine.initial_reply(scenario=scenario, call_memory=session.call_memory.to_dict())
         return engine.next_reply(
             scenario=scenario,
             transcript=session.turns,
             office_speech=office_speech,
+            call_memory=session.call_memory.to_dict(),
         )
     except Exception as exc:
         error_text = str(exc)
@@ -418,11 +818,12 @@ def prompt_reply(session: CallSession, office_speech: str | None = None) -> Repl
             )
         fallback = RuleBasedReplyEngine()
         if office_speech is None:
-            return fallback.initial_reply(scenario=scenario)
+            return fallback.initial_reply(scenario=scenario, call_memory=session.call_memory.to_dict())
         return fallback.next_reply(
             scenario=scenario,
             transcript=session.turns,
             office_speech=office_speech,
+            call_memory=session.call_memory.to_dict(),
         )
 
 
@@ -456,6 +857,15 @@ async def twiml(request: Request) -> Response:
     )
     opening = prompt_reply(session)
     session.pending_prompt = clean_text(opening.text)
+    publish_call_event(
+        session,
+        "transcript_line",
+        {
+            "speaker": "patient",
+            "text": session.pending_prompt,
+            "source": "twiml_opening",
+        },
+    )
     session.metadata.setdefault("webhook", {})["twiml"] = str(request.url)
     session.save()
 
@@ -464,6 +874,14 @@ async def twiml(request: Request) -> Response:
         session.status = "completed"
         session.end_reason = reason
         session.save()
+        publish_call_event(
+            session,
+            "call_completed",
+            {
+                "reason": session.end_reason,
+                "status": session.status,
+            },
+        )
         return Response(
             content=render_hard_stop_twiml(voice=_settings.twilio_voice, reason=reason or "completed"),
             media_type="text/xml",
@@ -504,6 +922,14 @@ async def voice(request: Request) -> Response:
         session.status = "completed"
         session.end_reason = reason
         session.save()
+        publish_call_event(
+            session,
+            "call_completed",
+            {
+                "reason": session.end_reason,
+                "status": session.status,
+            },
+        )
         return Response(
             content=render_hard_stop_twiml(voice=_settings.twilio_voice, reason=reason or "completed"),
             media_type="text/xml",
@@ -542,6 +968,16 @@ async def voice(request: Request) -> Response:
         text=speech,
         raw={"Confidence": confidence, **params},
     )
+    publish_call_event(
+        session,
+        "transcript_line",
+        {
+            "speaker": "office",
+            "text": speech,
+            "confidence": confidence or None,
+            "direction": "inbound",
+        },
+    )
 
     reply = prompt_reply(session, speech)
     reply_text = clean_text(reply.text)
@@ -549,6 +985,16 @@ async def voice(request: Request) -> Response:
         speaker="patient",
         text=reply_text,
         raw={"source": "engine", "should_hangup": reply.should_hangup},
+    )
+    publish_call_event(
+        session,
+        "transcript_line",
+        {
+            "speaker": "patient",
+            "text": reply_text,
+            "should_hangup": reply.should_hangup,
+            "direction": "outbound",
+        },
     )
     session.pending_prompt = reply_text
     session.updated_at = utc_now()
@@ -559,6 +1005,14 @@ async def voice(request: Request) -> Response:
         else:
             session.end_reason = should_force_hangup(session)[1] or "max_turns_reached"
         session.save()
+        publish_call_event(
+            session,
+            "call_completed",
+            {
+                "reason": session.end_reason,
+                "status": session.status,
+            },
+        )
         body = generate_twiml_response(
             say_verb(reply_text, voice=_settings.twilio_voice),
             "<Hangup/>",
@@ -604,6 +1058,14 @@ async def status(request: Request) -> Response:
             {"ts": utc_now(), "params": params}
         )
         session.save()
+        publish_call_event(
+            session,
+            "call_status",
+            {
+                "call_status": session.status,
+                "params": params,
+            },
+        )
     log_event("call_status", params)
     return Response(content="ok", media_type="text/plain")
 
@@ -623,6 +1085,15 @@ async def recording_status(request: Request) -> Response:
         try:
             path = save_recording_artifact(session, recording_sid, recording_url)
             session.recording_path = path
+            publish_call_event(
+                session,
+                "recording_ready",
+                {
+                    "recording_sid": recording_sid,
+                    "recording_url": recording_url,
+                    "recording_path": path,
+                },
+            )
         except Exception as exc:
             session.metadata["recording_download_error"] = str(exc)
         session.save()
@@ -630,15 +1101,159 @@ async def recording_status(request: Request) -> Response:
     return Response(content="ok", media_type="text/plain")
 
 
+@app.get("/events/{call_sid}")
+async def events(call_sid: str) -> StreamingResponse:
+    queue = call_event_hub.subscribe(call_sid)
+    backlog = call_event_hub.snapshot(call_sid)
+
+    def stream() -> Iterable[str]:
+        try:
+            for event in backlog:
+                yield format_sse_event(event)
+            yield ": connected\n\n"
+            while True:
+                try:
+                    event = queue.get(timeout=15)
+                    yield format_sse_event(event)
+                except Empty:
+                    yield ": keepalive\n\n"
+        finally:
+            call_event_hub.unsubscribe(call_sid, queue)
+
+    return StreamingResponse(
+        stream(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
+
+
+@app.get("/api/scenarios")
+async def api_scenarios() -> dict[str, Any]:
+    return {
+        "items": [
+            {
+                "id": scenario_id,
+                "objective": str(context.get("objective", "")),
+                "starter": str(context.get("starter", "")),
+                "required_facts": list(context.get("required_facts", [])),
+                "optional_facts": list(context.get("optional_facts", [])),
+            }
+            for scenario_id, context in SCENARIOS.items()
+        ]
+    }
+
+
+@app.post("/api/call")
+async def api_call_start(body: dict[str, Any]) -> dict[str, Any]:
+    scenario_id = str(body.get("scenario", "scheduling"))
+    if scenario_id not in SCENARIOS:
+        raise HTTPException(status_code=400, detail=f"Unknown scenario: {scenario_id}")
+    request = CallRequest(
+        scenario=scenario_id,
+        target_number=_settings.allowed_target_number,
+        dry_run=bool(body.get("dry_run", False)),
+    )
+    try:
+        return start_call(request, emit_output=False)
+    except SystemExit as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/bugs")
+async def api_bugs() -> dict[str, Any]:
+    return {"items": bug_index()}
+
+
+@app.get("/api/live-logs")
+async def api_live_logs(source: str = "app", limit: int = 120) -> dict[str, Any]:
+    if limit < 1 or limit > 1000:
+        raise HTTPException(status_code=400, detail="limit must be between 1 and 1000")
+    if source == "combined":
+        items: list[dict[str, Any]] = []
+        for name, path in LIVE_LOG_SOURCES.items():
+            items.extend(
+                {
+                    "source": name,
+                    "line": line,
+                }
+                for line in tail_text_file(path, limit_lines=limit)
+            )
+        return {"items": items[-limit:]}
+    path = LIVE_LOG_SOURCES.get(source)
+    if not path:
+        raise HTTPException(status_code=400, detail=f"Unknown log source: {source}")
+    return {
+        "items": [
+            {
+                "source": source,
+                "line": line,
+            }
+            for line in tail_text_file(path, limit_lines=limit)
+        ]
+    }
+
+
+@app.get("/api/calls")
+async def api_calls(limit: int = 50, scenario_id: str | None = None) -> dict[str, Any]:
+    if limit < 1 or limit > 500:
+        raise HTTPException(status_code=400, detail="limit must be between 1 and 500")
+    return {"items": transcript_index(scenario_id=scenario_id, limit=limit)}
+
+
+@app.get("/api/calls/{call_sid}")
+async def api_call(call_sid: str) -> dict[str, Any]:
+    return resolve_call_record(call_sid)
+
+
+@app.get("/api/calls/{call_sid}/transcript")
+async def api_call_transcript(call_sid: str) -> dict[str, Any]:
+    record = resolve_call_record(call_sid)
+    return {
+        "call_sid": record.get("call_sid"),
+        "scenario_id": record.get("scenario_id"),
+        "turns": record.get("turns", []),
+        "call_memory": record.get("call_memory", {}),
+        "metadata": record.get("metadata", {}),
+        "transcript_json_path": record.get("transcript_json_path"),
+        "transcript_text_path": record.get("transcript_text_path"),
+    }
+
+
+@app.get("/dashboard")
+async def dashboard() -> FileResponse:
+    return FileResponse(Path("dashboard") / "index.html")
+
+
+@app.get("/recordings/{filename}")
+async def recording_file(filename: str) -> FileResponse:
+    safe_name = Path(filename).name
+    path = RECORDING_ROOT / safe_name
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Recording not found")
+    return FileResponse(path, media_type="audio/mpeg", filename=safe_name)
+
+
 @app.get("/")
 async def root() -> dict[str, Any]:
     return {
         "name": APP_NAME,
         "allowed_target_number": _settings.allowed_target_number,
+        "base_url": _settings.base_url,
         "voice": _settings.twilio_voice,
         "max_turns": _settings.max_turns,
         "max_call_seconds": _settings.max_call_seconds,
         "engine": type(get_engine()).__name__,
+        "event_stream": "/events/{call_sid}",
+        "dashboard": "/dashboard",
+        "api_call_start": "/api/call",
+        "api_bugs": "/api/bugs",
+        "api_calls": "/api/calls",
+        "api_call": "/api/calls/{call_sid}",
+        "api_scenarios": "/api/scenarios",
     }
 
 
