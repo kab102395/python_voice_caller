@@ -51,6 +51,14 @@ def wait_for_http(url: str, timeout_seconds: float = 10.0) -> None:
     raise RuntimeError(f"Timed out waiting for {url}") from last_error
 
 
+def http_is_ready(url: str) -> bool:
+    try:
+        with urllib.request.urlopen(url, timeout=1.0) as response:
+            return 200 <= response.status < 300
+    except Exception:
+        return False
+
+
 def start_process(
     args: list[str],
     *,
@@ -100,6 +108,10 @@ def ngrok_public_url_if_available() -> str | None:
         return None
 
 
+def app_is_ready() -> bool:
+    return http_is_ready(f"{LOCAL_BASE_URL}/health")
+
+
 def wait_for_ngrok_public_url(timeout_seconds: float = 10.0) -> str:
     deadline = time.monotonic() + timeout_seconds
     last_error: Exception | None = None
@@ -122,16 +134,24 @@ def main() -> int:
         uvicorn_log = open(LOG_ROOT / "launcher-uvicorn.log", "a", encoding="utf-8")
         ngrok_log = open(LOG_ROOT / "launcher-ngrok.log", "a", encoding="utf-8")
 
-        uvicorn_proc = start_process(
-            [sys.executable, "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"],
-            stdout=uvicorn_log,
-            stderr=uvicorn_log,
-        )
-        wait_for_http(f"{LOCAL_BASE_URL}/health", timeout_seconds=10.0)
+        uvicorn_running = app_is_ready()
+        if not uvicorn_running:
+            uvicorn_proc = start_process(
+                [sys.executable, "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"],
+                stdout=uvicorn_log,
+                stderr=uvicorn_log,
+            )
+            wait_for_http(f"{LOCAL_BASE_URL}/health", timeout_seconds=15.0)
+        else:
+            print("Reusing existing app on http://localhost:8000")
 
-        ngrok_proc = start_process(["ngrok", "http", "8000"], stdout=ngrok_log, stderr=ngrok_log)
-        wait_for_http(NGROK_API_URL, timeout_seconds=10.0)
-        public_url = wait_for_ngrok_public_url(timeout_seconds=10.0)
+        public_url = ngrok_public_url_if_available()
+        if not public_url:
+            ngrok_proc = start_process(["ngrok", "http", "8000"], stdout=ngrok_log, stderr=ngrok_log)
+            wait_for_http(NGROK_API_URL, timeout_seconds=15.0)
+            public_url = wait_for_ngrok_public_url(timeout_seconds=15.0)
+        else:
+            print(f"Reusing existing ngrok tunnel: {public_url}")
 
         current_env = "\n".join(read_env_lines(ENV_PATH))
         if f"BASE_URL={public_url}" not in current_env:
@@ -143,10 +163,14 @@ def main() -> int:
         print("Press Ctrl+C to shut down.")
 
         while True:
-            if uvicorn_proc.poll() is not None:
+            if uvicorn_proc is not None and uvicorn_proc.poll() is not None:
                 raise RuntimeError("uvicorn stopped unexpectedly")
-            if ngrok_proc.poll() is not None:
+            if uvicorn_proc is None and not app_is_ready():
+                raise RuntimeError("existing uvicorn endpoint stopped responding")
+            if ngrok_proc is not None and ngrok_proc.poll() is not None:
                 raise RuntimeError("ngrok stopped unexpectedly")
+            if ngrok_proc is None and ngrok_public_url_if_available() is None:
+                raise RuntimeError("existing ngrok tunnel stopped responding")
             time.sleep(1.0)
     except KeyboardInterrupt:
         pass

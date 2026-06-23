@@ -21,6 +21,7 @@ from clients import (
     gather_verb,
     generate_twiml_response,
     say_verb,
+    update_twilio_call_status,
     validate_twilio_signature,
 )
 from call_service import CallRequest, start_call
@@ -43,6 +44,43 @@ LIVE_LOG_SOURCES = {
     "app": CURRENT_LOG_PATH,
     "uvicorn": LOG_ROOT / "launcher-uvicorn.log",
     "ngrok": LOG_ROOT / "launcher-ngrok.log",
+}
+INITIAL_OFFICE_STABILIZATION_MAX_FRAGMENTS = 1
+INITIAL_OFFICE_STABILIZATION_MAX_CHARS = 100
+TRUNCATED_OFFICE_TAILS = {
+    "a",
+    "an",
+    "and",
+    "at",
+    "for",
+    "in",
+    "of",
+    "on",
+    "or",
+    "the",
+    "to",
+    "with",
+}
+
+OFFICE_DISCLAIMER_OPENERS = (
+    "this call may be recorded for quality and training purposes",
+    "this call may be recorded",
+)
+SHORT_COMPLETE_ACKS = {
+    "hello",
+    "hi",
+    "i see",
+    "no problem",
+    "okay",
+    "ok",
+    "alright",
+    "right",
+    "sure",
+    "thanks",
+    "thank you",
+    "fine",
+    "good",
+    "great",
 }
 
 def utc_now() -> str:
@@ -106,6 +144,49 @@ def clean_text(text: str, *, max_chars: int = 400) -> str:
     if len(compact) > max_chars:
         compact = compact[: max_chars - 3].rstrip() + "..."
     return compact
+
+
+def office_speech_looks_truncated(speech: str) -> bool:
+    cleaned = clean_text(speech)
+    if not cleaned:
+        return False
+    lower = cleaned.lower()
+    words = re.findall(r"[a-z0-9']+", lower)
+    if not words:
+        return False
+    if lower.endswith(("...", ",", ":", ";", " -", "—", "–")):
+        return True
+    if len(words) >= 2 and words[-1] in TRUNCATED_OFFICE_TAILS:
+        return True
+    return False
+
+
+def office_speech_looks_like_disclaimer_opener(speech: str) -> bool:
+    cleaned = clean_text(speech).lower()
+    if not cleaned:
+        return False
+    return any(cleaned.startswith(prefix) for prefix in OFFICE_DISCLAIMER_OPENERS)
+
+
+def merge_overlapping_speech(left: str, right: str) -> str:
+    left_clean = clean_text(left)
+    right_clean = clean_text(right)
+    if not left_clean:
+        return right_clean
+    if not right_clean:
+        return left_clean
+    left_tokens = re.findall(r"[a-z0-9']+", left_clean.lower())
+    right_tokens = re.findall(r"[a-z0-9']+", right_clean.lower())
+    max_overlap = min(len(left_tokens), len(right_tokens))
+    for overlap in range(max_overlap, 0, -1):
+        if left_tokens[-overlap:] == right_tokens[:overlap]:
+            merged_tokens = re.findall(r"[a-z0-9']+", left_clean) + re.findall(
+                r"[a-z0-9']+", right_clean
+            )[overlap:]
+            return " ".join(merged_tokens)
+    if left_clean.endswith(right_clean) or right_clean.endswith(left_clean):
+        return left_clean if len(left_clean) >= len(right_clean) else right_clean
+    return f"{left_clean} {right_clean}".strip()
 
 
 def parse_iso_timestamp(value: str) -> datetime:
@@ -241,6 +322,17 @@ class CallMemory:
     last_office_question: str | None = None
     last_patient_answer: str | None = None
 
+    def tracked_fact_keys(self) -> set[str]:
+        return {
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "phone",
+            "callback_number",
+            *self.required_facts,
+            *self.optional_facts,
+        }
+
     @classmethod
     def from_scenario(cls, scenario: dict[str, Any]) -> "CallMemory":
         profile = {
@@ -272,7 +364,10 @@ class CallMemory:
         self.last_patient_answer = text
         self._append_limited(self.recent_patient_answers, text)
         lower = text.lower()
+        tracked_keys = self.tracked_fact_keys()
         for key, value in self.patient_profile.items():
+            if key not in tracked_keys:
+                continue
             normalized_value = value.lower()
             if normalized_value and normalized_value in lower:
                 self.confirmed_facts[key] = value
@@ -653,6 +748,41 @@ def get_session(call_sid: str) -> CallSession | None:
         return _sessions.get(call_sid)
 
 
+def stop_live_call(call_sid: str, *, reason: str = "killed_by_user") -> dict[str, Any]:
+    settings = get_settings()
+    twilio_result = update_twilio_call_status(
+        account_sid=settings.twilio_account_sid,
+        auth_token=settings.twilio_auth_token,
+        call_sid=call_sid,
+        status="completed",
+    )
+    session = get_session(call_sid)
+    if session and session.status != "completed":
+        session.status = "completed"
+        session.end_reason = reason
+        session.updated_at = utc_now()
+        session.metadata["stopped_by_user"] = True
+        session.save()
+        publish_call_event(
+            session,
+            "call_completed",
+            {
+                "status": "completed",
+                "reason": reason,
+                "call_sid": session.call_sid,
+            },
+        )
+        log_event(
+            "call_killed",
+            {
+                "call_sid": call_sid,
+                "reason": reason,
+                "scenario_id": session.scenario_id,
+            },
+        )
+    return twilio_result
+
+
 def upsert_session(
     *,
     call_sid: str,
@@ -720,7 +850,7 @@ def render_turn_twiml(
                 action_url=action_url,
                 prompt=retry_prompt or prompt,
                 voice=voice,
-                timeout=15,
+                timeout=14,
             ),
             "<Hangup/>",
         )
@@ -730,11 +860,66 @@ def render_turn_twiml(
             action_url=action_url,
             prompt=prompt,
             voice=voice,
-            timeout=15,
+            timeout=14,
         ),
         say_verb("I couldn't hear a response. Goodbye.", voice=voice),
         "<Hangup/>",
     )
+
+
+def _clear_initial_office_buffer(session: CallSession) -> None:
+    session.metadata.pop("initial_office_buffer", None)
+    session.metadata.pop("initial_office_buffer_count", None)
+    session.metadata.pop("initial_office_buffer_updated_at", None)
+
+
+def maybe_stage_office_speech(session: CallSession, speech: str) -> str | None:
+    buffer_text = str(session.metadata.get("initial_office_buffer", "")).strip()
+    fragment_count = int(session.metadata.get("initial_office_buffer_count", 0) or 0)
+    combined = merge_overlapping_speech(buffer_text, speech)
+
+    if fragment_count == 0 and office_speech_looks_like_disclaimer_opener(speech):
+        cleaned = clean_text(combined)
+        if len(cleaned) <= INITIAL_OFFICE_STABILIZATION_MAX_CHARS and not office_speech_looks_truncated(cleaned):
+            session.metadata["initial_office_buffer"] = combined
+            session.metadata["initial_office_buffer_count"] = 1
+            session.metadata["initial_office_buffer_updated_at"] = utc_now()
+            session.updated_at = utc_now()
+            session.save()
+            log_event(
+                "office_speech_buffered",
+                {
+                    "call_sid": session.call_sid,
+                    "scenario_id": session.scenario_id,
+                    "fragment_count": 1,
+                    "buffer_length": len(combined),
+                },
+            )
+            return None
+        return combined
+
+    if office_speech_looks_truncated(speech) and fragment_count < 2 and len(combined) <= 180:
+        session.metadata["initial_office_buffer"] = combined
+        session.metadata["initial_office_buffer_count"] = fragment_count + 1
+        session.metadata["initial_office_buffer_updated_at"] = utc_now()
+        session.updated_at = utc_now()
+        session.save()
+        log_event(
+            "office_speech_buffered",
+            {
+                "call_sid": session.call_sid,
+                "scenario_id": session.scenario_id,
+                "fragment_count": fragment_count + 1,
+                "buffer_length": len(combined),
+            },
+        )
+        return None
+
+    if buffer_text:
+        _clear_initial_office_buffer(session)
+        return combined
+
+    return speech
 
 
 def render_hard_stop_twiml(*, voice: str, reason: str) -> str:
@@ -843,6 +1028,7 @@ def save_recording_artifact(session: CallSession, recording_sid: str, recording_
     return str(path)
 
 
+
 @app.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok", "time": utc_now()}
@@ -855,17 +1041,7 @@ async def twiml(request: Request) -> Response:
     session = build_session_from_webhook(
         params, fallback_scenario=request.query_params.get("scenario")
     )
-    opening = prompt_reply(session)
-    session.pending_prompt = clean_text(opening.text)
-    publish_call_event(
-        session,
-        "transcript_line",
-        {
-            "speaker": "patient",
-            "text": session.pending_prompt,
-            "source": "twiml_opening",
-        },
-    )
+    session.pending_prompt = ""
     session.metadata.setdefault("webhook", {})["twiml"] = str(request.url)
     session.save()
 
@@ -891,9 +1067,9 @@ async def twiml(request: Request) -> Response:
     twiml_body = generate_twiml_response(
         gather_verb(
             action_url=f"{action_url}?call_sid={session.call_sid}&scenario={session.scenario_id}",
-            prompt=session.pending_prompt,
+            prompt="",
             voice=_settings.twilio_voice,
-            timeout=15,
+            timeout=14,
         ),
         say_verb("I couldn't hear a response. Goodbye.", voice=_settings.twilio_voice),
         "<Hangup/>",
@@ -962,6 +1138,23 @@ async def voice(request: Request) -> Response:
             retry_prompt=retry_prompt,
         )
         return Response(content=body, media_type="text/xml")
+
+    staged_speech = maybe_stage_office_speech(session, speech)
+    if staged_speech is None:
+        session.updated_at = utc_now()
+        session.save()
+        return Response(
+            content=generate_twiml_response(
+                gather_verb(
+                    action_url=f"{base_webhook_url('/voice')}?call_sid={session.call_sid}&scenario={session.scenario_id}",
+                    prompt="",
+                    voice=_settings.twilio_voice,
+                    timeout=14,
+                )
+            ),
+            media_type="text/xml",
+        )
+    speech = staged_speech
 
     session.add_turn(
         speaker="office",
@@ -1052,20 +1245,45 @@ async def status(request: Request) -> Response:
     validate_and_log_request(request, params)
     session = get_session(params.get("CallSid", ""))
     if session:
-        session.status = params.get("CallStatus", session.status)
-        session.updated_at = utc_now()
-        session.metadata.setdefault("status_events", []).append(
-            {"ts": utc_now(), "params": params}
-        )
-        session.save()
-        publish_call_event(
-            session,
-            "call_status",
-            {
-                "call_status": session.status,
-                "params": params,
-            },
-        )
+        call_status = params.get("CallStatus", session.status)
+        previous_status = session.status
+        status_events = session.metadata.setdefault("status_events", [])
+        status_events.append({"ts": utc_now(), "params": params})
+        if previous_status == "completed" and call_status != "completed":
+            session.updated_at = utc_now()
+            session.save()
+            publish_call_event(
+                session,
+                "call_status",
+                {
+                    "call_status": previous_status,
+                    "params": params,
+                    "ignored": True,
+                },
+            )
+        else:
+            session.status = call_status
+            session.updated_at = utc_now()
+            session.save()
+            publish_call_event(
+                session,
+                "call_status",
+                {
+                    "call_status": session.status,
+                    "params": params,
+                },
+            )
+            if call_status == "completed" and not session.end_reason:
+                session.end_reason = "remote_hangup"
+                session.save()
+                publish_call_event(
+                    session,
+                    "call_completed",
+                    {
+                        "reason": "remote_hangup",
+                        "status": "completed",
+                    },
+                )
     log_event("call_status", params)
     return Response(content="ok", media_type="text/plain")
 
@@ -1220,6 +1438,28 @@ async def api_call_transcript(call_sid: str) -> dict[str, Any]:
         "metadata": record.get("metadata", {}),
         "transcript_json_path": record.get("transcript_json_path"),
         "transcript_text_path": record.get("transcript_text_path"),
+    }
+
+
+@app.post("/api/calls/{call_sid}/stop")
+async def api_call_stop(call_sid: str) -> dict[str, Any]:
+    session = get_session(call_sid)
+    if session is not None and session.status == "completed":
+        return {
+            "call_sid": call_sid,
+            "status": session.status,
+            "end_reason": session.end_reason,
+            "already_stopped": True,
+        }
+    try:
+        update = stop_live_call(call_sid)
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    return {
+        "call_sid": call_sid,
+        "status": update.get("status", "completed"),
+        "end_reason": session.end_reason if session is not None else None,
+        "already_stopped": False,
     }
 
 

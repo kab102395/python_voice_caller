@@ -84,11 +84,11 @@ def get_settings() -> Settings:
     llm_api_key = _optional("LLM_API_KEY")
     llm_model = os.getenv("LLM_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
     llm_timeout_seconds = float(os.getenv("LLM_TIMEOUT_SECONDS", "20"))
-    twilio_voice = os.getenv("TWILIO_VOICE", "Polly.Matthew-Neural").strip() or "Polly.Matthew-Neural"
-    max_turns = int(os.getenv("MAX_CALL_TURNS", "10"))
+    twilio_voice = os.getenv("TWILIO_VOICE", "Google.en-US-Chirp3-HD-Puck").strip() or "Google.en-US-Chirp3-HD-Puck"
+    max_turns = int(os.getenv("MAX_CALL_TURNS", "30"))
     if max_turns < 1 or max_turns > 50:
         raise RuntimeError("MAX_CALL_TURNS must be between 1 and 50")
-    max_call_seconds = int(os.getenv("MAX_CALL_SECONDS", "180"))
+    max_call_seconds = int(os.getenv("MAX_CALL_SECONDS", "240"))
     if max_call_seconds < 30 or max_call_seconds > 3600:
         raise RuntimeError("MAX_CALL_SECONDS must be between 30 and 3600")
 

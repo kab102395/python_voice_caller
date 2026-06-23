@@ -134,6 +134,14 @@ def load_transcript(call_sid: str) -> dict[str, object]:
     return fetch_json(f"{LOCAL_BASE_URL}/api/calls/{urllib.parse.quote(call_sid, safe='')}/transcript")
 
 
+def stop_call(call_sid: str) -> dict[str, object]:
+    return fetch_json(
+        f"{LOCAL_BASE_URL}/api/calls/{urllib.parse.quote(call_sid, safe='')}/stop",
+        method="POST",
+        body={"reason": "killed_from_cli"},
+    )
+
+
 def open_path(path: str) -> bool:
     candidate = Path(path)
     if not candidate.is_absolute():
@@ -393,6 +401,22 @@ def follow_live_call() -> None:
         print("\nStopped following live call.")
 
 
+def kill_live_call() -> None:
+    call_sid = pick_call_sid(live_only=True)
+    if not call_sid:
+        return
+    confirm = input(f"Stop live call {call_sid}? Type YES to confirm: ").strip()
+    if confirm != "YES":
+        print("Cancelled.")
+        return
+    try:
+        result = stop_call(call_sid)
+    except Exception as exc:
+        print(f"Unable to stop call {call_sid}: {exc}")
+        return
+    print(json.dumps(result, indent=2))
+
+
 def open_artifact() -> None:
     call_sid = input("Enter call SID: ").strip()
     if call_sid.isdigit():
@@ -434,8 +458,9 @@ def menu_loop(public_url: str) -> None:
         print("  6) List bugs")
         print("  7) Open transcript or recording")
         print("  8) Follow live call")
-        print("  9) Open dashboard in browser")
-        print(" 10) Refresh summary")
+        print("  9) Stop live call")
+        print(" 10) Open dashboard in browser")
+        print(" 11) Refresh summary")
         print("  0) Quit")
         choice = input("\nChoice: ").strip()
         if choice == "1":
@@ -455,8 +480,10 @@ def menu_loop(public_url: str) -> None:
         elif choice == "8":
             follow_live_call()
         elif choice == "9":
-            webbrowser.open(LOCAL_DASHBOARD_URL)
+            kill_live_call()
         elif choice == "10":
+            webbrowser.open(LOCAL_DASHBOARD_URL)
+        elif choice == "11":
             continue
         elif choice == "0":
             break

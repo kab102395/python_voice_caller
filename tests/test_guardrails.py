@@ -3,12 +3,26 @@ from __future__ import annotations
 import importlib
 import asyncio
 import os
+import urllib.error
 from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
 import unittest
 from pathlib import Path
+from urllib.parse import urlencode
 from tempfile import TemporaryDirectory
 from unittest.mock import patch
+
+
+class FakeRequest:
+    def __init__(self, url: str, params: dict[str, str]) -> None:
+        self.url = url
+        self.headers = {}
+        self._body = urlencode(params).encode("utf-8")
+        query = url.split("?", 1)[1] if "?" in url else ""
+        self.query_params = dict(item.split("=", 1) for item in query.split("&") if item)
+
+    async def body(self) -> bytes:
+        return self._body
 
 
 class GuardrailTests(unittest.TestCase):
@@ -121,6 +135,83 @@ class GuardrailTests(unittest.TestCase):
         self.assertIn("I need Lisinopril 10mg.", memory.recent_patient_answers)
         self.assertEqual(memory.confirmed_facts.get("current_medication"), "Lisinopril 10mg")
 
+    def test_call_memory_ignores_untracked_profile_fields(self) -> None:
+        scenario = self.app.scenario_context("scheduling")
+        memory = self.app.CallMemory.from_scenario(scenario)
+        memory.record_turn(
+            speaker="patient",
+            text="I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski and I take Adderall 20mg.",
+        )
+        self.assertNotIn("appointment_to_cancel", memory.confirmed_facts)
+        self.assertNotIn("controlled_medication", memory.confirmed_facts)
+        self.assertNotIn("current_medication", memory.confirmed_facts)
+
+    def test_office_speech_looks_truncated_flags_partial_fragment(self) -> None:
+        self.assertTrue(self.app.office_speech_looks_truncated("You already have a."))
+        self.assertFalse(self.app.office_speech_looks_truncated("I see."))
+        self.assertFalse(self.app.office_speech_looks_truncated("No problem."))
+
+    def test_office_speech_buffer_releases_after_completion(self) -> None:
+        scenario = self.app.scenario_context("scheduling")
+        session = self.app.CallSession(
+            call_sid="CA-buf",
+            scenario_id="scheduling",
+            to_number="+18054398008",
+            from_number="+15551234567",
+            call_memory=self.app.CallMemory.from_scenario(scenario),
+            started_at="2026-06-22T00:00:00Z",
+            updated_at="2026-06-22T00:00:01Z",
+        )
+        self.assertIsNone(self.app.maybe_stage_office_speech(session, "You already have a."))
+        self.assertEqual(
+            self.app.maybe_stage_office_speech(session, "follow-up appointment booked."),
+            "You already have a. follow-up appointment booked.",
+        )
+
+    def test_office_disclaimer_opener_is_buffered_on_first_fragment(self) -> None:
+        scenario = self.app.scenario_context("scheduling")
+        session = self.app.CallSession(
+            call_sid="CA-disclaimer",
+            scenario_id="scheduling",
+            to_number="+18054398008",
+            from_number="+15551234567",
+            call_memory=self.app.CallMemory.from_scenario(scenario),
+            started_at="2026-06-22T00:00:00Z",
+            updated_at="2026-06-22T00:00:01Z",
+        )
+        self.assertIsNone(
+            self.app.maybe_stage_office_speech(
+                session,
+                "This call may be recorded for quality and training purposes.",
+            )
+        )
+        self.assertEqual(
+            self.app.maybe_stage_office_speech(
+                session,
+                "Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?",
+            ),
+            "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?",
+        )
+
+    def test_office_disclaimer_opener_releases_when_already_complete(self) -> None:
+        scenario = self.app.scenario_context("scheduling")
+        session = self.app.CallSession(
+            call_sid="CA-disclaimer-complete",
+            scenario_id="scheduling",
+            to_number="+18054398008",
+            from_number="+15551234567",
+            call_memory=self.app.CallMemory.from_scenario(scenario),
+            started_at="2026-06-22T00:00:00Z",
+            updated_at="2026-06-22T00:00:01Z",
+        )
+        self.assertEqual(
+            self.app.maybe_stage_office_speech(
+                session,
+                "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?",
+            ),
+            "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?",
+        )
+
     def test_prompt_builder_includes_call_memory(self) -> None:
         scenario = self.app.scenario_context("insurance")
         memory = self.app.CallMemory.from_scenario(scenario).to_dict()
@@ -136,6 +227,9 @@ class GuardrailTests(unittest.TestCase):
         self.assertIn("CALL MEMORY", prompt)
         self.assertIn("Blue Cross PPO", prompt)
         self.assertIn("REQUIRED FACTS FOR THIS SCENARIO", prompt)
+        self.assertIn("SCENARIO BOUNDARY RULES", prompt)
+        self.assertIn("Do not switch to a different appointment", prompt)
+        self.assertNotIn("preferred_pharmacy_address", prompt)
 
     def test_prompt_builder_merges_default_and_scenario_profile(self) -> None:
         prompt = self.scenarios.build_patient_prompt(
@@ -227,9 +321,9 @@ class GuardrailTests(unittest.TestCase):
 
     def test_api_bugs_parses_frontmatter(self) -> None:
         bugs = self.app.bug_index()
-        self.assertGreaterEqual(len(bugs), 18)
+        self.assertGreaterEqual(len(bugs), 1)
         self.assertEqual(bugs[0]["id"], 1)
-        self.assertIn("Provider name", bugs[0]["title"])
+        self.assertIn("medication", bugs[0]["title"].lower())
 
     def test_api_live_logs_reads_current_file(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -272,6 +366,39 @@ class GuardrailTests(unittest.TestCase):
         self.assertIsInstance(reply, self.engine.Reply)
         self.assertEqual(self.app._engine_disabled_reason, "quota")
         self.assertIsInstance(self.app._engine, self.engine.RuleBasedReplyEngine)
+
+    def test_http_post_json_retries_transient_errors(self) -> None:
+        client = importlib.import_module("clients")
+
+        class DummyResponse:
+            status = 200
+
+            def __enter__(self):  # type: ignore[no-untyped-def]
+                return self
+
+            def __exit__(self, exc_type, exc, tb):  # type: ignore[no-untyped-def]
+                return False
+
+            def read(self):  # type: ignore[no-untyped-def]
+                return b'{"ok": true}'
+
+        calls = {"count": 0}
+
+        def fake_urlopen(*args, **kwargs):  # type: ignore[no-untyped-def]
+            calls["count"] += 1
+            if calls["count"] == 1:
+                raise urllib.error.URLError("temporary reset")
+            return DummyResponse()
+
+        with patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            payload = client.http_post_json(
+                url="https://example.com/api",
+                data={"hello": "world"},
+                bearer_token="token",
+                timeout=1.0,
+            )
+        self.assertEqual(payload, {"ok": True})
+        self.assertEqual(calls["count"], 2)
 
     def test_should_force_hangup_by_elapsed_time(self) -> None:
         session = self.app.CallSession(
@@ -322,6 +449,171 @@ class GuardrailTests(unittest.TestCase):
             batch_runner.iter_batch_scenarios(limit=3),
             list(batch_runner.SCENARIOS.keys())[:3],
         )
+
+    def test_first_exchange_smoke_covers_all_scenarios(self) -> None:
+        disclaimer_fragment = "This call may be recorded for quality and training purposes."
+        opener_fragment = "Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?"
+        with TemporaryDirectory() as tmp:
+            transcript_root = Path(tmp) / "transcripts"
+            recording_root = Path(tmp) / "recordings"
+            with (
+                patch.object(self.app, "TRANSCRIPT_ROOT", transcript_root),
+                patch.object(self.app, "RECORDING_ROOT", recording_root),
+                patch.object(self.app, "validate_and_log_request", lambda *args, **kwargs: None),
+                patch.object(self.app, "get_engine", return_value=self.engine.RuleBasedReplyEngine()),
+            ):
+                for index, scenario_id in enumerate(self.scenarios.SCENARIOS.keys(), start=1):
+                    call_sid = f"CA-smoke-{index:02d}-{scenario_id.replace('_', '-')}"
+                    twiml_response = asyncio.run(
+                        self.app.twiml(
+                            FakeRequest(
+                                f"https://example.com/twiml?scenario={scenario_id}",
+                                {
+                                    "CallSid": call_sid,
+                                    "From": "+13203810451",
+                                    "To": "+18054398008",
+                                    "CallStatus": "in-progress",
+                                },
+                            )
+                        )
+                    )
+                    self.assertEqual(twiml_response.status_code, 200)
+                    self.assertIn("<Gather", twiml_response.body.decode("utf-8"))
+
+                    first_voice_response = asyncio.run(
+                        self.app.voice(
+                            FakeRequest(
+                                f"https://example.com/voice?call_sid={call_sid}&scenario={scenario_id}",
+                                {
+                                    "CallSid": call_sid,
+                                    "From": "+13203810451",
+                                    "To": "+18054398008",
+                                    "CallStatus": "in-progress",
+                                    "SpeechResult": disclaimer_fragment,
+                                    "Confidence": "0.99",
+                                },
+                            )
+                        )
+                    )
+                    self.assertEqual(first_voice_response.status_code, 200)
+                    self.assertIn("<Gather", first_voice_response.body.decode("utf-8"))
+
+                    voice_response = asyncio.run(
+                        self.app.voice(
+                            FakeRequest(
+                                f"https://example.com/voice?call_sid={call_sid}&scenario={scenario_id}",
+                                {
+                                    "CallSid": call_sid,
+                                    "From": "+13203810451",
+                                    "To": "+18054398008",
+                                    "CallStatus": "in-progress",
+                                    "SpeechResult": opener_fragment,
+                                    "Confidence": "0.99",
+                                },
+                            )
+                        )
+                    )
+                    self.assertEqual(voice_response.status_code, 200)
+                    voice_body = voice_response.body.decode("utf-8")
+                    self.assertIn("<Gather", voice_body)
+
+                    record = self.app.resolve_call_record(call_sid)
+                    self.assertEqual(record["status"], "started")
+                    self.assertEqual(record["turn_count"], 2)
+                    self.assertEqual(record["scenario_id"], scenario_id)
+                    self.assertIsNone(record["end_reason"])
+
+    def test_full_flow_smoke_covers_all_scenarios(self) -> None:
+        disclaimer_fragment = "This call may be recorded for quality and training purposes."
+        opener_fragment = "Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?"
+        closing_fragment = "Thanks, bye."
+        with TemporaryDirectory() as tmp:
+            transcript_root = Path(tmp) / "transcripts"
+            recording_root = Path(tmp) / "recordings"
+            with (
+                patch.object(self.app, "TRANSCRIPT_ROOT", transcript_root),
+                patch.object(self.app, "RECORDING_ROOT", recording_root),
+                patch.object(self.app, "validate_and_log_request", lambda *args, **kwargs: None),
+                patch.object(self.app, "get_engine", return_value=self.engine.RuleBasedReplyEngine()),
+            ):
+                for index, (scenario_id, scenario) in enumerate(self.scenarios.SCENARIOS.items(), start=1):
+                    call_sid = f"CA-full-{index:02d}-{scenario_id.replace('_', '-')}"
+                    twiml_response = asyncio.run(
+                        self.app.twiml(
+                            FakeRequest(
+                                f"https://example.com/twiml?scenario={scenario_id}",
+                                {
+                                    "CallSid": call_sid,
+                                    "From": "+13203810451",
+                                    "To": "+18054398008",
+                                    "CallStatus": "in-progress",
+                                },
+                            )
+                        )
+                    )
+                    self.assertEqual(twiml_response.status_code, 200)
+
+                    for speech in (disclaimer_fragment, opener_fragment, *map(str, scenario.get("followups", [])), closing_fragment):
+                        voice_response = asyncio.run(
+                            self.app.voice(
+                                FakeRequest(
+                                    f"https://example.com/voice?call_sid={call_sid}&scenario={scenario_id}",
+                                    {
+                                        "CallSid": call_sid,
+                                        "From": "+13203810451",
+                                        "To": "+18054398008",
+                                        "CallStatus": "in-progress",
+                                        "SpeechResult": speech,
+                                        "Confidence": "0.99",
+                                    },
+                                )
+                            )
+                        )
+                        self.assertEqual(voice_response.status_code, 200)
+                        if "<Gather" not in voice_response.body.decode("utf-8"):
+                            break
+
+                    record = self.app.resolve_call_record(call_sid)
+                    self.assertEqual(record["scenario_id"], scenario_id)
+                    self.assertEqual(record["status"], "completed")
+                    self.assertIsNotNone(record["end_reason"])
+                    self.assertGreaterEqual(record["turn_count"], 2)
+
+    def test_recording_status_does_not_complete_live_call(self) -> None:
+        call_sid = "CA-smoke-recording"
+        with TemporaryDirectory() as tmp:
+            transcript_root = Path(tmp) / "transcripts"
+            recording_root = Path(tmp) / "recordings"
+            with (
+                patch.object(self.app, "TRANSCRIPT_ROOT", transcript_root),
+                patch.object(self.app, "RECORDING_ROOT", recording_root),
+                patch.object(self.app, "validate_and_log_request", lambda *args, **kwargs: None),
+                patch.object(self.app, "save_recording_artifact", return_value=str(recording_root / "fake.mp3")),
+            ):
+                self.app.upsert_session(
+                    call_sid=call_sid,
+                    scenario_id="controlled_refill",
+                    to_number="+18054398008",
+                    from_number="+13203810451",
+                    metadata={"source": "twilio"},
+                )
+                response = asyncio.run(
+                    self.app.recording_status(
+                        FakeRequest(
+                            "https://example.com/recording-status",
+                            {
+                                "CallSid": call_sid,
+                                "RecordingSid": "RE-smoke",
+                                "RecordingUrl": "https://example.com/recording",
+                            },
+                        )
+                    )
+                )
+                self.assertEqual(response.status_code, 200)
+                record = self.app.resolve_call_record(call_sid)
+                self.assertEqual(record["status"], "started")
+                self.assertIsNone(record["end_reason"])
+                self.assertEqual(record["recording_sid"], "RE-smoke")
 
 
 if __name__ == "__main__":

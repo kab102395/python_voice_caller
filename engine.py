@@ -11,7 +11,26 @@ from scenarios import build_patient_prompt
 
 GOODBYE_RE = re.compile(r"\b(bye|goodbye|see you|take care|have a good day|have a great day)\b", re.I)
 WRAP_UP_RE = re.compile(r"\b(is there anything else|anything else I can help|anything else for you)\b", re.I)
+CONFIRMATION_RE = re.compile(r"\b(is that correct|is this correct|is all (of )?that correct|does that (sound|look) right|is this the (appointment|one)|is that the (appointment|one))\b", re.I)
 REPETITION_GUARD_REPLY = "I think we've already covered that. What would you like me to do next?"
+def _first_turn_reply(
+    *,
+    scenario: dict[str, Any],
+    transcript: list[dict[str, str]],
+    office_speech: str,
+    call_memory: dict[str, Any] | None = None,
+) -> Reply | None:
+    if len(transcript) > 1:
+        return None
+
+    starter = str(scenario.get("starter", "")).strip()
+    profile = (call_memory or {}).get("patient_profile", {}) if call_memory else {}
+    first_name = str(profile.get("first_name", "")).strip()
+    if starter:
+        return Reply(text=starter)
+    if first_name:
+        return Reply(text=f"Yes, this is {first_name}.")
+    return None
 
 
 def _normalize_question(text: str) -> tuple[str, ...]:
@@ -115,11 +134,22 @@ class RuleBasedReplyEngine(ReplyEngine):
     ) -> Reply:
         if _repetition_detected(transcript):
             return Reply(text=REPETITION_GUARD_REPLY)
+        if CONFIRMATION_RE.search(office_speech):
+            return Reply(text="Yes, that's correct.", should_hangup=False)
         if GOODBYE_RE.search(office_speech):
             return Reply(text="Thanks, that helps. Bye.", should_hangup=True)
 
         if WRAP_UP_RE.search(office_speech) and len(transcript) >= 6:
             return Reply(text="No, that's all I needed. Thanks, bye!", should_hangup=True)
+
+        first_turn = _first_turn_reply(
+            scenario=scenario,
+            transcript=transcript,
+            office_speech=office_speech,
+            call_memory=call_memory,
+        )
+        if first_turn is not None:
+            return first_turn
 
         office_turns = [turn for turn in transcript if turn.get("speaker") == "office"]
         index = max(0, len(office_turns) - 1)
@@ -166,11 +196,22 @@ class OpenAICompatibleReplyEngine(ReplyEngine):
     ) -> Reply:
         if _repetition_detected(transcript):
             return Reply(text=REPETITION_GUARD_REPLY)
+        if CONFIRMATION_RE.search(office_speech):
+            return Reply(text="Yes, that's correct.", should_hangup=False)
         if GOODBYE_RE.search(office_speech):
             return Reply(text="Thanks, that helps. Bye.", should_hangup=True)
 
         if WRAP_UP_RE.search(office_speech) and len(transcript) >= 6:
             return Reply(text="No, that's all I needed. Thanks, bye!", should_hangup=True)
+
+        first_turn = _first_turn_reply(
+            scenario=scenario,
+            transcript=transcript,
+            office_speech=office_speech,
+            call_memory=call_memory,
+        )
+        if first_turn is not None:
+            return first_turn
 
         messages = [
             {

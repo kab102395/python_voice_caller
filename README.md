@@ -53,7 +53,7 @@ Optional:
 - `LLM_MODEL` - defaults to `gpt-4o-mini`
 - `LLM_TIMEOUT_SECONDS` - defaults to `20`
 - `TWILIO_VOICE` - defaults to `Polly.Matthew-Neural`
-- `MAX_CALL_TURNS` - defaults to `10`
+- `MAX_CALL_TURNS` - defaults to `30`
 - `MAX_CALL_SECONDS` - defaults to `180`
 
 ## Setup

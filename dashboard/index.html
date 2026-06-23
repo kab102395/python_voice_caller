@@ -146,6 +146,11 @@
       cursor: pointer;
       font-weight: 600;
     }
+    button.danger {
+      background: linear-gradient(180deg, #f06f6f, #e25b5b);
+      border-color: #e25b5b;
+      color: #fff;
+    }
     button:disabled { opacity: 0.6; cursor: not-allowed; }
     .stack { display: grid; gap: 12px; }
     .row { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -431,6 +436,7 @@
               <span class="chip" id="live-scenario">scenario: -</span>
               <span class="chip" id="live-status">status: idle</span>
               <span class="chip" id="live-call-sid">sid: -</span>
+              <button id="stop-call-button" class="danger" type="button" disabled>Stop live call</button>
             </div>
           </div>
           <div class="panel-body">
@@ -498,6 +504,7 @@
       selectedScenarioIds: [],
       liveLogSource: "app",
       liveLogTimer: null,
+      stopCallBusy: false,
     };
 
     const $ = (id) => document.getElementById(id);
@@ -549,6 +556,15 @@
       const banner = $("live-banner");
       banner.textContent = text;
       banner.className = kind ? `banner ${kind}` : "banner";
+    }
+
+    function syncStopButton(record = null) {
+      const button = $("stop-call-button");
+      const status = String(record?.status || $("live-status").textContent.replace("status: ", "") || "").toLowerCase();
+      const liveSid = String(record?.call_sid || state.currentCallSid || "").trim();
+      const isLive = Boolean(liveSid) && status && status !== "completed";
+      button.disabled = !isLive || state.stopCallBusy;
+      button.textContent = state.stopCallBusy ? "Stopping..." : "Stop live call";
     }
 
     function syncBatchChip() {
@@ -739,6 +755,7 @@
       $("live-call-sid").textContent = `sid: ${record.call_sid || "-"}`;
       $("live-scenario").textContent = `scenario: ${record.scenario_id || "-"}`;
       $("live-status").textContent = `status: ${record.status || "-"}`;
+      syncStopButton(record);
       $("detail-path").textContent = record.transcript_json_path || "-";
       $("call-chip").textContent = `call: ${record.call_sid || "none"}`;
       if (record.started_at) {
@@ -930,6 +947,7 @@
       state.eventSource.addEventListener("call_status", (event) => {
         const payload = JSON.parse(event.data);
         $("live-status").textContent = `status: ${payload.call_status || "-"}`;
+        syncStopButton({ status: payload.call_status || "-", call_sid: payload.call_sid || callSid });
       });
       state.eventSource.addEventListener("recording_ready", (event) => {
         const payload = JSON.parse(event.data);
@@ -946,6 +964,7 @@
         stopTimer();
         state.suppressDisconnectedBanner = true;
         closeSSE(true);
+        syncStopButton({ status: "completed", call_sid: payload.call_sid || callSid });
         resolveCompletionWaiter(payload);
         loadCallHistory();
       });
@@ -968,6 +987,7 @@
         state.currentCallSid = result.sid;
         state.currentScenarioId = scenarioId;
         $("call-chip").textContent = `call: ${result.sid}`;
+        syncStopButton({ status: "started", call_sid: result.sid });
         connectSSE(result.sid);
         if (refresh) {
           await loadCallHistory();
@@ -1019,6 +1039,30 @@
       await refreshLiveLogs();
     }
 
+    async function stopCurrentCall() {
+      if (!state.currentCallSid || state.stopCallBusy) return;
+      state.stopCallBusy = true;
+      syncStopButton({ status: $("live-status").textContent.replace("status: ", ""), call_sid: state.currentCallSid });
+      try {
+        const result = await fetchJson(`/api/calls/${encodeURIComponent(state.currentCallSid)}/stop`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ reason: "killed_from_dashboard" }),
+        });
+        appendBanner(`Stop requested for ${result.call_sid}.`, "warn");
+        $("live-status").textContent = `status: ${result.status || "completed"}`;
+        closeSSE(true);
+        stopTimer();
+        await loadCallHistory();
+        await refreshCurrentCall();
+      } catch (error) {
+        appendBanner(`Failed to stop call: ${error.message}`, "warn");
+      } finally {
+        state.stopCallBusy = false;
+        syncStopButton({ status: $("live-status").textContent.replace("status: ", ""), call_sid: state.currentCallSid });
+      }
+    }
+
     function wireEvents() {
       $("scenario-select").addEventListener("change", updateScenarioObjective);
       $("call-button").addEventListener("click", async () => {
@@ -1044,6 +1088,9 @@
         if (state.currentCallSid) {
           await loadCall(state.currentCallSid, false);
         }
+      });
+      $("stop-call-button").addEventListener("click", async () => {
+        await stopCurrentCall();
       });
       $("history-toggle").addEventListener("click", () => {
         const panel = $("history-panel");

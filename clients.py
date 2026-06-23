@@ -5,6 +5,7 @@ import html
 import hashlib
 import hmac
 import json
+import time
 import ssl
 import urllib.error
 import urllib.parse
@@ -14,6 +15,7 @@ from typing import Any
 
 
 USER_AGENT = "python_voice_caller/0.2"
+JSON_POST_RETRIES = 1
 
 
 def _https_context() -> ssl.SSLContext:
@@ -76,13 +78,21 @@ def http_post_json(
     request.add_header("Content-Type", "application/json")
     request.add_header("Authorization", f"Bearer {bearer_token}")
     request.add_header("User-Agent", USER_AGENT)
-    try:
-        with urllib.request.urlopen(request, timeout=timeout, context=_https_context()) as response:
-            payload = response.read().decode("utf-8", errors="replace")
-            return json.loads(payload)
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
+    last_exc: Exception | None = None
+    for attempt in range(JSON_POST_RETRIES + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout, context=_https_context()) as response:
+                payload = response.read().decode("utf-8", errors="replace")
+                return json.loads(payload)
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
+        except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as exc:
+            last_exc = exc
+            if attempt >= JSON_POST_RETRIES:
+                break
+            time.sleep(0.5 * (attempt + 1))
+    raise RuntimeError(f"POST JSON failed after retries from {url}: {last_exc}") from last_exc
 
 
 def download_binary(
@@ -159,6 +169,33 @@ def create_twilio_call(
         raise RuntimeError(f"Twilio call creation failed: HTTP {exc.code}: {body}") from exc
 
 
+def update_twilio_call_status(
+    *,
+    account_sid: str,
+    auth_token: str,
+    call_sid: str,
+    status: str = "completed",
+    timeout: float = 30.0,
+) -> dict[str, Any]:
+    url = f"https://api.twilio.com/2010-04-01/Accounts/{account_sid}/Calls/{call_sid}.json"
+    status_value = status.strip()
+    if not status_value:
+        raise ValueError("status must not be empty")
+    encoded = urllib.parse.urlencode({"Status": status_value}).encode("utf-8")
+    request = urllib.request.Request(url, data=encoded, method="POST")
+    request.add_header("Content-Type", "application/x-www-form-urlencoded")
+    request.add_header("User-Agent", USER_AGENT)
+    token = base64.b64encode(f"{account_sid}:{auth_token}".encode("utf-8")).decode("utf-8")
+    request.add_header("Authorization", f"Basic {token}")
+    try:
+        with urllib.request.urlopen(request, timeout=timeout, context=_https_context()) as response:
+            payload = response.read().decode("utf-8", errors="replace")
+            return json.loads(payload)
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Twilio call update failed: HTTP {exc.code}: {body}") from exc
+
+
 def generate_twiml_response(*verbs: str) -> str:
     return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response>" + "".join(verbs) + "</Response>"
 
@@ -175,17 +212,22 @@ def gather_verb(
     prompt: str,
     voice: str,
     timeout: int = 4,
-    speech_timeout: int = 2,
+    speech_timeout: int = 1,
     pause_seconds: int = 0,
 ) -> str:
     escaped_prompt = html.escape(prompt, quote=False)
     escaped_action_url = html.escape(action_url, quote=True)
     escaped_voice = html.escape(voice, quote=True)
     pause = f'<Pause length="{pause_seconds}"/>' if pause_seconds > 0 else ""
+    prompt_markup = (
+        f"<Say voice=\"{escaped_voice}\">{escaped_prompt}</Say>"
+        if escaped_prompt.strip()
+        else ""
+    )
     return (
         f"<Gather input=\"speech\" action=\"{escaped_action_url}\" method=\"POST\" "
         f"speechTimeout=\"{speech_timeout}\" timeout=\"{timeout}\">"
         f"{pause}"
-        f"<Say voice=\"{escaped_voice}\">{escaped_prompt}</Say>"
+        f"{prompt_markup}"
         "</Gather>"
     )

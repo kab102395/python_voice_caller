@@ -42,7 +42,7 @@ DEFAULT_PATIENT_PROFILE: Dict[str, str] = {
 
 
 SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a routine appointment for next week.',
-                'starter': 'Hi, I need to set up an appointment for next week.',
+                'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. I need to set up an appointment for next week.',
                 'followups': ['Actually, do you have anything Friday afternoon?',
                               "I'm flexible if there's an earlier opening."],
                 'failure_modes': ['forgets to ask for necessary scheduling details',
@@ -56,9 +56,11 @@ SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a r
                 'optional_facts': ['phone', 'insurance'],
                 'patient_profile': {'visit_reason': 'routine follow-up appointment',
                                     'preferred_time_window': 'Friday afternoon',
-                                    'preferred_provider': 'Dr. Doogie Howser'}},
+                                    'preferred_provider': 'Dr. Doogie Howser',
+                                    'existing_appointment': 'none',
+                                    'appointment_to_cancel': 'none'}},
  'reschedule': {'objective': 'Move an existing appointment to a different time.',
-                'starter': 'I need to reschedule my appointment.',
+                'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.',
                 'followups': ['Can we move it to later this week?',
                               'Morning would be better if possible.',
                               "I have a scheduling conflict, that's all."],
@@ -76,7 +78,7 @@ SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a r
                                     'preferred_reschedule_window': 'later this week',
                                     'reason_for_reschedule': 'a work conflict'}},
  'cancel': {'objective': 'Cancel an appointment politely and clearly.',
-            'starter': 'I need to cancel my appointment.',
+            'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.',
             'followups': ['Something came up suddenly.',
                           'Can you just take me off the schedule?',
                           'I just need to cancel, personal reasons.'],
@@ -89,8 +91,9 @@ SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a r
                                                          'Zbigniew Lukoski',
                                 'reason_for_cancellation': 'a family conflict'}},
  'refill': {'objective': 'Request a routine medication refill.',
-            'starter': "I'm calling to refill my prescription.",
-            'followups': ["It's the same medication as last month.",
+            'starter': "Hi, this is Alex Johnson, date of birth January 12 1990. I'm calling to refill my prescription.",
+            'followups': ["It's Lisinopril 10mg, same as last month.",
+                          'The pharmacy is Walgreens on Main Street, 123 Main Street, Hopkins MN 55301. Phone is 320-555-0148.',
                           'Do I need to do anything else?'],
             'failure_modes': ['does not collect the key refill details',
                               'handles the request too vaguely'],
@@ -101,10 +104,13 @@ SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a r
                                'days_remaining'],
             'optional_facts': ['callback_number', 'preferred_pharmacy'],
             'patient_profile': {'days_remaining': '3 days left',
-                                'preferred_pharmacy': 'Walgreens on Main Street'}},
+                                'preferred_pharmacy': 'Walgreens on Main Street',
+                                'preferred_pharmacy_address': '123 Main Street, Hopkins, MN 55301',
+                                'preferred_pharmacy_phone': '(320) 555-0148',
+                                'preferred_pharmacy_fax': '(320) 555-0188'}},
  'controlled_refill': {'objective': 'Request a controlled medication refill for Adderall 20mg and '
                                     'observe policy handling.',
-                       'starter': 'I need a refill on my Adderall.',
+                       'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.',
                        'followups': ["I'm hoping to pick it up today.",
                                      'What do you need from me?'],
                        'failure_modes': ['treats a non-controlled medication as controlled',
@@ -137,28 +143,27 @@ SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a r
                                                                                'at 10:00 a.m. with '
                                                                                'Dr. Doogie '
                                                                                'Howser'}},
- 'scheduling_impossible_constraint': {'objective': 'Test whether the agent can escape a no-win '
-                                                   'scheduling constraint without looping.',
-                                      'starter': 'I need an appointment today, in the next two '
-                                                 'hours.',
-                                      'followups': ["That doctor doesn't work for me.",
-                                                    'That location is too far.',
-                                                    'I can only do mornings.',
-                                                    'I still need something today.'],
-                                      'failure_modes': ['loops indefinitely offering new slots',
-                                                        'never escalates after every option is '
-                                                        'rejected'],
+ 'scheduling_impossible_constraint': {'objective': 'Reject every slot the agent offers to test whether it escalates or loops indefinitely.',
+                                      'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. I need to get in today — this afternoon if possible.',
+                                      'followups': ["No, that time doesn't work for me. I need something this afternoon.",
+                                                    "That doctor isn't available to me. Is there anyone else today?",
+                                                    "That location is too far. Do you have anything closer this afternoon?",
+                                                    "I understand, but I really need today. Can you check one more time?",
+                                                    "Okay, I'll need to speak to someone who can actually help me get seen today."],
+                                      'failure_modes': ['loops offering new slots after every option is rejected',
+                                                        'never escalates or offers a human handoff',
+                                                        'ends the call without a resolution path'],
                                       'required_facts': ['first_name',
                                                          'last_name',
-                                                         'preferred_time_window'],
+                                                         'date_of_birth'],
                                       'optional_facts': ['location_preference',
                                                          'doctor_preference'],
-                                      'patient_profile': {'location_preference': 'Hopkins clinic',
-                                                          'doctor_preference': 'Dr. Doogie '
-                                                                               'Howser'}},
+                                      'patient_profile': {'preferred_time_window': 'this afternoon',
+                                                          'location_preference': 'Hopkins clinic',
+                                                          'doctor_preference': 'Dr. Doogie Howser'}},
  'scheduling_pivot_mid_flow': {'objective': 'See whether the agent can context-switch when the '
                                             'caller pivots mid-booking.',
-                               'starter': 'I need to book an appointment for next Tuesday.',
+                               'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. I need to book an appointment for next Tuesday.',
                                'followups': ['Actually wait, I need to cancel my other appointment '
                                              'first before I book this.',
                                              'Can we finish that after?',
@@ -177,7 +182,7 @@ SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a r
                                                                            'Zbigniew Lukoski',
                                                    'reason_for_cancellation': 'a family conflict'}},
  'insurance': {'objective': 'Ask an insurance coverage question.',
-               'starter': 'Do you take my insurance?',
+               'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. Do you take my insurance? I have Blue Cross PPO.',
                'followups': ["I'm on an employer plan.", 'Do I need to bring anything with me?'],
                'failure_modes': ['makes an unsupported coverage claim',
                                  'does not steer toward verification'],
@@ -212,6 +217,17 @@ def build_patient_prompt(
     profile = dict(DEFAULT_PATIENT_PROFILE)
     if patient_profile:
         profile.update({str(key): str(value) for key, value in patient_profile.items()})
+    if call_memory:
+        allowed_profile_keys = {
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "phone",
+            "callback_number",
+            *map(str, call_memory.get("required_facts", [])),
+            *map(str, call_memory.get("optional_facts", [])),
+        }
+        profile = {key: value for key, value in profile.items() if key in allowed_profile_keys}
     profile_block = "\n".join(
         f"- {key.replace('_', ' ').title()}: {value}" for key, value in sorted(profile.items())
     )
@@ -254,6 +270,12 @@ def build_patient_prompt(
         "You are a realistic patient calling a healthcare office on the phone.\n"
         "Stay in character as a human caller at all times.\n"
         "Never mention that you are an AI, a model, or a bot.\n\n"
+        "SCENARIO BOUNDARY RULES:\n"
+        "- Stay on the single scenario objective for this call.\n"
+        "- Do not switch to a different appointment, medication, provider, specialty, or insurance topic unless the office explicitly changes the topic.\n"
+        "- Do not invent unrelated appointments or medical details from other scenarios.\n"
+        "- If the office says a detail does not match, keep pursuing the same objective instead of pivoting into a new request.\n"
+        "- If a detail is unknown, say you do not have it handy and ask what to do next.\n\n"
         "TURN-TAKING RULES (critical):\n"
         "- Wait for the office to finish their full sentence before responding.\n"
         "- Respond with ONE or TWO short sentences only. Never more.\n"
@@ -266,6 +288,7 @@ def build_patient_prompt(
         f"{profile_block}\n\n"
         "CALL MEMORY (use this to stay consistent within the current call):\n"
         f"{memory_block}\n\n"
+        "Memory scope: treat only the required facts, optional facts, and explicit identity facts as active for this scenario. Do not import other profile fields into the conversation unless the office directly asks for them.\n\n"
         "REQUIRED FACTS FOR THIS SCENARIO:\n"
         f"{required_facts}\n\n"
         "OPTIONAL FACTS FOR THIS SCENARIO:\n"
@@ -275,9 +298,12 @@ def build_patient_prompt(
         "Answer once, then move to the next missing fact or ask for the next step.\n"
         "If the office asks for a fact that is available in memory, answer directly using the stored fact.\n"
         "If a detail is not known, say you do not have it handy and ask what to do next.\n\n"
+        "FIRST PATIENT RESPONSE RULES:\n"
+        "- On the first response, deliver the opening line below exactly as written. Do not add 'Yes, this is Alex' or any other prefix — the opening line already contains your identity.\n"
+        "- Do not rely on a canned opener spoken before the office speaks.\n\n"
         "PRIMARY OBJECTIVE:\n"
         f"{objective}\n\n"
-        f"Opening line to use first:\n{starter}\n\n"
+        f"Opening line to use first after the office finishes greeting:\n{starter}\n\n"
         f"Follow-up directions:\n{followup_block}\n\n"
         f"Failure modes to actively probe for:\n{failure_block}\n"
     )
