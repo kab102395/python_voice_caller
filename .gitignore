@@ -5,3 +5,6 @@ launcher-*.log
 launcher-*.out
 launcher-*.err
 artifacts/logs/*.log
+artifacts/history/
+artifacts/recordings/
+artifacts/transcripts/
