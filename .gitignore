@@ -1,2 +1,7 @@
 /.env
-/.env.example
+__pycache__/
+*.pyc
+launcher-*.log
+launcher-*.out
+launcher-*.err
+artifacts/logs/*.log

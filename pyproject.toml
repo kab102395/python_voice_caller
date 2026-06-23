@@ -10,7 +10,17 @@ dependencies = [
 ]
 
 [tool.setuptools]
-py-modules = ["app", "call_runner", "clients", "config", "engine", "scenarios"]
+py-modules = [
+  "app",
+  "batch_runner",
+  "call_runner",
+  "call_service",
+  "clients",
+  "config",
+  "engine",
+  "launcher",
+  "scenarios",
+]
 
 [tool.black]
 line-length = 88

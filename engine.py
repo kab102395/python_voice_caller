@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from typing import Any
+from collections import Counter
 
 from clients import http_post_json
 from scenarios import build_patient_prompt
@@ -10,6 +11,63 @@ from scenarios import build_patient_prompt
 
 GOODBYE_RE = re.compile(r"\b(bye|goodbye|see you|take care|have a good day|have a great day)\b", re.I)
 WRAP_UP_RE = re.compile(r"\b(is there anything else|anything else I can help|anything else for you)\b", re.I)
+REPETITION_GUARD_REPLY = "I think we've already covered that. What would you like me to do next?"
+
+
+def _normalize_question(text: str) -> tuple[str, ...]:
+    tokens = re.findall(r"[a-z0-9]+", text.lower())
+    stopwords = {
+        "a",
+        "an",
+        "and",
+        "are",
+        "can",
+        "could",
+        "do",
+        "for",
+        "how",
+        "i",
+        "in",
+        "is",
+        "it",
+        "me",
+        "my",
+        "of",
+        "on",
+        "or",
+        "please",
+        "that",
+        "the",
+        "there",
+        "this",
+        "to",
+        "we",
+        "what",
+        "when",
+        "where",
+        "which",
+        "with",
+        "would",
+        "you",
+        "your",
+    }
+    return tuple(token for token in tokens if token not in stopwords)
+
+
+def _repetition_detected(transcript: list[dict[str, str]]) -> bool:
+    office_turns = [turn.get("text", "") for turn in transcript if turn.get("speaker") == "office"]
+    if len(office_turns) < 2:
+        return False
+    recent = [_normalize_question(text) for text in office_turns[-2:]]
+    if any(not tokens for tokens in recent):
+        return False
+    if recent[0] == recent[1]:
+        return True
+    if len(office_turns) >= 3:
+        recent_three = [_normalize_question(text) for text in office_turns[-3:]]
+        counts = Counter(recent_three)
+        return any(count >= 2 for count in counts.values())
+    return False
 
 
 @dataclass
@@ -19,7 +77,12 @@ class Reply:
 
 
 class ReplyEngine:
-    def initial_reply(self, *, scenario: dict[str, Any]) -> Reply:
+    def initial_reply(
+        self,
+        *,
+        scenario: dict[str, Any],
+        call_memory: dict[str, Any] | None = None,
+    ) -> Reply:
         raise NotImplementedError
 
     def next_reply(
@@ -28,12 +91,18 @@ class ReplyEngine:
         scenario: dict[str, Any],
         transcript: list[dict[str, str]],
         office_speech: str,
+        call_memory: dict[str, Any] | None = None,
     ) -> Reply:
         raise NotImplementedError
 
 
 class RuleBasedReplyEngine(ReplyEngine):
-    def initial_reply(self, *, scenario: dict[str, Any]) -> Reply:
+    def initial_reply(
+        self,
+        *,
+        scenario: dict[str, Any],
+        call_memory: dict[str, Any] | None = None,
+    ) -> Reply:
         return Reply(text=str(scenario["starter"]))
 
     def next_reply(
@@ -42,7 +111,10 @@ class RuleBasedReplyEngine(ReplyEngine):
         scenario: dict[str, Any],
         transcript: list[dict[str, str]],
         office_speech: str,
+        call_memory: dict[str, Any] | None = None,
     ) -> Reply:
+        if _repetition_detected(transcript):
+            return Reply(text=REPETITION_GUARD_REPLY)
         if GOODBYE_RE.search(office_speech):
             return Reply(text="Thanks, that helps. Bye.", should_hangup=True)
 
@@ -76,7 +148,12 @@ class OpenAICompatibleReplyEngine(ReplyEngine):
         self.model = model
         self.timeout_seconds = timeout_seconds
 
-    def initial_reply(self, *, scenario: dict[str, Any]) -> Reply:
+    def initial_reply(
+        self,
+        *,
+        scenario: dict[str, Any],
+        call_memory: dict[str, Any] | None = None,
+    ) -> Reply:
         return Reply(text=str(scenario["starter"]))
 
     def next_reply(
@@ -85,7 +162,10 @@ class OpenAICompatibleReplyEngine(ReplyEngine):
         scenario: dict[str, Any],
         transcript: list[dict[str, str]],
         office_speech: str,
+        call_memory: dict[str, Any] | None = None,
     ) -> Reply:
+        if _repetition_detected(transcript):
+            return Reply(text=REPETITION_GUARD_REPLY)
         if GOODBYE_RE.search(office_speech):
             return Reply(text="Thanks, that helps. Bye.", should_hangup=True)
 
@@ -105,6 +185,7 @@ class OpenAICompatibleReplyEngine(ReplyEngine):
                         for key, value in dict(scenario.get("patient_profile", {}) or {}).items()
                     }
                     or None,
+                    call_memory=call_memory,
                 )
                 + "\nKeep responses to 1-2 short sentences. Never mention you are an AI.\n",
             }

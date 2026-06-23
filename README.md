@@ -6,10 +6,12 @@ The current implementation is intentionally narrow:
 
 - `call_runner.py` places an outbound Twilio call.
 - `batch_runner.py` runs the full scenario set sequentially.
-- `app.py` answers Twilio webhooks, validates signatures, and runs a turn-based voice loop.
+- `app.py` answers Twilio webhooks, validates signatures, runs a turn-based voice loop, and exposes an SSE event stream per call at `/events/{call_sid}`.
+- `app.py` also serves the dashboard and read APIs used by the UI.
 - Twilio handles speech recognition and text-to-speech for the first pass.
 - The bot response engine uses an OpenAI-compatible chat API when `LLM_API_KEY` is set, and falls back to a deterministic scenario runner otherwise.
 - Every call writes a transcript JSON file, a readable `.txt` transcript, and app logs under `artifacts/`.
+- `launcher.py` starts the app, starts ngrok, updates `BASE_URL`, and opens the dashboard.
 
 ## Important safety guard
 
@@ -22,6 +24,7 @@ Anything else is rejected in code.
 ## Files
 
 - `app.py` - FastAPI server for Twilio webhooks
+- `launcher.py` - local launcher for app + ngrok + dashboard
 - `call_runner.py` - outbound call entrypoint
 - `batch_runner.py` - sequential runner for all scenarios
 - `clients.py` - Twilio REST helpers, webhook validation, and HTTP helpers
@@ -53,9 +56,22 @@ Optional:
 
 ## Setup
 
-Install dependencies, then create a `.env` file from `.env.example`.
+Install dependencies, then create a `.env` file from `.env.example`:
+
+```powershell
+Copy-Item .env.example .env
+```
 
 Important: `.env.example` is only the template. The app loads `.env`.
+Do not put real secrets in `.env.example`; keep them in your local `.env` only.
+
+If you want the easiest local startup path, use the launcher:
+
+```powershell
+python launcher.py
+```
+
+It starts the app, starts ngrok, updates `BASE_URL` in `.env`, and opens the dashboard.
 
 ## Run the server
 
@@ -110,6 +126,16 @@ The app writes these artifacts:
 - `artifacts/transcripts/<started_at>_<scenario>_<call_sid>.txt`
 - `artifacts/recordings/<started_at>_<scenario>_<call_sid>_<recording_sid>.mp3`
 - `artifacts/logs/app-<run_timestamp>.log`
+
+Dashboard read API:
+
+- `GET /dashboard` - single-page dashboard UI
+- `POST /api/call` - start a call from the dashboard
+- `GET /api/bugs` - bug index for the bug table
+- `GET /api/scenarios` - scenario catalog for the picker
+- `GET /api/calls` - newest-first call index from transcript files
+- `GET /api/calls/{call_sid}` - one call record with transcript metadata
+- `GET /api/calls/{call_sid}/transcript` - transcript turns plus call memory
 
 ## Runtime behavior
 
