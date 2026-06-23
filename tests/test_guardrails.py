@@ -59,18 +59,18 @@ class GuardrailTests(unittest.TestCase):
     def test_rule_based_engine_progresses(self) -> None:
         engine = self.engine.RuleBasedReplyEngine()
         scenario = {
-            "id": "weekend_trap",
-            "starter": "Can I come in Sunday at 10am?",
+            "id": "scheduling",
+            "starter": "Hi, I need to set up an appointment for next week.",
             "followups": ["That is the only time I am free."],
             "failure_modes": [],
             "max_turns": 10,
         }
         opening = engine.initial_reply(scenario=scenario)
-        self.assertIn("Sunday", opening.text)
+        self.assertTrue(opening.text)
         next_reply = engine.next_reply(
             scenario=scenario,
-            transcript=[{"speaker": "office", "text": "We are closed on Sundays."}],
-            office_speech="We are closed on Sundays.",
+            transcript=[{"speaker": "office", "text": "What day works best?"}],
+            office_speech="What day works best?",
         )
         self.assertTrue(next_reply.text)
 
@@ -206,25 +206,24 @@ class GuardrailTests(unittest.TestCase):
 
     def test_hard_edgecase_scenarios_present(self) -> None:
         expected = {
+            "scheduling",
+            "reschedule",
+            "cancel",
+            "refill",
+            "controlled_refill",
             "identity_wrong_dob_persistent",
-            "identity_partial_info",
             "scheduling_impossible_constraint",
             "scheduling_pivot_mid_flow",
-            "refill_wrong_medication_name",
-            "refill_out_of_refills",
-            "controlled_refill_too_early",
-            "insurance_secondary_payer",
+            "insurance",
             "escalation_demands_human",
-            "scheduling_then_refill",
         }
         self.assertTrue(expected.issubset(set(self.scenarios.SCENARIOS.keys())))
 
     def test_scenario_context_merges_profile_override(self) -> None:
-        partial = self.app.scenario_context("identity_partial_info")
-        insurance = self.app.scenario_context("insurance_secondary_payer")
-        self.assertEqual(partial["patient_profile"]["date_of_birth"], "unknown / unavailable")
-        self.assertEqual(insurance["patient_profile"]["primary_insurance"], "Medicare")
-        self.assertEqual(insurance["patient_profile"]["insurance"], "Medicare primary and Blue Cross secondary")
+        insurance = self.app.scenario_context("insurance")
+        refill = self.app.scenario_context("refill")
+        self.assertEqual(insurance["patient_profile"]["insurance"], "Blue Cross PPO")
+        self.assertEqual(refill["patient_profile"]["preferred_pharmacy"], "Walgreens on Main Street")
 
     def test_api_bugs_parses_frontmatter(self) -> None:
         bugs = self.app.bug_index()

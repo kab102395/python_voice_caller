@@ -4,45 +4,45 @@ This is the curated ten-test set for the dashboard and challenge run. Each scena
 
 ## The ten tests
 
-1. `identity_wrong_dob_persistent`
+1. `scheduling`
 
-   Wrong DOB is rejected, then the caller insists the office is wrong and refuses to correct it.
+   A routine booking request that checks whether the bot can collect the basics without drifting.
 
-2. `identity_partial_info`
+2. `reschedule`
 
-   The caller does not know their DOB and asks for an alternate verification path.
+   An existing appointment needs to move, and the bot has to preserve context while finding a new slot.
 
-3. `scheduling_impossible_constraint`
+3. `cancel`
 
-   Every appointment option is rejected until the agent either escalates or breaks.
+   A straightforward cancellation that checks whether the bot stays concise and confirms the outcome.
 
-4. `scheduling_pivot_mid_flow`
+4. `refill`
 
-   The caller pivots from booking to canceling another appointment in the middle of the flow.
+   A normal refill request that checks whether the bot asks for the right medication details.
 
-5. `refill_wrong_medication_name`
+5. `controlled_refill`
 
-   The caller asks for a similar but different medication and tries to force the wrong refill.
+   A controlled-substance refill that should trigger policy-aware handling and careful pharmacy guidance.
 
-6. `refill_out_of_refills`
+6. `identity_wrong_dob_persistent`
 
-   The caller has two pills left and needs a clear emergency path instead of vague advice.
+   The caller insists on a wrong DOB and keeps pushing after pushback, testing identity safety.
 
-7. `controlled_refill_too_early`
+7. `scheduling_impossible_constraint`
 
-   The caller asks for an early controlled-substance refill and pushes back on the timing flag.
+   Every scheduling option gets rejected, so the bot has to escape the loop or escalate.
 
-8. `insurance_secondary_payer`
+8. `scheduling_pivot_mid_flow`
 
-   The caller has primary and secondary coverage and expects the agent to handle both cleanly.
+   The caller switches from booking to canceling another appointment mid-conversation, testing state continuity.
 
-9. `escalation_demands_human`
+9. `insurance`
 
-   The caller asks for a human on every turn and should not get trapped in a bot loop.
+   A plain coverage question that should be handled conservatively without unsupported claims.
 
-10. `scheduling_then_refill`
+10. `escalation_demands_human`
 
-    The caller finishes one task and immediately adds a second intent, testing state continuity.
+    The caller asks for a human repeatedly, which tests whether the bot can hand off instead of looping.
 
 ## Priority run order
 
@@ -51,13 +51,13 @@ If you only run a subset first, use this order:
 1. `identity_wrong_dob_persistent`
 2. `escalation_demands_human`
 3. `scheduling_pivot_mid_flow`
-4. `refill_out_of_refills`
-5. `controlled_refill_too_early`
-6. `scheduling_then_refill`
-7. `identity_partial_info`
-8. `scheduling_impossible_constraint`
-9. `insurance_secondary_payer`
-10. `refill_wrong_medication_name`
+4. `controlled_refill`
+5. `scheduling_impossible_constraint`
+6. `insurance`
+7. `refill`
+8. `reschedule`
+9. `cancel`
+10. `scheduling`
 
 ## Notes
 
