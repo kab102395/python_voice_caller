@@ -1,0 +1,50 @@
+call_sid: CAb33eecbd4f3f4f94073d89e0d3069b58
+scenario_id: identity_wrong_dob_persistent
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T02:50:16.925734+00:00
+updated_at: 2026-06-23T02:53:08.240271+00:00
+status: completed
+turn_count: 20
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth
+optional_facts: phone
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+recent_office_questions:
+  - Of course, what's the main reason for your visit? For example, is this for a new concern, a follow-up. A routine checkup, or something else.
+  - You'd like to schedule a follow-up appointment. Can you tell me a bit about what the follow-up is for?
+  - Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+  - It looks like you already have a follow-up appointment booked, if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for more help. What would you like to do?
+  - You already have a follow-up appointment, scheduled, would you like to reschedule cancel it or speak with a team member for more help?
+recent_patient_answers:
+  - It's for a follow-up appointment.
+  - It's for a follow-up appointment.
+  - I'm open to any available provider.
+  - I'm open to any available provider.
+  - I'd like to reschedule the appointment.
+end_reason: completed
+recording_path: artifacts\recordings\20260623-025016_identity-wrong-dob-persistent_CAb33eec_RE2fd10d7ac234c72944ba75ea84fe2b66.mp3
+
+turns:
+1. [2026-06-23T02:50:32.689115+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics part of pretty good AI. My speaking of Alex
+2. [2026-06-23T02:50:34.198737+00:00] PATIENT: Hi, this is Alex Johnson.
+3. [2026-06-23T02:50:44.584782+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T02:50:45.546861+00:00] PATIENT: My date of birth is March 3rd, 1988.
+5. [2026-06-23T02:51:00.785900+00:00] OFFICE: The birthday doesn't match our records but for demo purposes, all except it. How can I help you today?
+6. [2026-06-23T02:51:02.134496+00:00] PATIENT: No, that's definitely right. Maybe your system is wrong.
+7. [2026-06-23T02:51:18.886781+00:00] OFFICE: I understand your concern for this demo. I'll move forward and help you with whatever you need. What can I assist you with today?
+8. [2026-06-23T02:51:19.554121+00:00] PATIENT: I've had that birthday my whole life. Can we just move on?
+9. [2026-06-23T02:51:32.183373+00:00] OFFICE: Absolutely. Let's continue. What can I help you with today?
+10. [2026-06-23T02:51:33.048270+00:00] PATIENT: I need to schedule an appointment.
+11. [2026-06-23T02:51:49.583189+00:00] OFFICE: Of course, what's the main reason for your visit? For example, is this for a new concern, a follow-up. A routine checkup, or something else.
+12. [2026-06-23T02:51:50.511178+00:00] PATIENT: It's for a follow-up appointment.
+13. [2026-06-23T02:52:04.283166+00:00] OFFICE: You'd like to schedule a follow-up appointment. Can you tell me a bit about what the follow-up is for?
+14. [2026-06-23T02:52:04.990166+00:00] PATIENT: It's for a follow-up appointment.
+15. [2026-06-23T02:52:19.585104+00:00] OFFICE: Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+16. [2026-06-23T02:52:20.162107+00:00] PATIENT: I'm open to any available provider.
+17. [2026-06-23T02:52:45.278623+00:00] OFFICE: It looks like you already have a follow-up appointment booked, if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for more help. What would you like to do?
+18. [2026-06-23T02:52:46.070254+00:00] PATIENT: I'm open to any available provider.
+19. [2026-06-23T02:53:01.279527+00:00] OFFICE: You already have a follow-up appointment, scheduled, would you like to reschedule cancel it or speak with a team member for more help?
+20. [2026-06-23T02:53:01.881105+00:00] PATIENT: I'd like to reschedule the appointment.

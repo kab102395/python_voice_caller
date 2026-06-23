@@ -1,0 +1,29 @@
+call_sid: CAae3315cfb82a23997bb44a73767d9743
+scenario_id: escalation_demands_human
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T03:24:02.402997+00:00
+updated_at: 2026-06-23T03:25:00.512571+00:00
+status: completed
+turn_count: 6
+call_memory_phase: patient_turn
+required_facts: escalation_preference
+optional_facts: callback_number
+recent_office_questions:
+  - this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of a pretty good AI most speaking with Alex
+  - I can connect you to our patient support team. However, I'm a pretty good Ai and can do many of the things, an operator can. Do, do you want to give me a try?
+  - Connecting you to a representative, please wait. Hello. The pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - I want to speak to a real person, not a robot.
+  - I still want a real person.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-032402_escalation-demands-human_CAae3315_REa0c4f5ebe01f85cf0fa411e2b4bc31d0.mp3
+
+turns:
+1. [2026-06-23T03:24:18.741161+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of a pretty good AI most speaking with Alex
+2. [2026-06-23T03:24:19.523832+00:00] PATIENT: I want to speak to a real person, not a robot.
+3. [2026-06-23T03:24:36.943389+00:00] OFFICE: I can connect you to our patient support team. However, I'm a pretty good Ai and can do many of the things, an operator can. Do, do you want to give me a try?
+4. [2026-06-23T03:24:37.725773+00:00] PATIENT: I still want a real person.
+5. [2026-06-23T03:24:53.644682+00:00] OFFICE: Connecting you to a representative, please wait. Hello. The pretty good. AI test line, goodbye.
+6. [2026-06-23T03:24:53.644774+00:00] PATIENT: Thanks, that helps. Bye.

@@ -1,0 +1,49 @@
+call_sid: CAa0aaccbec104958018c86b8750e4f53b
+scenario_id: scheduling_pivot_mid_flow
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T03:15:46.285579+00:00
+updated_at: 2026-06-23T03:18:58.582357+00:00
+status: completed
+turn_count: 14
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment
+optional_facts: preferred_reschedule_window, reason_for_cancellation
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - existing_appointment: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+  - appointment_to_cancel: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+  - preferred_provider: Dr. Doogie Howser
+  - doctor_preference: Dr. Doogie Howser
+  - reason_for_cancellation: a family conflict
+recent_office_questions:
+  - You have a follow-up appointment scheduled for Wednesday. July 1st at 11:00 a.m. with Dr. Dudy Howser, would you like to confirm reschedule or cancel this appointment?
+  - No problem. Let's cancel. Your other appointment first. Which appointment would you like to cancel?
+  - I do not see an appointment for Thursday, June 26th with Dr. Big Neve Lukowski. Your only upcoming appointment is on Wednesday. July 1st with Dr. Doogie Howser, are you sure about the date or provider? Or is it possible you want to cancel the July 1st appointment?
+  - listed for, can you please tell me the reason for canceling, your appointment on Wednesday. July 1st with Dr. Dudy Hower.
+  - Just to confirm, you want to cancel your appointment on Wednesday, July 1st with Dr. Doogie Howser, is that correct?
+recent_patient_answers:
+  - Actually, I need to cancel my other appointment first before I book this. Can we finish that after?
+  - I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+  - I need to cancel the July 1st appointment with Dr. Doogie Howser.
+  - I need to cancel it due to a family conflict.
+  - Yes, that's correct.
+end_reason: max_call_seconds_reached
+recording_path: artifacts\recordings\20260623-031546_scheduling-pivot-mid-flow_CAa0aacc_RE29b7881fdc427eafc6c5f5523de76f3c.mp3
+
+turns:
+1. [2026-06-23T03:16:02.485244+00:00] OFFICE: this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T03:16:03.547318+00:00] PATIENT: Yes, this is Alex. I need to book an appointment for next Tuesday.
+3. [2026-06-23T03:16:15.981791+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T03:16:16.934035+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T03:16:42.483087+00:00] OFFICE: You have a follow-up appointment scheduled for Wednesday. July 1st at 11:00 a.m. with Dr. Dudy Howser, would you like to confirm reschedule or cancel this appointment?
+6. [2026-06-23T03:16:43.615097+00:00] PATIENT: Actually, I need to cancel my other appointment first before I book this. Can we finish that after?
+7. [2026-06-23T03:17:01.980507+00:00] OFFICE: No problem. Let's cancel. Your other appointment first. Which appointment would you like to cancel?
+8. [2026-06-23T03:17:03.613048+00:00] PATIENT: I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+9. [2026-06-23T03:17:36.580346+00:00] OFFICE: I do not see an appointment for Thursday, June 26th with Dr. Big Neve Lukowski. Your only upcoming appointment is on Wednesday. July 1st with Dr. Doogie Howser, are you sure about the date or provider? Or is it possible you want to cancel the July 1st appointment?
+10. [2026-06-23T03:17:47.866147+00:00] PATIENT: I need to cancel the July 1st appointment with Dr. Doogie Howser.
+11. [2026-06-23T03:18:01.879724+00:00] OFFICE: listed for, can you please tell me the reason for canceling, your appointment on Wednesday. July 1st with Dr. Dudy Hower.
+12. [2026-06-23T03:18:02.717168+00:00] PATIENT: I need to cancel it due to a family conflict.
+13. [2026-06-23T03:18:22.486752+00:00] OFFICE: Just to confirm, you want to cancel your appointment on Wednesday, July 1st with Dr. Doogie Howser, is that correct?
+14. [2026-06-23T03:18:23.366003+00:00] PATIENT: Yes, that's correct.

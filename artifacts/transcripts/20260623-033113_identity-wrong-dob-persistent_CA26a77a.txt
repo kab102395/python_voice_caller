@@ -1,0 +1,37 @@
+call_sid: CA26a77a1f8f268acedac2af4fab749241
+scenario_id: identity_wrong_dob_persistent
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T03:31:13.276461+00:00
+updated_at: 2026-06-23T03:32:39.015893+00:00
+status: completed
+turn_count: 8
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth
+optional_facts: phone
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - appointment_to_cancel: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. Thanks for calling tit Point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+  - Please provide your date of birth.
+  - The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+  - I'm unable to cancel your appointment right now. I'll connect you to our patient support team for help. Please stay on the line. Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - Hi, this is Alex Johnson.
+  - My date of birth is March 3rd, 1988.
+  - I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-033113_identity-wrong-dob-persistent_CA26a77a_RE092bfb4863d40416a580a67d051d0eab.mp3
+
+turns:
+1. [2026-06-23T03:31:29.184525+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling tit Point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T03:31:30.182598+00:00] PATIENT: Hi, this is Alex Johnson.
+3. [2026-06-23T03:31:42.880088+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T03:31:43.759517+00:00] PATIENT: My date of birth is March 3rd, 1988.
+5. [2026-06-23T03:31:58.272322+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+6. [2026-06-23T03:31:59.576459+00:00] PATIENT: I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+7. [2026-06-23T03:32:32.177303+00:00] OFFICE: I'm unable to cancel your appointment right now. I'll connect you to our patient support team for help. Please stay on the line. Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+8. [2026-06-23T03:32:32.177396+00:00] PATIENT: Thanks, that helps. Bye.

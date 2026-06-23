@@ -1,0 +1,44 @@
+call_sid: CA9d1195e12bc9147fdfefba5a9337506b
+scenario_id: scheduling_pivot_mid_flow
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T02:55:17.619460+00:00
+updated_at: 2026-06-23T02:57:31.689464+00:00
+status: completed
+turn_count: 14
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment
+optional_facts: preferred_reschedule_window, reason_for_cancellation
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+recent_office_questions:
+  - Thanks, Alex. What type of appointment do you need next Tuesday. Is this for a new patient consultation? A follow-up. A routine office visit or something else.
+  - No problem. We can cancel your other appointment. First, then book, the new 1. What date? And time is the appointment. You want to cancel?
+  - I'll leave a date time and provider for the appointment. You want to cancel. Can you share those details?
+  - That's all right. I can connect you with a live agent and can look up your appointment and help with the cancellation. Would you like me to transfer you now?
+  - Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - Actually, I need to cancel my other appointment first before I book this. Can we finish that after?
+  - Okay, let's handle the cancellation first. What do you need from me to proceed?
+  - I don't have the details of the appointment handy. What should I do next?
+  - Yes, please transfer me to a live agent. Thank you.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-025517_scheduling-pivot-mid-flow_CA9d1195_RE9598a4e11da90fe04a97d28f0f6e7229.mp3
+
+turns:
+1. [2026-06-23T02:55:33.617852+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T02:55:34.397974+00:00] PATIENT: Yes, this is Alex. I need to book an appointment for next Tuesday.
+3. [2026-06-23T02:55:46.221422+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T02:55:47.249127+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T02:56:08.716098+00:00] OFFICE: Thanks, Alex. What type of appointment do you need next Tuesday. Is this for a new patient consultation? A follow-up. A routine office visit or something else.
+6. [2026-06-23T02:56:09.764993+00:00] PATIENT: Actually, I need to cancel my other appointment first before I book this. Can we finish that after?
+7. [2026-06-23T02:56:29.319687+00:00] OFFICE: No problem. We can cancel your other appointment. First, then book, the new 1. What date? And time is the appointment. You want to cancel?
+8. [2026-06-23T02:56:30.156025+00:00] PATIENT: Okay, let's handle the cancellation first. What do you need from me to proceed?
+9. [2026-06-23T02:56:46.112666+00:00] OFFICE: I'll leave a date time and provider for the appointment. You want to cancel. Can you share those details?
+10. [2026-06-23T02:56:46.868002+00:00] PATIENT: I don't have the details of the appointment handy. What should I do next?
+11. [2026-06-23T02:57:04.675006+00:00] OFFICE: That's all right. I can connect you with a live agent and can look up your appointment and help with the cancellation. Would you like me to transfer you now?
+12. [2026-06-23T02:57:05.666941+00:00] PATIENT: Yes, please transfer me to a live agent. Thank you.
+13. [2026-06-23T02:57:24.713505+00:00] OFFICE: Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+14. [2026-06-23T02:57:24.713545+00:00] PATIENT: Thanks, that helps. Bye.

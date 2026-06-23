@@ -1,0 +1,376 @@
+{
+  "call_sid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+  "scenario_id": "scheduling_then_refill",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "call_memory": {
+    "scenario_id": "scheduling_then_refill",
+    "objective": "Test whether the agent can handle a second intent after finishing the first one.",
+    "patient_profile": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "phone": "+1 (320) 381-0451",
+      "callback_number": "+1 (320) 381-0451",
+      "street_address": "123 Main Street",
+      "city": "Hopkins",
+      "state": "MN",
+      "zip_code": "55301",
+      "insurance": "Blue Cross PPO",
+      "primary_insurance": "Blue Cross PPO",
+      "employer_plan": "Blue Cross PPO employer plan",
+      "insurance_card_upload": "ready to upload if needed",
+      "preferred_pharmacy": "Walgreens on Main Street",
+      "preferred_pharmacy_address": "123 Main Street, Hopkins, MN 55301",
+      "preferred_pharmacy_phone": "(320) 555-0148",
+      "preferred_pharmacy_fax": "(320) 555-0188",
+      "preferred_provider": "Dr. Doogie Howser",
+      "preferred_time_window": "Friday afternoon",
+      "visit_reason": "routine follow-up appointment",
+      "existing_appointment": "Tuesday, June 24 at 10:00 a.m. with Dr. Doogie Howser",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski",
+      "preferred_reschedule_window": "later this week",
+      "reason_for_reschedule": "a work conflict",
+      "reason_for_cancellation": "a family conflict",
+      "current_medication": "Lisinopril 10mg",
+      "controlled_medication": "Adderall 20mg",
+      "days_remaining": "3 days left",
+      "last_pickup_date": "last Thursday",
+      "issue_summary": "routine orthopedic follow-up",
+      "location_preference": "Hopkins clinic",
+      "doctor_preference": "Dr. Doogie Howser",
+      "alternative_verification": "phone number and address",
+      "question_topic": "office hours"
+    },
+    "required_facts": [
+      "first_name",
+      "last_name",
+      "date_of_birth",
+      "current_medication",
+      "preferred_time_window"
+    ],
+    "optional_facts": [
+      "visit_reason",
+      "callback_number"
+    ],
+    "phase": "patient_turn",
+    "turn_count": 12,
+    "recent_office_questions": [
+      "Please provide your date of birth.",
+      "What type of appointment? Would you like to schedule for next week, for example, is this a general office, visit a follow-up, a new patient consultation or something else.",
+      "Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?",
+      "We have openings for a follow-up consultation with dudy. Howser on Monday, June 29th at 3 p.m. or 4 p.m. would either of those times work for you.",
+      "Your follow-up appointment is set for Monday. June 29th, at 3 p.m. with DUI. Hower, please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else I can help you with"
+    ],
+    "recent_patient_answers": [
+      "My date of birth is January 12, 1990.",
+      "I need a routine follow-up appointment.",
+      "Yes, that's correct.",
+      "I can do 3 p.m. on Monday, June 29th.",
+      "No, that's all I needed. Thanks, bye!"
+    ],
+    "confirmed_facts": {
+      "first_name": "Alex",
+      "date_of_birth": "January 12, 1990",
+      "visit_reason": "routine follow-up appointment"
+    },
+    "last_office_question": "Your follow-up appointment is set for Monday. June 29th, at 3 p.m. with DUI. Hower, please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else I can help you with",
+    "last_patient_answer": "No, that's all I needed. Thanks, bye!"
+  },
+  "started_at": "2026-06-23T03:40:20.444242+00:00",
+  "updated_at": "2026-06-23T03:42:30.319087+00:00",
+  "status": "completed",
+  "turn_count": 12,
+  "no_speech_count": 0,
+  "pending_prompt": "No, that's all I needed. Thanks, bye!",
+  "recording_sid": "RE3781195409761038decb618c2d0bf4ab",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE3781195409761038decb618c2d0bf4ab",
+  "recording_path": "artifacts\\recordings\\20260623-034020_scheduling-then-refill_CA949595_RE3781195409761038decb618c2d0bf4ab.mp3",
+  "end_reason": "No, that's all I needed. Thanks, bye!",
+  "metadata": {
+    "source": "twilio",
+    "event_counts": {
+      "session_started": 1,
+      "transcript_line": 13,
+      "call_completed": 1,
+      "recording_ready": 1
+    },
+    "last_event": {
+      "call_sid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+      "event_type": "recording_ready",
+      "ts": "2026-06-23T03:42:31.712220+00:00",
+      "recording_sid": "RE3781195409761038decb618c2d0bf4ab",
+      "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE3781195409761038decb618c2d0bf4ab",
+      "recording_path": "artifacts\\recordings\\20260623-034020_scheduling-then-refill_CA949595_RE3781195409761038decb618c2d0bf4ab.mp3"
+    },
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=scheduling_then_refill"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?",
+      "raw": {
+        "Confidence": "0.9674406",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "This call may be recorded for quality and training purposes.  Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T03:40:37.165095+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, this is Alex. I need to make an appointment for next week.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T03:40:39.326097+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Please provide your date of birth.",
+      "raw": {
+        "Confidence": "0.99671364",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Please provide your date of birth.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T03:40:51.060976+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "My date of birth is January 12, 1990.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T03:40:52.119675+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "What type of appointment? Would you like to schedule for next week, for example, is this a general office, visit a follow-up, a new patient consultation or something else.",
+      "raw": {
+        "Confidence": "0.9905751",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "What type of appointment? Would you like to schedule for next week, for example, is this a general office, visit a follow-up, a new patient consultation or something else.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T03:41:14.664284+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I need a routine follow-up appointment.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T03:41:17.476236+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?",
+      "raw": {
+        "Confidence": "0.99379116",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T03:41:30.760990+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's correct.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T03:41:32.739238+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "We have openings for a follow-up consultation with dudy. Howser on Monday, June 29th at 3 p.m. or 4 p.m. would either of those times work for you.",
+      "raw": {
+        "Confidence": "0.8705631",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "We have openings for a follow-up consultation with dudy. Howser on Monday, June 29th at 3 p.m. or 4 p.m. would either of those times work for you.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T03:41:54.968131+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I can do 3 p.m. on Monday, June 29th.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T03:41:55.785264+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Your follow-up appointment is set for Monday. June 29th, at 3 p.m. with DUI. Hower, please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else I can help you with",
+      "raw": {
+        "Confidence": "0.9403611",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Your follow-up appointment is set for Monday. June 29th, at 3 p.m. with DUI. Hower, please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else I can help you with",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA949595c9d6f9555ff0f5bbd7f7e7fe5d",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T03:42:22.359015+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "No, that's all I needed. Thanks, bye!",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-23T03:42:22.359110+00:00"
+    }
+  ]
+}

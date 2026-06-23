@@ -1,0 +1,43 @@
+call_sid: CA949595c9d6f9555ff0f5bbd7f7e7fe5d
+scenario_id: scheduling_then_refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T03:40:20.444242+00:00
+updated_at: 2026-06-23T03:42:30.319087+00:00
+status: completed
+turn_count: 12
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, current_medication, preferred_time_window
+optional_facts: visit_reason, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - visit_reason: routine follow-up appointment
+recent_office_questions:
+  - Please provide your date of birth.
+  - What type of appointment? Would you like to schedule for next week, for example, is this a general office, visit a follow-up, a new patient consultation or something else.
+  - Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?
+  - We have openings for a follow-up consultation with dudy. Howser on Monday, June 29th at 3 p.m. or 4 p.m. would either of those times work for you.
+  - Your follow-up appointment is set for Monday. June 29th, at 3 p.m. with DUI. Hower, please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else I can help you with
+recent_patient_answers:
+  - My date of birth is January 12, 1990.
+  - I need a routine follow-up appointment.
+  - Yes, that's correct.
+  - I can do 3 p.m. on Monday, June 29th.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-034020_scheduling-then-refill_CA949595_RE3781195409761038decb618c2d0bf4ab.mp3
+
+turns:
+1. [2026-06-23T03:40:37.165095+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T03:40:39.326097+00:00] PATIENT: Yes, this is Alex. I need to make an appointment for next week.
+3. [2026-06-23T03:40:51.060976+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T03:40:52.119675+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T03:41:14.664284+00:00] OFFICE: What type of appointment? Would you like to schedule for next week, for example, is this a general office, visit a follow-up, a new patient consultation or something else.
+6. [2026-06-23T03:41:17.476236+00:00] PATIENT: I need a routine follow-up appointment.
+7. [2026-06-23T03:41:30.760990+00:00] OFFICE: Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?
+8. [2026-06-23T03:41:32.739238+00:00] PATIENT: Yes, that's correct.
+9. [2026-06-23T03:41:54.968131+00:00] OFFICE: We have openings for a follow-up consultation with dudy. Howser on Monday, June 29th at 3 p.m. or 4 p.m. would either of those times work for you.
+10. [2026-06-23T03:41:55.785264+00:00] PATIENT: I can do 3 p.m. on Monday, June 29th.
+11. [2026-06-23T03:42:22.359015+00:00] OFFICE: Your follow-up appointment is set for Monday. June 29th, at 3 p.m. with DUI. Hower, please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else I can help you with
+12. [2026-06-23T03:42:22.359110+00:00] PATIENT: No, that's all I needed. Thanks, bye!
