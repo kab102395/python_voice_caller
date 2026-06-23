@@ -1,0 +1,23 @@
+{
+  "call_sid": "CAe13bf16a56c7ca9f73e50596287fc1cf",
+  "scenario_id": "scheduling",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "started_at": "2026-06-22T22:30:09.403852+00:00",
+  "updated_at": "2026-06-22T22:30:17.892811+00:00",
+  "status": "started",
+  "turn_count": 0,
+  "no_speech_count": 0,
+  "pending_prompt": "Hi, I need to set up an appointment for next week.",
+  "recording_sid": "RE02d66259f22ea56985ffbd1e79f84050",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE02d66259f22ea56985ffbd1e79f84050",
+  "recording_path": "artifacts\\recordings\\CAe13bf16a56c7ca9f73e50596287fc1cf-scheduling-RE02d66259f22ea56985ffbd1e79f84050.mp3",
+  "end_reason": null,
+  "metadata": {
+    "source": "twilio",
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=scheduling"
+    }
+  },
+  "turns": []
+}

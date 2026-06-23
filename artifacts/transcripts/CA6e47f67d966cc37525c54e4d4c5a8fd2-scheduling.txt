@@ -1,0 +1,27 @@
+call_sid: CA6e47f67d966cc37525c54e4d4c5a8fd2
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T23:25:38.437248+00:00
+updated_at: 2026-06-22T23:28:24.660427+00:00
+status: completed
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\CA6e47f67d966cc37525c54e4d4c5a8fd2-scheduling-RE9c12e8e4c3d5e99b1a592a65c7426328.mp3
+
+turns:
+1. [2026-06-22T23:25:56.012316+00:00] OFFICE: this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-22T23:25:57.071095+00:00] PATIENT: Yes, this is Alex. I need to set up an appointment for next week.
+3. [2026-06-22T23:26:10.293948+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-22T23:26:10.943014+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-22T23:26:30.289717+00:00] OFFICE: You do not have any appointments scheduled for next week. Would you like to book 1?
+6. [2026-06-22T23:26:31.027046+00:00] PATIENT: Yes, I would like to book an appointment. Do you have anything Friday afternoon?
+7. [2026-06-22T23:26:51.987244+00:00] OFFICE: What is the main reason for your visit? For example, is this for a routine checkup, a follow-up, an urgent concern or something else.
+8. [2026-06-22T23:26:52.828931+00:00] PATIENT: This is for a routine checkup.
+9. [2026-06-22T23:27:14.692197+00:00] OFFICE: We have Friday afternoon openings with Dr. Zmu lucoski, the available times are 2 p.m. 2:30 p.m. and 3 p.m. would you like to book 1 of these?
+10. [2026-06-22T23:27:15.817284+00:00] PATIENT: I would like to book the 2:30 p.m. appointment with Dr. Zmu lucoski.
+11. [2026-06-22T23:27:35.103359+00:00] OFFICE: Just to confirm, you would like the 2:30 p.m. appointment, this Friday with Dr. Zebu lucoski. Is that correct?
+12. [2026-06-22T23:27:35.696920+00:00] PATIENT: Yes, that's correct. Thank you!
+13. [2026-06-22T23:28:02.292980+00:00] OFFICE: Your appointment is set for Friday at 2:30 p.m. with Dr. Z big new lucasi, please bring your photo ID, insurance card, a list of your current medications and any Imaging discs. If you have them, let me know if you need anything else.
+14. [2026-06-22T23:28:03.231026+00:00] PATIENT: I’ll make sure to bring those items. Thank you for the information!
+15. [2026-06-22T23:28:20.165326+00:00] OFFICE: You're welcome. If you have any other questions or need to make changes, just let us know. Have a great day.
+16. [2026-06-22T23:28:20.165344+00:00] PATIENT: Thanks, that helps. Bye.

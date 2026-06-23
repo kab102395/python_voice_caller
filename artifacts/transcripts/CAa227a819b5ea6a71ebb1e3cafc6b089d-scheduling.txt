@@ -1,0 +1,14 @@
+call_sid: CAa227a819b5ea6a71ebb1e3cafc6b089d
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T23:23:40.261401+00:00
+updated_at: 2026-06-22T23:24:34.690849+00:00
+status: started
+recording_path: artifacts\recordings\CAa227a819b5ea6a71ebb1e3cafc6b089d-scheduling-RE62326150ae883fa262b5dd7582626cda.mp3
+
+turns:
+1. [2026-06-22T23:23:57.688210+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-22T23:23:59.365099+00:00] PATIENT: Yes, this is Alex. I need to set up an appointment for next week.
+3. [2026-06-22T23:24:12.891290+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-22T23:24:13.814114+00:00] PATIENT: My date of birth is January 12, 1990.

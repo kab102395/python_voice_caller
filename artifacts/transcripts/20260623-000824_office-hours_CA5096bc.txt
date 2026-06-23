@@ -1,0 +1,21 @@
+call_sid: CA5096bcdc278ed9606f85d036309eb6c3
+scenario_id: office_hours
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T00:08:24.710819+00:00
+updated_at: 2026-06-23T00:10:05.274472+00:00
+status: completed
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-000824_office-hours_CA5096bc_REbe0716d1c3efdedbca3c7d798deefe74.mp3
+
+turns:
+1. [2026-06-23T00:08:38.870117+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point. The pedics. Part of pretty good, AI.
+2. [2026-06-23T00:08:39.730402+00:00] PATIENT: What time are you open until on weekdays?
+3. [2026-06-23T00:08:56.971142+00:00] OFFICE: We're open until 4 p.m. on Monday, Tuesday, and Thursday until 7 p.m. on Wednesday and until noon on Friday. Is there anything else you'd like to know?
+4. [2026-06-23T00:08:57.728412+00:00] PATIENT: Do you have late hours on Thursdays?
+5. [2026-06-23T00:09:15.071055+00:00] OFFICE: No, we close at 4 p.m. on Thursdays. Our latest hours are on Wednesdays when we're open until 7:00 p.m. would you like help scheduling an appointment.
+6. [2026-06-23T00:09:18.413629+00:00] PATIENT: What about holidays?
+7. [2026-06-23T00:09:35.675096+00:00] OFFICE: We follow a regular weekday schedule, but holiday hours may vary. If you have a specific holiday in mind, I can check for you. Which holiday are you asking about?
+8. [2026-06-23T00:09:36.444223+00:00] PATIENT: I don't have that handy. What should I do next?
+9. [2026-06-23T00:09:57.470073+00:00] OFFICE: If you're looking to visit you can call or schedule during our regular hours. If you have a specific date in mind later, just let me know and I can check if we're open. Is there anything else I can help with right now?
+10. [2026-06-23T00:09:57.470097+00:00] PATIENT: No, that's all I needed. Thanks, bye!

@@ -1,0 +1,27 @@
+call_sid: CA854f38a1dd5d7229464f5a68838c642c
+scenario_id: unclear_speech
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T00:15:47.852842+00:00
+updated_at: 2026-06-23T00:18:47.463123+00:00
+status: completed
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-001547_unclear-speech_CA854f38_RE22477458acac14751cf5d61a568afbf3.mp3
+
+turns:
+1. [2026-06-23T00:16:03.585363+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good. AI. Am I speaking with Alex?
+2. [2026-06-23T00:16:04.660025+00:00] PATIENT: Hi, yes, this is Alex. I need help with, like, my appointment thing.
+3. [2026-06-23T00:16:17.085962+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T00:16:17.721114+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T00:16:39.286960+00:00] OFFICE: You have a follow-up. Appointment, scheduled for tomorrow Tuesday. June 23rd, at 10:00 a.m. with Dr. Doozy Howser, would you like to confirm reschedule or cancel this appointment?
+6. [2026-06-23T00:16:40.087951+00:00] PATIENT: Sorry, I meant maybe next week?
+7. [2026-06-23T00:16:52.587948+00:00] OFFICE: No problem. Can you tell me the reason you need to reschedule your appointment?
+8. [2026-06-23T00:16:54.089284+00:00] PATIENT: I don't have that handy. What should I do next?
+9. [2026-06-23T00:17:18.988308+00:00] OFFICE: That's okay. You can just tell me if it's for something like a schedule. Conflict illness or another reason any detailed help but it doesn't have to be specific. Would you like to look for openings any day next week or do you have a preferred day or time?
+10. [2026-06-23T00:17:19.803922+00:00] PATIENT: I have a schedule conflict. Can we look for openings on Wednesday?
+11. [2026-06-23T00:17:48.990190+00:00] OFFICE: The next available Wednesday opening is June 24th at 4 pm in Nashville with Dr. Doogie Howser there are also openings on July 1st at 11:00 a.m. and 3 p.m. Would you like to reschedule for June 24th at 4 p.m. or would you prefer 1 of the July 1st times?
+12. [2026-06-23T00:17:50.790051+00:00] PATIENT: Let's go with July 1st at 11:00 a.m.
+13. [2026-06-23T00:18:13.088868+00:00] OFFICE: Just to confirm you'd like to move your appointment to Wednesday July 1st at 11:00 a.m. in Nashville with Dr. Doogie Howser. Is that correct you'll need to bring a photo ID and your insurance card.
+14. [2026-06-23T00:18:13.888882+00:00] PATIENT: Yes, that's correct. I'll bring my photo ID and insurance card.
+15. [2026-06-23T00:18:39.490978+00:00] OFFICE: Your appointment is now set for Wednesday. July 1st at 11:00 a.m. with Dr. Dudy, Howser in Nashville, I sent you a text with the details. Is there anything else I can help you with today?
+16. [2026-06-23T00:18:39.491003+00:00] PATIENT: No, that's all I needed. Thanks, bye!

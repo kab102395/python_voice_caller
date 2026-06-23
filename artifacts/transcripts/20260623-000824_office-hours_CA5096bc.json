@@ -1,0 +1,244 @@
+{
+  "call_sid": "CA5096bcdc278ed9606f85d036309eb6c3",
+  "scenario_id": "office_hours",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "started_at": "2026-06-23T00:08:24.710819+00:00",
+  "updated_at": "2026-06-23T00:10:05.274472+00:00",
+  "status": "completed",
+  "turn_count": 10,
+  "no_speech_count": 0,
+  "pending_prompt": "No, that's all I needed. Thanks, bye!",
+  "recording_sid": "REbe0716d1c3efdedbca3c7d798deefe74",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/REbe0716d1c3efdedbca3c7d798deefe74",
+  "recording_path": "artifacts\\recordings\\20260623-000824_office-hours_CA5096bc_REbe0716d1c3efdedbca3c7d798deefe74.mp3",
+  "end_reason": "No, that's all I needed. Thanks, bye!",
+  "metadata": {
+    "source": "twilio",
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=office_hours"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point. The pedics. Part of pretty good, AI.",
+      "raw": {
+        "Confidence": "0.97877085",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "This call may be recorded for quality and training purposes.  Thanks for calling Pivot Point.  The pedics.  Part of pretty good, AI.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5096bcdc278ed9606f85d036309eb6c3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T00:08:38.870117+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "What time are you open until on weekdays?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T00:08:39.730402+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "We're open until 4 p.m. on Monday, Tuesday, and Thursday until 7 p.m. on Wednesday and until noon on Friday. Is there anything else you'd like to know?",
+      "raw": {
+        "Confidence": "0.91642296",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "We're open until 4 p.m. on Monday, Tuesday, and Thursday until 7 p.m. on Wednesday and until noon on Friday. Is there anything else you'd like to know?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5096bcdc278ed9606f85d036309eb6c3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T00:08:56.971142+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Do you have late hours on Thursdays?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T00:08:57.728412+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "No, we close at 4 p.m. on Thursdays. Our latest hours are on Wednesdays when we're open until 7:00 p.m. would you like help scheduling an appointment.",
+      "raw": {
+        "Confidence": "0.9084049",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "No, we close at 4 p.m. on Thursdays. Our latest hours are on Wednesdays when we're open until 7:00 p.m. would you like help scheduling an appointment.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5096bcdc278ed9606f85d036309eb6c3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T00:09:15.071055+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "What about holidays?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T00:09:18.413629+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "We follow a regular weekday schedule, but holiday hours may vary. If you have a specific holiday in mind, I can check for you. Which holiday are you asking about?",
+      "raw": {
+        "Confidence": "0.9890348",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "We follow a regular weekday schedule, but holiday hours may vary. If you have a specific holiday in mind, I can check for you. Which holiday are you asking about?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5096bcdc278ed9606f85d036309eb6c3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T00:09:35.675096+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I don't have that handy. What should I do next?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T00:09:36.444223+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "If you're looking to visit you can call or schedule during our regular hours. If you have a specific date in mind later, just let me know and I can check if we're open. Is there anything else I can help with right now?",
+      "raw": {
+        "Confidence": "0.9932531",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "If you're looking to visit you can call or schedule during our regular hours. If you have a specific date in mind later, just let me know and I can check if we're open. Is there anything else I can help with right now?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5096bcdc278ed9606f85d036309eb6c3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T00:09:57.470073+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "No, that's all I needed. Thanks, bye!",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-23T00:09:57.470097+00:00"
+    }
+  ]
+}

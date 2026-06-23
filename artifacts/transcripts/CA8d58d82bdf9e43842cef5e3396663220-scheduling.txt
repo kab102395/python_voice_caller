@@ -1,0 +1,13 @@
+call_sid: CA8d58d82bdf9e43842cef5e3396663220
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T23:07:15.078769+00:00
+updated_at: 2026-06-22T23:07:38.848869+00:00
+status: completed
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\CA8d58d82bdf9e43842cef5e3396663220-scheduling-REda9eb1d6b0e21fedf23e578212d1e3fc.mp3
+
+turns:
+1. [2026-06-22T23:07:31.834435+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Well speaking with Alex
+2. [2026-06-22T23:07:31.834458+00:00] PATIENT: Thanks, that helps. Bye.

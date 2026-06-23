@@ -1,0 +1,244 @@
+{
+  "call_sid": "CA44a3b36c25565f96d088473423db7df3",
+  "scenario_id": "cancel",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "started_at": "2026-06-22T23:46:18.003577+00:00",
+  "updated_at": "2026-06-22T23:47:45.125782+00:00",
+  "status": "completed",
+  "turn_count": 10,
+  "no_speech_count": 0,
+  "pending_prompt": "Thanks, that helps. Bye.",
+  "recording_sid": "RE21f3763b0bac925c438eb083570ba6bb",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE21f3763b0bac925c438eb083570ba6bb",
+  "recording_path": "artifacts\\recordings\\20260622-234618_cancel_CA44a3b3_RE21f3763b0bac925c438eb083570ba6bb.mp3",
+  "end_reason": "Thanks, that helps. Bye.",
+  "metadata": {
+    "source": "twilio",
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=cancel"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex",
+      "raw": {
+        "Confidence": "0.96387726",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "this call may be recorded for quality and training purposes, but  thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA44a3b36c25565f96d088473423db7df3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-22T23:46:34.494556+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I need to cancel my appointment.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-22T23:46:35.538606+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Can you please provide your date of birth?",
+      "raw": {
+        "Confidence": "0.9987307",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Can you please provide your date of birth?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA44a3b36c25565f96d088473423db7df3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-22T23:46:45.990011+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "My date of birth is January 12, 1990.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-22T23:46:46.694196+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "You have an appointment tomorrow with Dr. Z dig new Lakosky. Can you tell me the reason for cancelling?",
+      "raw": {
+        "Confidence": "0.83418417",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "You have an appointment tomorrow with Dr. Z dig new Lakosky. Can you tell me the reason for cancelling?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA44a3b36c25565f96d088473423db7df3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-22T23:47:04.183801+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Something came up suddenly. Can you just take me off the schedule?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-22T23:47:04.805304+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Just to confirm, you want to cancel your appointment tomorrow with Dr. Z big. New Lakosky. Correct.",
+      "raw": {
+        "Confidence": "0.88620573",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Just to confirm, you want to cancel your appointment tomorrow with Dr. Z big. New Lakosky. Correct.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA44a3b36c25565f96d088473423db7df3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-22T23:47:21.995692+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's correct.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-22T23:47:22.735153+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Your appointment for tomorrow with Dr. Zigman lucosky, has been canceled. Is there anything else I can help you with today?",
+      "raw": {
+        "Confidence": "0.9967529",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Your appointment for tomorrow with Dr. Zigman lucosky, has been canceled.  Is there anything else I can help you with today?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA44a3b36c25565f96d088473423db7df3",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-22T23:47:38.285723+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Thanks, that helps. Bye.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-22T23:47:38.285740+00:00"
+    }
+  ]
+}

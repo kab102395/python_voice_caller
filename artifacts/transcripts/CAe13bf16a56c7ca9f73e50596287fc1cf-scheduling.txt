@@ -1,0 +1,11 @@
+call_sid: CAe13bf16a56c7ca9f73e50596287fc1cf
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T22:30:09.403852+00:00
+updated_at: 2026-06-22T22:30:17.892811+00:00
+status: started
+recording_path: artifacts\recordings\CAe13bf16a56c7ca9f73e50596287fc1cf-scheduling-RE02d66259f22ea56985ffbd1e79f84050.mp3
+
+turns:
+  (none)

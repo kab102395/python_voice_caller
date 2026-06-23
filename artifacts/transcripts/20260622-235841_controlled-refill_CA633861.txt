@@ -1,0 +1,27 @@
+call_sid: CA63386126eca163ac0be4482248ebe40b
+scenario_id: controlled_refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T23:58:41.162335+00:00
+updated_at: 2026-06-23T00:01:57.485092+00:00
+status: completed
+end_reason: max_call_seconds_reached
+recording_path: artifacts\recordings\20260622-235841_controlled-refill_CA633861_RE673764d7c4d64d27eef7ae347db7d760.mp3
+
+turns:
+1. [2026-06-22T23:58:57.166361+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-22T23:58:58.156801+00:00] PATIENT: Yes, this is Alex. I need a refill on one of my controlled medications.
+3. [2026-06-22T23:59:10.168866+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-22T23:59:10.805718+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-22T23:59:26.669947+00:00] OFFICE: Which controlled medication. Do you need refilled today?
+6. [2026-06-22T23:59:27.512888+00:00] PATIENT: I need a refill on my Lisinopril. I'm hoping to pick it up today.
+7. [2026-06-22T23:59:42.367623+00:00] OFFICE: How many days of listener Pearl? Do you have left? If you are already out, just let me know.
+8. [2026-06-22T23:59:43.175068+00:00] PATIENT: I don't have that information handy. What do you need me to do next?
+9. [2026-06-23T00:00:01.970278+00:00] OFFICE: No problem. If you are unsure, Can you estimate if you have any pills left? Or are you already out of lysin pro? Even a rough. Guess helps.
+10. [2026-06-23T00:00:03.354701+00:00] PATIENT: I'm not sure how many I have left. I think I might be out, though.
+11. [2026-06-23T00:00:28.476461+00:00] OFFICE: Thanks for letting me know. I'll mark you as out of osin pro. What is the best phone number for staff to call you back about this refill? I have your number is 320 381 045. Is that correct?
+12. [2026-06-23T00:00:30.512698+00:00] PATIENT: Yes, that's correct. It's +1 (320) 381-0451.
+13. [2026-06-23T00:00:56.972674+00:00] OFFICE: Could you please tell me the name of the pharmacy you want to use for your medication? If you know the address City or any details like cross streets or nearby stores? That would help too. If you have their phone or fax number, please share that as well.
+14. [2026-06-23T00:00:57.772737+00:00] PATIENT: I prefer Walgreens for my medication. I don't have the address or phone number handy.
+15. [2026-06-23T00:01:21.172579+00:00] OFFICE: No problem. Is there anything you remember about this? Walgreens like the street name neighborhood? Or if it's near any stores or landmarks even a city or zip code would help me identify the right location.
+16. [2026-06-23T00:01:21.963577+00:00] PATIENT: I don't have any specific details about the location. I'm sorry, but I can't provide that right now.

@@ -1,0 +1,29 @@
+call_sid: CA6cb31b0f8187d3b76e3a42200aae2b57
+scenario_id: reschedule
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T23:42:02.881410+00:00
+updated_at: 2026-06-22T23:45:02.588859+00:00
+status: completed
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260622-234202_reschedule_CA6cb31b_REe0a597e727073fc7a9ab2125ac96a666.mp3
+
+turns:
+1. [2026-06-22T23:42:18.463895+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+2. [2026-06-22T23:42:19.127518+00:00] PATIENT: I need to reschedule my appointment.
+3. [2026-06-22T23:42:29.860151+00:00] OFFICE: Can you please provide your date of birth?
+4. [2026-06-22T23:42:30.714423+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-22T23:42:52.660025+00:00] OFFICE: You have the appointment scheduled for Friday June 26th at 2:30 p.m. with Z big new lucosky at Nashville 220 Athens Way is this the appointment you want to reschedule?
+6. [2026-06-22T23:42:53.665451+00:00] PATIENT: Yes, I want to reschedule that appointment.
+7. [2026-06-22T23:43:20.663526+00:00] OFFICE: The next available appointment is tomorrow Tuesday, June 23rd at 2:30 p.m. in Nashville with Z big new lucoski. There were also openings tomorrow at 3:30 p.m. and Wednesday June 24th at 3 p.m. would you like to take 1 of these times or do you want to look for a different date or time?
+8. [2026-06-22T23:43:21.414285+00:00] PATIENT: Let's move it to tomorrow at 2:30 p.m.
+9. [2026-06-22T23:43:32.672113+00:00] OFFICE: Can you tell me the reason you need to reschedule your appointment?
+10. [2026-06-22T23:43:34.277381+00:00] PATIENT: I don't have that information handy. What should I do next?
+11. [2026-06-22T23:43:54.968183+00:00] OFFICE: No problem. You can just give a general reason like a schedule, conflict, personal reasons, or anything else that fits. Even a simple answer is fine. Just let me know what works best for you.
+12. [2026-06-22T23:43:55.579397+00:00] PATIENT: I have a scheduling conflict.
+13. [2026-06-22T23:44:15.661441+00:00] OFFICE: You'd like to move your appointment to tomorrow Tuesday. June 23rd at 2:30 p.m. in Nashville. With Z big, new lucasi due to a scheduling conflict. Is that correct?
+14. [2026-06-22T23:44:16.292388+00:00] PATIENT: Yes, that's correct.
+15. [2026-06-22T23:44:39.465137+00:00] OFFICE: Your appointment has been rescheduled to tomorrow Tuesday, June 23rd at 2:30 p.m. with c big new lucosky, in Nashville. Would you like me to send you a text message with these details?
+16. [2026-06-22T23:44:40.185336+00:00] PATIENT: Yes, please send me a text message with the details.
+17. [2026-06-22T23:44:55.465904+00:00] OFFICE: I sent the appointment details to your phone. Is there anything else I can help you with today?
+18. [2026-06-22T23:44:55.465923+00:00] PATIENT: Thanks, that helps. Bye.

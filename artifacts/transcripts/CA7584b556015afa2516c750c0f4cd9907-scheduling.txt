@@ -1,0 +1,23 @@
+call_sid: CA7584b556015afa2516c750c0f4cd9907
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T22:38:03.367821+00:00
+updated_at: 2026-06-22T22:39:01.027699+00:00
+status: completed
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\CA7584b556015afa2516c750c0f4cd9907-scheduling-RE5d9228371c5f58d449d1e42dc1cdc739.mp3
+
+turns:
+1. [2026-06-22T22:38:08.130549+00:00] OFFICE: This call may be recorded for quality and training purposes, but Espanol.
+2. [2026-06-22T22:38:08.353975+00:00] PATIENT: Actually, do you have anything Friday afternoon?
+3. [2026-06-22T22:38:19.618411+00:00] OFFICE: We have openings this week in early next week. Are you looking for something after 12:00 p.m. this Friday?
+4. [2026-06-22T22:38:19.805424+00:00] PATIENT: I'm flexible if there's an earlier opening.
+5. [2026-06-22T22:38:32.639469+00:00] OFFICE: Let me check for the earliest available appointment on Friday, 1 moment. I don't have your patient profile yet.
+6. [2026-06-22T22:38:32.882512+00:00] PATIENT: I'm flexible if there's an earlier opening.
+7. [2026-06-22T22:38:37.191895+00:00] OFFICE: create a
+8. [2026-06-22T22:38:37.371197+00:00] PATIENT: I'm flexible if there's an earlier opening.
+9. [2026-06-22T22:38:44.590254+00:00] OFFICE: To help you book an appointment.
+10. [2026-06-22T22:38:44.779337+00:00] PATIENT: I'm flexible if there's an earlier opening.
+11. [2026-06-22T22:38:54.167216+00:00] OFFICE: Create a demo. Thanks for letting me know to schedule your appointment. I'll need to create a demo patient profile for you.
+12. [2026-06-22T22:38:54.167239+00:00] PATIENT: Thanks, that helps. Bye.

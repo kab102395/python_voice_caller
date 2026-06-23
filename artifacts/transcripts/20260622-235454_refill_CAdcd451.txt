@@ -1,0 +1,23 @@
+call_sid: CAdcd451b596109a9618c97ec22e66e118
+scenario_id: refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T23:54:54.771809+00:00
+updated_at: 2026-06-22T23:56:33.518523+00:00
+status: completed
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260622-235454_refill_CAdcd451_RE5915ce2cd9ab1732d2239d39fa5631e4.mp3
+
+turns:
+1. [2026-06-22T23:55:11.451722+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-22T23:55:12.317158+00:00] PATIENT: Yes, this is Alex. I'm calling to refill my prescription.
+3. [2026-06-22T23:55:23.960261+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-22T23:55:24.599100+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-22T23:55:37.256888+00:00] OFFICE: Which medication do you need refilled today?
+6. [2026-06-22T23:55:37.896865+00:00] PATIENT: I need a refill for Lisinopril 10mg.
+7. [2026-06-22T23:55:51.056368+00:00] OFFICE: How many days of LIC Pro do you have left if you are already out just let me know.
+8. [2026-06-22T23:55:51.851459+00:00] PATIENT: I'm already out of Lisinopril. Do I need to do anything else?
+9. [2026-06-22T23:56:11.057053+00:00] OFFICE: I just need a call back number, in case the staff needs to reach you. I have your number as 320 381 0451. Is that correct?
+10. [2026-06-22T23:56:11.632114+00:00] PATIENT: Yes, that's correct.
+11. [2026-06-22T23:56:25.654145+00:00] OFFICE: Is there anything else you'd like the staff to know about your refill request, for example, any symptoms or urgency?
+12. [2026-06-22T23:56:25.654167+00:00] PATIENT: No, that's all I needed. Thanks, bye!

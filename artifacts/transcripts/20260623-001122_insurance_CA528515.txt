@@ -1,0 +1,29 @@
+call_sid: CA52851517598e5342ac7a537c1a8046f0
+scenario_id: insurance
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T00:11:22.430867+00:00
+updated_at: 2026-06-23T00:14:03.558175+00:00
+status: completed
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-001122_insurance_CA528515_REcdbe930f70f08ac8a1c126ac1742cf1a.mp3
+
+turns:
+1. [2026-06-23T00:11:38.379757+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T00:11:39.324780+00:00] PATIENT: Yes, this is Alex. Do you take my insurance?
+3. [2026-06-23T00:11:49.373860+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T00:11:50.959213+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T00:12:06.482258+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+6. [2026-06-23T00:12:07.269308+00:00] PATIENT: I'm calling to ask if you take my insurance.
+7. [2026-06-23T00:12:20.980421+00:00] OFFICE: Sure which insurance company and plan. Are you asking about?
+8. [2026-06-23T00:12:21.573142+00:00] PATIENT: I have Blue Cross PPO on an employer plan.
+9. [2026-06-23T00:12:33.784083+00:00] OFFICE: What state is your Blue Cross PPO plan issued in.
+10. [2026-06-23T00:12:34.479166+00:00] PATIENT: I don't have that information handy. What should I do next?
+11. [2026-06-23T00:13:04.374597+00:00] OFFICE: No problem. If you have your insurance card, you can text us a photo and we'll handle the details. Let me send you a secure link. Now you currently do not have any insurance on file with us. Would you like to receive a text message at a number ending in 0451 to upload photos of your insurance card?
+12. [2026-06-23T00:13:05.063073+00:00] PATIENT: Yes, please send the text message to the number ending in 0451.
+13. [2026-06-23T00:13:24.372253+00:00] OFFICE: I just sent the link please upload photos of the front and back of your insurance card when you're ready. Let me know if you have any questions about the form.
+14. [2026-06-23T00:13:25.090131+00:00] PATIENT: I will do that. Do I need to bring anything with me for my appointment?
+15. [2026-06-23T00:13:43.096061+00:00] OFFICE: You should bring your insurance card and a photo ID to your appointment. If you have any recent medical records or referral, paperwork those can help too.
+16. [2026-06-23T00:13:43.904133+00:00] PATIENT: Got it, I'll bring my insurance card and photo ID. Thank you!
+17. [2026-06-23T00:13:57.978664+00:00] OFFICE: You're all set. Let me know if you need anything else. Have a great day.
+18. [2026-06-23T00:13:57.978684+00:00] PATIENT: Thanks, that helps. Bye.

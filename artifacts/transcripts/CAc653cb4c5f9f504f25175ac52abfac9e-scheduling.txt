@@ -1,0 +1,31 @@
+call_sid: CAc653cb4c5f9f504f25175ac52abfac9e
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T22:54:27.981375+00:00
+updated_at: 2026-06-22T22:56:16.975738+00:00
+status: completed
+end_reason: completed
+recording_path: artifacts\recordings\CAc653cb4c5f9f504f25175ac52abfac9e-scheduling-RE9aab3bdb60d7e8f3935f6251df186d2f.mp3
+
+turns:
+1. [2026-06-22T22:54:34.222777+00:00] OFFICE: This call may be recorded for quality and training purposes.
+2. [2026-06-22T22:54:35.255736+00:00] PATIENT: Okay, that's fine. I need to set up an appointment for next week.
+3. [2026-06-22T22:54:43.205165+00:00] OFFICE: Point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+4. [2026-06-22T22:54:43.653827+00:00] PATIENT: Yes, this is Alex.
+5. [2026-06-22T22:54:50.294005+00:00] OFFICE: Please provide your date of birth.
+6. [2026-06-22T22:54:50.824159+00:00] PATIENT: It's January 12, 1990.
+7. [2026-06-22T22:55:00.169402+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it.
+8. [2026-06-22T22:55:01.475692+00:00] PATIENT: Alright, thanks for that. Can we go ahead and schedule the appointment for next week?
+9. [2026-06-22T22:55:16.687801+00:00] OFFICE: Of course, what type of appointment do you need? Are you looking for a general office? Visit a follow-up or something else.
+10. [2026-06-22T22:55:17.337968+00:00] PATIENT: I need a general office appointment.
+11. [2026-06-22T22:55:33.581445+00:00] OFFICE: We have several openings for a general office appointment. Next week. Do you have a preferred provider segue MD or Kelly Noble?
+12. [2026-06-22T22:55:34.342684+00:00] PATIENT: I don't have a preferred provider. Can you tell me what openings you have?
+13. [2026-06-22T22:55:39.952818+00:00] OFFICE: Would you like the first of?
+14. [2026-06-22T22:55:40.495039+00:00] PATIENT: Sure, what time is that?
+15. [2026-06-22T22:55:46.230693+00:00] OFFICE: here are a
+16. [2026-06-22T22:55:46.916765+00:00] PATIENT: It seems like there was a bit of a mix-up. Can you repeat the available times?
+17. [2026-06-22T22:55:51.069908+00:00] OFFICE: Special available.
+18. [2026-06-22T22:55:53.028582+00:00] PATIENT: I'm not sure what that means. Can you clarify the available times for the appointment?
+19. [2026-06-22T22:56:07.207877+00:00] OFFICE: Of course, on Monday. June 29th. We have openings at 9:30 a.m. 10 a.m. and 10:30 a.m.
+20. [2026-06-22T22:56:07.998818+00:00] PATIENT: I think you meant next week, right? Can I book the 10 a.m. slot on Monday?

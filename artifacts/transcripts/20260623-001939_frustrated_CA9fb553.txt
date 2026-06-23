@@ -1,0 +1,27 @@
+call_sid: CA9fb5535c0ca7e947a2979cc84c6b1c47
+scenario_id: frustrated
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T00:19:39.932580+00:00
+updated_at: 2026-06-23T00:21:59.430248+00:00
+status: completed
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-001939_frustrated_CA9fb553_RE0f639630b593e3e8b02edd43967fe7ec.mp3
+
+turns:
+1. [2026-06-23T00:19:55.746849+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T00:19:56.597942+00:00] PATIENT: Yes, this is Alex. I've been on hold forever and I'm annoyed.
+3. [2026-06-23T00:20:08.039495+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T00:20:08.788882+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T00:20:23.639642+00:00] OFFICE: The birth thing doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+6. [2026-06-23T00:20:24.648997+00:00] PATIENT: I just need this handled now. I need assistance with my prescription refill.
+7. [2026-06-23T00:20:42.135249+00:00] OFFICE: Which medication do you need refilled today?
+8. [2026-06-23T00:20:42.839958+00:00] PATIENT: I need a refill for my Lisinopril 10mg.
+9. [2026-06-23T00:20:54.246886+00:00] OFFICE: How many days of lentil do you have left?
+10. [2026-06-23T00:20:55.243823+00:00] PATIENT: I don't have that information handy. What should I do next?
+11. [2026-06-23T00:21:11.941910+00:00] OFFICE: If you're not sure, can you estimate, how many days you have left, or let me know if you're already out, either a rough desk helps.
+12. [2026-06-23T00:21:12.639880+00:00] PATIENT: I really can't estimate that right now. Can you please stop repeating yourself?
+13. [2026-06-23T00:21:34.136775+00:00] OFFICE: No problem. My market is unknown. When is the best phone number for a call back? I have your number as 320 381 0451. Is that correct?
+14. [2026-06-23T00:21:34.879763+00:00] PATIENT: Yes, that's correct. Please call me back at that number.
+15. [2026-06-23T00:21:51.438876+00:00] OFFICE: Is there anything else you'd like the staff to know about your refill request, for example, any symptoms urgency or other details?
+16. [2026-06-23T00:21:51.438895+00:00] PATIENT: No, that's all I needed. Thanks, bye!

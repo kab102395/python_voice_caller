@@ -1,0 +1,27 @@
+call_sid: CA82c2dd98a7ddd363f48423d76a7f288a
+scenario_id: weekend_trap
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T00:04:09.881629+00:00
+updated_at: 2026-06-23T00:07:01.253017+00:00
+status: completed
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-000409_weekend-trap_CA82c2dd_RE6f47507a5ee70490e87d6ec4758a3493.mp3
+
+turns:
+1. [2026-06-23T00:04:25.551472+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling to the point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T00:04:26.413493+00:00] PATIENT: Yes, this is Alex. Can I come in Sunday at 10am?
+3. [2026-06-23T00:04:38.138412+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T00:04:38.868041+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T00:04:58.852219+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today? Alex? Are you looking to book an appointment at 10 a.m.? Or is there something else you need?
+6. [2026-06-23T00:04:59.791499+00:00] PATIENT: I'm looking to book an appointment at 10 a.m. on Sunday. That's the only time I'm free.
+7. [2026-06-23T00:05:21.838079+00:00] OFFICE: Pinit Point Orthopedics is open Monday through Friday and closed on Sundays. Would you like to look for the next available? 10:00 a.m. slot on a weekday instead.
+8. [2026-06-23T00:05:22.538595+00:00] PATIENT: Are you sure there isn't anything on the weekend?
+9. [2026-06-23T00:05:40.637996+00:00] OFFICE: Yes, the clinic is only open Monday through Friday. There are no weekend appointments available, would you like to check for a 10 a.m. slot on a weekday?
+10. [2026-06-23T00:05:41.380494+00:00] PATIENT: Yes, please check for a 10 a.m. slot on a weekday.
+11. [2026-06-23T00:06:02.655146+00:00] OFFICE: Sure what is the reason for your visit? Are you coming in for a general office? Visit a follow-up or something else.
+12. [2026-06-23T00:06:03.336174+00:00] PATIENT: I'm coming in for a follow-up appointment.
+13. [2026-06-23T00:06:22.135778+00:00] OFFICE: There is a 10 mm slot available on Tuesday, June. 23rd with Dr. Dudy Howser, would you like to book that appointment?
+14. [2026-06-23T00:06:22.945982+00:00] PATIENT: Yes, I would like to book that appointment with Dr. Dudy Howser.
+15. [2026-06-23T00:06:53.344790+00:00] OFFICE: Your follow-up appointment is booked for Tuesday, June 23rd, at 10:00 a.m. with Dr. Dudy Howser, please, bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else I can help you with today?
+16. [2026-06-23T00:06:53.344819+00:00] PATIENT: No, that's all I needed. Thanks, bye!

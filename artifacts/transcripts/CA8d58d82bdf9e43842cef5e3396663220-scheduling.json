@@ -1,0 +1,68 @@
+{
+  "call_sid": "CA8d58d82bdf9e43842cef5e3396663220",
+  "scenario_id": "scheduling",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "started_at": "2026-06-22T23:07:15.078769+00:00",
+  "updated_at": "2026-06-22T23:07:38.848869+00:00",
+  "status": "completed",
+  "turn_count": 2,
+  "no_speech_count": 0,
+  "pending_prompt": "Thanks, that helps. Bye.",
+  "recording_sid": "REda9eb1d6b0e21fedf23e578212d1e3fc",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/REda9eb1d6b0e21fedf23e578212d1e3fc",
+  "recording_path": "artifacts\\recordings\\CA8d58d82bdf9e43842cef5e3396663220-scheduling-REda9eb1d6b0e21fedf23e578212d1e3fc.mp3",
+  "end_reason": "Thanks, that helps. Bye.",
+  "metadata": {
+    "source": "twilio",
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=scheduling"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Well speaking with Alex",
+      "raw": {
+        "Confidence": "0.8871575",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "This call may be recorded for quality and training purposes.  Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Well speaking with Alex",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA8d58d82bdf9e43842cef5e3396663220",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-22T23:07:31.834435+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Thanks, that helps. Bye.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-22T23:07:31.834458+00:00"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+call_sid: CA7901a8cde48dcea31a61465171ab35c8
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T22:47:55.096993+00:00
+updated_at: 2026-06-22T22:48:47.575897+00:00
+status: started
+
+turns:
+1. [2026-06-22T22:48:00.203014+00:00] OFFICE: This call may be recorded for quality and training purposes, but Espanol.
+2. [2026-06-22T22:48:01.919313+00:00] PATIENT: Hi, I need to set up an appointment for next week.
+3. [2026-06-22T22:48:11.133731+00:00] OFFICE: I can help with that. Would you like to create a devil patient profile? First
+4. [2026-06-22T22:48:12.392171+00:00] PATIENT: Uh, I think I just need to book an appointment. Can we skip the profile for now?
+5. [2026-06-22T22:48:16.415592+00:00] OFFICE: To get started.
+6. [2026-06-22T22:48:17.328240+00:00] PATIENT: Okay, what do you need from me to get that started?
+7. [2026-06-22T22:48:21.385479+00:00] OFFICE: No rush. Great.
+8. [2026-06-22T22:48:22.371341+00:00] PATIENT: Thanks! So, when can I schedule the appointment for next week?
+9. [2026-06-22T22:48:34.579329+00:00] OFFICE: I can help you schedule the appointment but I'll need your first and last name to create your demo patient profile first.
+10. [2026-06-22T22:48:35.536339+00:00] PATIENT: Sure, my name is Alex Johnson. Can we go ahead and book that appointment now?
+11. [2026-06-22T22:48:39.761909+00:00] OFFICE: First, and last name.
+12. [2026-06-22T22:48:40.482101+00:00] PATIENT: Oh, right! It's Alex Johnson. Can we set up that appointment now?
+13. [2026-06-22T22:48:46.817021+00:00] OFFICE: Go ahead. Whenever you're ready. Just let me know your first and last name.
+14. [2026-06-22T22:48:47.575884+00:00] PATIENT: Okay, it's Alex Johnson. Can we schedule that appointment for next week?

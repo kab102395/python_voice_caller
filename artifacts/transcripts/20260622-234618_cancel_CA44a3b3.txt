@@ -1,0 +1,21 @@
+call_sid: CA44a3b36c25565f96d088473423db7df3
+scenario_id: cancel
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-22T23:46:18.003577+00:00
+updated_at: 2026-06-22T23:47:45.125782+00:00
+status: completed
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260622-234618_cancel_CA44a3b3_RE21f3763b0bac925c438eb083570ba6bb.mp3
+
+turns:
+1. [2026-06-22T23:46:34.494556+00:00] OFFICE: this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex
+2. [2026-06-22T23:46:35.538606+00:00] PATIENT: I need to cancel my appointment.
+3. [2026-06-22T23:46:45.990011+00:00] OFFICE: Can you please provide your date of birth?
+4. [2026-06-22T23:46:46.694196+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-22T23:47:04.183801+00:00] OFFICE: You have an appointment tomorrow with Dr. Z dig new Lakosky. Can you tell me the reason for cancelling?
+6. [2026-06-22T23:47:04.805304+00:00] PATIENT: Something came up suddenly. Can you just take me off the schedule?
+7. [2026-06-22T23:47:21.995692+00:00] OFFICE: Just to confirm, you want to cancel your appointment tomorrow with Dr. Z big. New Lakosky. Correct.
+8. [2026-06-22T23:47:22.735153+00:00] PATIENT: Yes, that's correct.
+9. [2026-06-22T23:47:38.285723+00:00] OFFICE: Your appointment for tomorrow with Dr. Zigman lucosky, has been canceled. Is there anything else I can help you with today?
+10. [2026-06-22T23:47:38.285740+00:00] PATIENT: Thanks, that helps. Bye.
