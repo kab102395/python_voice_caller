@@ -174,8 +174,8 @@ def gather_verb(
     action_url: str,
     prompt: str,
     voice: str,
-    timeout: int = 5,
-    speech_timeout: int = 3,
+    timeout: int = 4,
+    speech_timeout: int = 2,
     pause_seconds: int = 0,
 ) -> str:
     escaped_prompt = html.escape(prompt, quote=False)
