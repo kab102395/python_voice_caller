@@ -41,6 +41,28 @@ DEFAULT_PATIENT_PROFILE: Dict[str, str] = {
 }
 
 
+SCENARIO_VOICE_GUIDANCE: Dict[str, str] = {
+    "insurance": (
+        "INSURANCE-SCENARIO GUIDANCE:\n"
+        "- If the office asks what you should bring, answer with a practical patient-style follow-up.\n"
+        "- Prefer useful details such as your insurance card or a quick question about whether anything else is needed.\n"
+        "- Do not answer with a repeated insurance claim when the office asked a different question.\n\n"
+    ),
+    "identity_wrong_dob_persistent": (
+        "IDENTITY-SCENARIO GUIDANCE:\n"
+        "- If the office challenges your date of birth, correct it clearly and calmly.\n"
+        "- Do not repeat the wrong date back to the office.\n"
+        "- After repeated pushback, stop arguing and ask what you should do next.\n\n"
+    ),
+    "escalation_demands_human": (
+        "ESCALATION-SCENARIO GUIDANCE:\n"
+        "- If you want a human, keep asking for a person in a calm but persistent way.\n"
+        "- Vary the wording slightly instead of repeating the same demand.\n"
+        "- Escalate to a callback or staff handoff after several refusals.\n\n"
+    ),
+}
+
+
 SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a routine appointment for next week.',
                 'starter': 'Hi, this is Alex Johnson, date of birth January 12 1990. I need to set up an appointment for next week.',
                 'followups': ['Actually, do you have anything Friday afternoon?',
@@ -218,6 +240,7 @@ def build_patient_prompt(
     call_memory: Dict[str, Any] | None = None,
 ) -> str:
     profile = dict(DEFAULT_PATIENT_PROFILE)
+    scenario_id = str((call_memory or {}).get("scenario_id", "")).strip()
     if patient_profile:
         profile.update({str(key): str(value) for key, value in patient_profile.items()})
     if call_memory:
@@ -269,6 +292,17 @@ def build_patient_prompt(
             for key, value in confirmed.items():
                 memory_lines.append(f"  - {key.replace('_', ' ').title()}: {value}")
         memory_block = "\n".join(memory_lines) if memory_lines else "- none"
+    human_voice_block = (
+        "HUMAN VOICE GUIDANCE:\n"
+        "- Sound like a real patient speaking on the phone: polite, natural, and lightly imperfect.\n"
+        "- Use contractions and short everyday phrasing when it fits.\n"
+        "- Usually answer in one short sentence; use two only when the extra detail is genuinely helpful.\n"
+        "- Answer the question directly instead of echoing the office's wording.\n"
+        "- Only repeat a detail when you are explicitly confirming it.\n"
+        "- If the same question comes up again, vary the wording a little while keeping the answer consistent.\n"
+        "- Stay calm and cooperative, even when you are frustrated or uncertain.\n\n"
+    )
+    scenario_voice_block = SCENARIO_VOICE_GUIDANCE.get(scenario_id, "")
     return (
         "You are a realistic patient calling a healthcare office on the phone.\n"
         "Stay in character as a human caller at all times.\n"
@@ -281,12 +315,13 @@ def build_patient_prompt(
         "- If a detail is unknown, say you do not have it handy and ask what to do next.\n\n"
         "TURN-TAKING RULES (critical):\n"
         "- Wait for the office to finish their full sentence before responding.\n"
-        "- Respond with ONE or TWO short sentences only. Never more.\n"
+        "- Respond with one short sentence, or two when the extra detail is genuinely needed.\n"
         "- When the office asks you a direct question, answer it immediately and specifically.\n"
         "- Do not ask a question back unless the office has fully answered yours first.\n"
-        "- Do not repeat what the office just said.\n"
-        "- Do not hedge or say 'um' or 'uh' excessively - speak clearly and decisively.\n"
+        "- Avoid repeating the office's wording unless you need to confirm a detail.\n"
+        "- Do not hedge or say 'um' or 'uh' excessively; keep the answer clear and grounded.\n"
         "- If the office offers options (like provider names or times), pick one confidently.\n\n"
+        f"{human_voice_block}"
         "PATIENT PROFILE (use this as truth - do not invent details):\n"
         f"{profile_block}\n\n"
         "CALL MEMORY (use this to stay consistent within the current call):\n"
@@ -301,6 +336,7 @@ def build_patient_prompt(
         "Answer once, then move to the next missing fact or ask for the next step.\n"
         "If the office asks for a fact that is available in memory, answer directly using the stored fact.\n"
         "If a detail is not known, say you do not have it handy and ask what to do next.\n\n"
+        f"{scenario_voice_block}"
         "FIRST PATIENT RESPONSE RULES:\n"
         "- On the first response, deliver the opening line below exactly as written. Do not add 'Yes, this is Alex' or any other prefix — the opening line already contains your identity.\n"
         "- Do not rely on a canned opener spoken before the office speaks.\n\n"

@@ -124,6 +124,159 @@ class GuardrailTests(unittest.TestCase):
         )
         self.assertTrue(reply.should_hangup)
 
+    def test_rule_based_engine_uses_variant_guardrail_replies(self) -> None:
+        engine = self.engine.RuleBasedReplyEngine()
+        scenario = {
+            "id": "scheduling",
+            "starter": "Hi, I need to set up an appointment for next week.",
+            "followups": [],
+            "failure_modes": [],
+            "max_turns": 10,
+        }
+
+        confirmation_reply = engine.next_reply(
+            scenario=scenario,
+            transcript=[{"speaker": "office", "text": "Is that correct?"}],
+            office_speech="Is that correct?",
+        )
+        self.assertIn(
+            confirmation_reply.text,
+            {
+                "Yes, that's correct.",
+                "That's right.",
+                "Yes, that looks right.",
+                "Correct.",
+            },
+        )
+        self.assertFalse(confirmation_reply.should_hangup)
+
+        goodbye_reply = engine.next_reply(
+            scenario=scenario,
+            transcript=[
+                {"speaker": "office", "text": "Thanks for your time."},
+                {"speaker": "patient", "text": "Okay."},
+                {"speaker": "office", "text": "Goodbye."},
+            ],
+            office_speech="Goodbye.",
+        )
+        self.assertIn(
+            goodbye_reply.text,
+            {
+                "Thanks, that helps. Bye.",
+                "Okay, thank you. Bye.",
+                "Thanks, bye.",
+            },
+        )
+        self.assertTrue(goodbye_reply.should_hangup)
+
+        wrap_up_reply = engine.next_reply(
+            scenario=scenario,
+            transcript=[
+                {"speaker": "office", "text": "I can help with that."},
+                {"speaker": "patient", "text": "Okay."},
+                {"speaker": "office", "text": "Anything else I can help with?"},
+                {"speaker": "patient", "text": "No."},
+                {"speaker": "office", "text": "Great."},
+                {"speaker": "patient", "text": "Thanks."},
+            ],
+            office_speech="Anything else I can help with?",
+        )
+        self.assertIn(
+            wrap_up_reply.text,
+            {
+                "No, that's all I needed. Thanks, bye!",
+                "That's everything for me. Thanks, bye.",
+                "No, I'm good. Thanks. Bye.",
+            },
+        )
+        self.assertTrue(wrap_up_reply.should_hangup)
+
+        repeated_confirmation_reply = engine.next_reply(
+            scenario=scenario,
+            transcript=[{"speaker": "office", "text": "Is that correct?"}],
+            office_speech="Is that correct?",
+        )
+        self.assertEqual(confirmation_reply.text, repeated_confirmation_reply.text)
+        self.assertEqual(confirmation_reply.should_hangup, repeated_confirmation_reply.should_hangup)
+
+    def test_llm_reply_shaping_rewrites_echoes(self) -> None:
+        with TemporaryDirectory() as tmp:
+            engine = self.engine.OpenAICompatibleReplyEngine(
+                api_base="https://example.com/v1",
+                api_key="test-key",
+                model="gpt-4o",
+                timeout_seconds=1.0,
+                trace_dir=Path(tmp),
+            )
+
+            insurance_scenario = self.app.scenario_context("insurance")
+            insurance_memory = self.app.CallMemory.from_scenario(insurance_scenario).to_dict()
+            with patch.object(
+                self.engine,
+                "http_post_json",
+                return_value={"choices": [{"message": {"content": "I'm on an employer plan."}}]},
+            ):
+                insurance_reply = engine.next_reply(
+                    scenario=insurance_scenario,
+                    transcript=[
+                        {"speaker": "office", "text": "Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?"},
+                        {"speaker": "patient", "text": "Hi, this is Alex Johnson, date of birth January 12 1990. Do you take my insurance? I have Blue Cross PPO."},
+                    ],
+                    office_speech="Do I need to bring anything with me?",
+                    call_memory=insurance_memory,
+                )
+            self.assertIn("insurance card", insurance_reply.text.lower())
+
+            identity_scenario = self.app.scenario_context("identity_wrong_dob_persistent")
+            identity_memory = self.app.CallMemory.from_scenario(identity_scenario).to_dict()
+            with patch.object(
+                self.engine,
+                "http_post_json",
+                return_value={"choices": [{"message": {"content": "My date of birth is March 3rd, 1988."}}]},
+            ):
+                identity_reply = engine.next_reply(
+                    scenario=identity_scenario,
+                    transcript=[
+                        {"speaker": "office", "text": "Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?"},
+                        {"speaker": "patient", "text": "Hi, this is Alex Johnson."},
+                    ],
+                    office_speech="My date of birth is March 3rd, 1988.",
+                    call_memory=identity_memory,
+                )
+            self.assertIn(
+                identity_reply.text,
+                {
+                    "My date of birth is January 12, 1990.",
+                    "No, that's not right. My date of birth is January 12, 1990.",
+                    "I've said January 12, 1990. Can we move on?",
+                },
+            )
+
+            human_scenario = self.app.scenario_context("escalation_demands_human")
+            human_memory = self.app.CallMemory.from_scenario(human_scenario).to_dict()
+            with patch.object(
+                self.engine,
+                "http_post_json",
+                return_value={"choices": [{"message": {"content": "This is ridiculous. Transfer me now."}}]},
+            ):
+                human_reply = engine.next_reply(
+                    scenario=human_scenario,
+                    transcript=[
+                        {"speaker": "office", "text": "I still want a real person."},
+                        {"speaker": "patient", "text": "I really need a person to help me with this."},
+                    ],
+                    office_speech="This is ridiculous. Transfer me now.",
+                    call_memory=human_memory,
+                )
+            self.assertIn(
+                human_reply.text,
+                {
+                    "I really do need a person to help me with this.",
+                    "Can you transfer me to someone who can help?",
+                    "Please have a staff member call me back.",
+                },
+            )
+
     def test_call_memory_tracks_recent_turns(self) -> None:
         scenario = self.app.scenario_context("refill")
         memory = self.app.CallMemory.from_scenario(scenario)
@@ -578,6 +731,110 @@ class GuardrailTests(unittest.TestCase):
                     self.assertEqual(record["status"], "completed")
                     self.assertIsNotNone(record["end_reason"])
                     self.assertGreaterEqual(record["turn_count"], 2)
+
+    def test_full_flow_smoke_covers_all_scenarios_with_llm(self) -> None:
+        settings = self.app.get_settings()
+        if not settings.llm_api_key:
+            self.skipTest("LLM_API_KEY is required for the live GPT-backed smoke test")
+
+        disclaimer_fragment = "This call may be recorded for quality and training purposes."
+        opener_fragment = "Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?"
+        closing_fragment = "Thanks, bye."
+        trace_root = self.app.LLM_TRACE_ROOT / self.app.RUN_LABEL
+
+        self.app._engine = None
+        self.app._engine_disabled_reason = None
+
+        with TemporaryDirectory() as tmp:
+            transcript_root = Path(tmp) / "transcripts"
+            recording_root = Path(tmp) / "recordings"
+            with (
+                patch.object(self.app, "TRANSCRIPT_ROOT", transcript_root),
+                patch.object(self.app, "RECORDING_ROOT", recording_root),
+                patch.object(self.app, "validate_and_log_request", lambda *args, **kwargs: None),
+            ):
+                for index, (scenario_id, scenario) in enumerate(self.scenarios.SCENARIOS.items(), start=1):
+                    call_sid = f"CA-llm-{index:02d}-{scenario_id.replace('_', '-')}"
+                    twiml_response = asyncio.run(
+                        self.app.twiml(
+                            FakeRequest(
+                                f"https://example.com/twiml?scenario={scenario_id}",
+                                {
+                                    "CallSid": call_sid,
+                                    "From": "+13203810451",
+                                    "To": "+18054398008",
+                                    "CallStatus": "in-progress",
+                                },
+                            )
+                        )
+                    )
+                    self.assertEqual(twiml_response.status_code, 200)
+                    self.assertIn("<Gather", twiml_response.body.decode("utf-8"))
+
+                    first_voice_response = asyncio.run(
+                        self.app.voice(
+                            FakeRequest(
+                                f"https://example.com/voice?call_sid={call_sid}&scenario={scenario_id}",
+                                {
+                                    "CallSid": call_sid,
+                                    "From": "+13203810451",
+                                    "To": "+18054398008",
+                                    "CallStatus": "in-progress",
+                                    "SpeechResult": disclaimer_fragment,
+                                    "Confidence": "0.99",
+                                },
+                            )
+                        )
+                    )
+                    self.assertEqual(first_voice_response.status_code, 200)
+                    self.assertIn("<Gather", first_voice_response.body.decode("utf-8"))
+
+                    voice_response = asyncio.run(
+                        self.app.voice(
+                            FakeRequest(
+                                f"https://example.com/voice?call_sid={call_sid}&scenario={scenario_id}",
+                                {
+                                    "CallSid": call_sid,
+                                    "From": "+13203810451",
+                                    "To": "+18054398008",
+                                    "CallStatus": "in-progress",
+                                    "SpeechResult": opener_fragment,
+                                    "Confidence": "0.99",
+                                },
+                            )
+                        )
+                    )
+                    self.assertEqual(voice_response.status_code, 200)
+                    self.assertIn("<Gather", voice_response.body.decode("utf-8"))
+
+                    for speech in (*map(str, scenario.get("followups", [])), closing_fragment):
+                        voice_response = asyncio.run(
+                            self.app.voice(
+                                FakeRequest(
+                                    f"https://example.com/voice?call_sid={call_sid}&scenario={scenario_id}",
+                                    {
+                                        "CallSid": call_sid,
+                                        "From": "+13203810451",
+                                        "To": "+18054398008",
+                                        "CallStatus": "in-progress",
+                                        "SpeechResult": speech,
+                                        "Confidence": "0.99",
+                                    },
+                                )
+                            )
+                        )
+                        self.assertEqual(voice_response.status_code, 200)
+                        if "<Gather" not in voice_response.body.decode("utf-8"):
+                            break
+
+                    record = self.app.resolve_call_record(call_sid)
+                    self.assertEqual(record["scenario_id"], scenario_id)
+                    self.assertEqual(record["status"], "completed")
+                    self.assertIsNotNone(record["end_reason"])
+                    self.assertGreaterEqual(record["turn_count"], 2)
+
+        self.assertTrue(trace_root.exists())
+        self.assertTrue(any(trace_root.rglob("llm-trace.jsonl")))
 
     def test_recording_status_does_not_complete_live_call(self) -> None:
         call_sid = "CA-smoke-recording"

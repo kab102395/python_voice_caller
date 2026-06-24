@@ -5,5 +5,6 @@ launcher-*.log
 launcher-*.out
 launcher-*.err
 artifacts/logs/*.log
+artifacts/llm-traces/
 artifacts/transcripts/20260622-000000_scheduling_CA-buf.*
 artifacts/transcripts/20260622-000000_scheduling_CA-discl.*

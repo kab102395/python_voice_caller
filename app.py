@@ -36,6 +36,7 @@ LOG_ROOT = ARTIFACT_ROOT / "logs"
 CURRENT_LOG_PATH = LOG_ROOT / "app.log"
 TRANSCRIPT_ROOT = ARTIFACT_ROOT / "transcripts"
 RECORDING_ROOT = ARTIFACT_ROOT / "recordings"
+LLM_TRACE_ROOT = ARTIFACT_ROOT / "llm-traces"
 BUG_REPORT_ROOT = Path("bug_reports")
 HARD_STOP_MESSAGE = "I have everything I need. Thank you for your help. Goodbye."
 RUN_LABEL = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
@@ -729,6 +730,7 @@ def get_engine() -> ReplyEngine:
             api_key=_settings.llm_api_key,
             model=_settings.llm_model,
             timeout_seconds=_settings.llm_timeout_seconds,
+            trace_dir=LLM_TRACE_ROOT / RUN_LABEL,
         )
     else:
         _engine = RuleBasedReplyEngine()

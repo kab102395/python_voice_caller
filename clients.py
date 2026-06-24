@@ -15,7 +15,8 @@ from typing import Any
 
 
 USER_AGENT = "python_voice_caller/0.2"
-JSON_POST_RETRIES = 1
+JSON_POST_RETRIES = 3
+RETRYABLE_JSON_POST_STATUSES = {429}
 
 
 def _https_context() -> ssl.SSLContext:
@@ -86,6 +87,10 @@ def http_post_json(
                 return json.loads(payload)
         except urllib.error.HTTPError as exc:
             body = exc.read().decode("utf-8", errors="replace")
+            if exc.code in RETRYABLE_JSON_POST_STATUSES and attempt < JSON_POST_RETRIES:
+                last_exc = exc
+                time.sleep(0.5 * (attempt + 1))
+                continue
             raise RuntimeError(f"HTTP {exc.code} from {url}: {body}") from exc
         except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as exc:
             last_exc = exc
