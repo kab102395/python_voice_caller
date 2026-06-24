@@ -82,7 +82,7 @@ def get_settings() -> Settings:
         os.getenv("LLM_API_BASE", "https://api.openai.com/v1")
     )
     llm_api_key = _optional("LLM_API_KEY")
-    llm_model = os.getenv("LLM_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
+    llm_model = os.getenv("LLM_MODEL", "gpt-4o").strip() or "gpt-4o"
     llm_timeout_seconds = float(os.getenv("LLM_TIMEOUT_SECONDS", "20"))
     twilio_voice = os.getenv("TWILIO_VOICE", "Google.en-US-Chirp3-HD-Puck").strip() or "Google.en-US-Chirp3-HD-Puck"
     max_turns = int(os.getenv("MAX_CALL_TURNS", "30"))
