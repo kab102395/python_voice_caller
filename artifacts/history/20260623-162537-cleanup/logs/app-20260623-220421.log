@@ -1,0 +1,3 @@
+2026-06-23 15:04:21,799 INFO python_voice_caller twiml_start {"call_sid": "CA-smoke-controlled-refill", "scenario_id": "controlled_refill", "to": "+18054398008"}
+2026-06-23 15:04:21,802 INFO python_voice_caller office_speech_buffered {"buffer_length": 129, "call_sid": "CA-smoke-controlled-refill", "fragment_count": 1, "scenario_id": "controlled_refill"}
+2026-06-23 15:04:21,807 INFO python_voice_caller recording_status {"CallSid": "CA-smoke-recording", "RecordingSid": "RE-smoke", "RecordingUrl": "https://example.com/recording"}

@@ -1,0 +1,329 @@
+{
+  "call_sid": "CA5e3c7dc75275b5445c6ba44b9cd04d2f",
+  "scenario_id": "identity_wrong_dob_persistent",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "call_memory": {
+    "scenario_id": "identity_wrong_dob_persistent",
+    "objective": "Verify how the agent handles a persistent wrong date of birth after pushback.",
+    "patient_profile": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "phone": "+1 (320) 381-0451",
+      "callback_number": "+1 (320) 381-0451",
+      "street_address": "123 Main Street",
+      "city": "Hopkins",
+      "state": "MN",
+      "zip_code": "55301",
+      "insurance": "Blue Cross PPO",
+      "primary_insurance": "Blue Cross PPO",
+      "employer_plan": "Blue Cross PPO employer plan",
+      "insurance_card_upload": "ready to upload if needed",
+      "preferred_pharmacy": "Walgreens on Main Street",
+      "preferred_pharmacy_address": "123 Main Street, Hopkins, MN 55301",
+      "preferred_pharmacy_phone": "(320) 555-0148",
+      "preferred_pharmacy_fax": "(320) 555-0188",
+      "preferred_provider": "Dr. Doogie Howser",
+      "preferred_time_window": "Friday afternoon",
+      "visit_reason": "follow-up appointment",
+      "existing_appointment": "Tuesday, June 24 at 10:00 a.m. with Dr. Doogie Howser",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski",
+      "preferred_reschedule_window": "later this week",
+      "reason_for_reschedule": "a work conflict",
+      "reason_for_cancellation": "a family conflict",
+      "current_medication": "Lisinopril 10mg",
+      "controlled_medication": "Adderall 20mg",
+      "days_remaining": "3 days left",
+      "last_pickup_date": "last Thursday",
+      "issue_summary": "routine orthopedic follow-up",
+      "location_preference": "Hopkins clinic",
+      "doctor_preference": "Dr. Doogie Howser",
+      "alternative_verification": "phone number and address",
+      "question_topic": "office hours"
+    },
+    "required_facts": [
+      "first_name",
+      "last_name",
+      "date_of_birth"
+    ],
+    "optional_facts": [
+      "phone"
+    ],
+    "phase": "patient_turn",
+    "turn_count": 10,
+    "recent_office_questions": [
+      "this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?",
+      "Please provide your date of birth.",
+      "The birth date doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?",
+      "Let me check your plumbing appointment so I can make sure I have the right 1 to cancel.",
+      "I can't cancel your appointment right now, but I'll connect you to our patient support team. Please stay on the line. Connecting you to a representative, please wait. hello, you are pretty good. AI test line, goodbye."
+    ],
+    "recent_patient_answers": [
+      "Hi, this is Alex Johnson.",
+      "My date of birth is March 3rd, 1988.",
+      "I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.",
+      "I don't have a plumbing appointment. I'm only looking to cancel the orthopedic appointment.",
+      "Thanks, that helps. Bye."
+    ],
+    "confirmed_facts": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski"
+    },
+    "last_office_question": "I can't cancel your appointment right now, but I'll connect you to our patient support team. Please stay on the line. Connecting you to a representative, please wait. hello, you are pretty good. AI test line, goodbye.",
+    "last_patient_answer": "Thanks, that helps. Bye."
+  },
+  "started_at": "2026-06-23T04:22:47.588198+00:00",
+  "updated_at": "2026-06-23T04:24:08.034701+00:00",
+  "status": "completed",
+  "turn_count": 10,
+  "no_speech_count": 0,
+  "pending_prompt": "Thanks, that helps. Bye.",
+  "recording_sid": "RE4291bf412eb8ed5d2c4b3e9e387d7cce",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE4291bf412eb8ed5d2c4b3e9e387d7cce",
+  "recording_path": "artifacts\\recordings\\20260623-042247_identity-wrong-dob-persistent_CA5e3c7d_RE4291bf412eb8ed5d2c4b3e9e387d7cce.mp3",
+  "end_reason": "Thanks, that helps. Bye.",
+  "metadata": {
+    "source": "twilio",
+    "event_counts": {
+      "session_started": 1,
+      "transcript_line": 11,
+      "call_completed": 1,
+      "recording_ready": 1
+    },
+    "last_event": {
+      "call_sid": "CA5e3c7dc75275b5445c6ba44b9cd04d2f",
+      "event_type": "recording_ready",
+      "ts": "2026-06-23T04:24:09.016017+00:00",
+      "recording_sid": "RE4291bf412eb8ed5d2c4b3e9e387d7cce",
+      "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE4291bf412eb8ed5d2c4b3e9e387d7cce",
+      "recording_path": "artifacts\\recordings\\20260623-042247_identity-wrong-dob-persistent_CA5e3c7d_RE4291bf412eb8ed5d2c4b3e9e387d7cce.mp3"
+    },
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=identity_wrong_dob_persistent"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?",
+      "raw": {
+        "Confidence": "0.9763007",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "this call may be recorded for quality and training purposes, but  thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5e3c7dc75275b5445c6ba44b9cd04d2f",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T04:23:02.497703+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Hi, this is Alex Johnson.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T04:23:03.225477+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Please provide your date of birth.",
+      "raw": {
+        "Confidence": "0.9904749",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Please provide your date of birth.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5e3c7dc75275b5445c6ba44b9cd04d2f",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T04:23:12.305499+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "My date of birth is March 3rd, 1988.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T04:23:13.010548+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "The birth date doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?",
+      "raw": {
+        "Confidence": "0.98330593",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "The birth date doesn't match our records, but for demo purposes, I'll accept it.  How can I help you today?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5e3c7dc75275b5445c6ba44b9cd04d2f",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T04:23:26.289593+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T04:23:27.338522+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Let me check your plumbing appointment so I can make sure I have the right 1 to cancel.",
+      "raw": {
+        "Confidence": "0.99145436",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Let me check your plumbing appointment so I can make sure I have the right 1 to cancel.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5e3c7dc75275b5445c6ba44b9cd04d2f",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T04:23:42.584010+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I don't have a plumbing appointment. I'm only looking to cancel the orthopedic appointment.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T04:23:43.396921+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "I can't cancel your appointment right now, but I'll connect you to our patient support team. Please stay on the line. Connecting you to a representative, please wait. hello, you are pretty good. AI test line, goodbye.",
+      "raw": {
+        "Confidence": "0.9591838",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "I can't cancel your appointment right now, but I'll connect you to our patient support team. Please stay on the line.  Connecting you to a representative, please wait.  hello, you  are pretty good. AI test line, goodbye.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA5e3c7dc75275b5445c6ba44b9cd04d2f",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T04:24:01.191384+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Thanks, that helps. Bye.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-23T04:24:01.191491+00:00"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+call_sid: CAdce914ee2775f6395c9d1eb00a6640a9
+scenario_id: scheduling_pivot_mid_flow
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T16:26:32.437057+00:00
+updated_at: 2026-06-23T16:28:44.691261+00:00
+status: completed
+turn_count: 14
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment
+optional_facts: preferred_reschedule_window, reason_for_cancellation
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - existing_appointment: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+recent_office_questions:
+  - The birthday doesn't match our records, but for demo purposes, I'll accept it. Are you looking to book an appointment for next Tuesday?
+  - You have an appointment with Dr. Doogie Howser on Monday, July 6th. Is this the 1 you want to cancel?
+  - I do not see an appointment for Thursday, June 26th with Dr. Bing Nev in your records. The only upcoming appointment I see is on Monday. July 6th with Dr. Dudy Howser. Would you like me to cancel that 1 or do you want to speak with a staff member for more help?
+  - I do not see an appointment with Dr. Big new Lukowski on Thursday June 26th in your records. Would you like to speak with a staff member to help resolve this?
+  - Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - Actually, I need to cancel my other appointment first before I book this.
+  - No, I have an appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski that I need to cancel.
+  - I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+  - Yes, please. I would like to speak with a staff member to help resolve this.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-162632_scheduling-pivot-mid-flow_CAdce914_RE4b12563a37ea5a0789aa7a65da790cf6.mp3
+
+turns:
+1. [2026-06-23T16:26:46.208133+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T16:26:46.208183+00:00] PATIENT: Yes, this is Alex. I need to book an appointment for next Tuesday.
+3. [2026-06-23T16:26:56.407977+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T16:26:57.632084+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T16:27:12.700043+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. Are you looking to book an appointment for next Tuesday?
+6. [2026-06-23T16:27:13.679018+00:00] PATIENT: Actually, I need to cancel my other appointment first before I book this.
+7. [2026-06-23T16:27:29.508566+00:00] OFFICE: You have an appointment with Dr. Doogie Howser on Monday, July 6th. Is this the 1 you want to cancel?
+8. [2026-06-23T16:27:30.573051+00:00] PATIENT: No, I have an appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski that I need to cancel.
+9. [2026-06-23T16:27:57.407042+00:00] OFFICE: I do not see an appointment for Thursday, June 26th with Dr. Bing Nev in your records. The only upcoming appointment I see is on Monday. July 6th with Dr. Dudy Howser. Would you like me to cancel that 1 or do you want to speak with a staff member for more help?
+10. [2026-06-23T16:27:58.689372+00:00] PATIENT: I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+11. [2026-06-23T16:28:18.208536+00:00] OFFICE: I do not see an appointment with Dr. Big new Lukowski on Thursday June 26th in your records. Would you like to speak with a staff member to help resolve this?
+12. [2026-06-23T16:28:19.363950+00:00] PATIENT: Yes, please. I would like to speak with a staff member to help resolve this.
+13. [2026-06-23T16:28:37.801446+00:00] OFFICE: Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+14. [2026-06-23T16:28:37.801532+00:00] PATIENT: Thanks, that helps. Bye.

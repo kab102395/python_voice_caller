@@ -1,0 +1,43 @@
+call_sid: CA5cd15ccdc8068afc342f55a8c4abb805
+scenario_id: cancel
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:18:08.345929+00:00
+updated_at: 2026-06-23T04:19:34.291031+00:00
+status: completed
+turn_count: 12
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, appointment_to_cancel
+optional_facts: reason_for_cancellation, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - reason_for_cancellation: a family conflict
+recent_office_questions:
+  - Pivot Point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+  - Please provide your date of birth.
+  - The birth date doesn't match. Our records booked for demo purposes. I'll accept it. How can I help you today?
+  - You have an appointment with Doogie, Howser on Thursday, June 25th. Is this the 1 you want to cancel? If so can you tell me the reason for cancelling?
+  - Your appointment with Duty house or on June 25th has been canceled due to a family conflict. Is there anything else I can help you with today?
+recent_patient_answers:
+  - Yes, this is Alex.
+  - My date of birth is January 12, 1990.
+  - I need to cancel my appointment.
+  - Yes, I want to cancel that appointment due to a family conflict.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-041808_cancel_CA5cd15c_REd6d1c8c8281bf486909e4c73673df7bf.mp3
+
+turns:
+1. [2026-06-23T04:18:14.797408+00:00] OFFICE: This call may be recorded for quality and training purposes.
+2. [2026-06-23T04:18:15.495668+00:00] PATIENT: I need to cancel my appointment.
+3. [2026-06-23T04:18:23.701499+00:00] OFFICE: Pivot Point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+4. [2026-06-23T04:18:24.294017+00:00] PATIENT: Yes, this is Alex.
+5. [2026-06-23T04:18:34.418943+00:00] OFFICE: Please provide your date of birth.
+6. [2026-06-23T04:18:35.188668+00:00] PATIENT: My date of birth is January 12, 1990.
+7. [2026-06-23T04:18:48.408720+00:00] OFFICE: The birth date doesn't match. Our records booked for demo purposes. I'll accept it. How can I help you today?
+8. [2026-06-23T04:18:49.098730+00:00] PATIENT: I need to cancel my appointment.
+9. [2026-06-23T04:19:06.297672+00:00] OFFICE: You have an appointment with Doogie, Howser on Thursday, June 25th. Is this the 1 you want to cancel? If so can you tell me the reason for cancelling?
+10. [2026-06-23T04:19:07.153144+00:00] PATIENT: Yes, I want to cancel that appointment due to a family conflict.
+11. [2026-06-23T04:19:26.303272+00:00] OFFICE: Your appointment with Duty house or on June 25th has been canceled due to a family conflict. Is there anything else I can help you with today?
+12. [2026-06-23T04:19:26.303369+00:00] PATIENT: No, that's all I needed. Thanks, bye!

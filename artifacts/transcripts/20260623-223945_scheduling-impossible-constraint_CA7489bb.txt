@@ -1,0 +1,53 @@
+call_sid: CA7489bbcb3fee49fffc893eb807f50b8b
+scenario_id: scheduling_impossible_constraint
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T22:39:45.335630+00:00
+updated_at: 2026-06-23T22:44:00.845288+00:00
+status: completed
+turn_count: 22
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth
+optional_facts: location_preference, doctor_preference
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - doctor_preference: Dr. Doogie Howser
+recent_office_questions:
+  - There are no other providers with openings today at Pivot Point Orthopedics. Would you like to book the earliest available slot tomorrow? Or would you prefer to speak with someone at the office for more help?
+  - I'll check again for any last minute openings with any provider today, 1 moment.
+  - But there are still no openings with any provider today. The soonest available is tomorrow morning at 8:45 with Dr. Z big new Lakosky. Would you like to book that? Or do you want to hear other times for tomorrow?
+  - Tomorrow afternoon, I can offer you 1 p.m. 1:15 p.m. or 1:30 p.m. with Dr. Ziggy lucosky, would any of those work for you?
+  - I understand you need something this afternoon but there are no openings left today with any provider. The earliest available is tomorrow afternoon, would you like me to connect you to the office for further help? Or would you like to book a slot for tomorrow?
+recent_patient_answers:
+  - I understand, but I really need today. Can you check one more time?
+  - I appreciate that, but I need something this afternoon.
+  - No, that time doesn't work for me. I need something this afternoon.
+  - No, that time doesn't work for me. I need something this afternoon.
+  - Okay, I'll need to speak to someone who can actually help me get seen today.
+end_reason: max_call_seconds_reached
+recording_path: artifacts\recordings\20260623-223945_scheduling-impossible-constraint_CA7489bb_RE72882439c7e458637ed02a5eb48ba840.mp3
+
+turns:
+1. [2026-06-23T22:39:59.152970+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking of Alex?
+2. [2026-06-23T22:39:59.153034+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need to get in today — this afternoon if possible.
+3. [2026-06-23T22:40:26.458783+00:00] OFFICE: Are you looking to be seen for an urgent concern like pain injury or something? That needs prompt attention? Or is this more of a routine or follow-up visit?
+4. [2026-06-23T22:40:27.206494+00:00] PATIENT: I need to be seen today for an urgent concern. Can you help me with that?
+5. [2026-06-23T22:40:50.747842+00:00] OFFICE: Do you have a specific provider? You'd like to see or is the first available appointment, okay?
+6. [2026-06-23T22:40:51.999455+00:00] PATIENT: I prefer to see Dr. Doogie Howser, but I need to get in today. Can you check for any availability?
+7. [2026-06-23T22:41:08.147437+00:00] OFFICE: Let me check for openings with Dr. Dooba house with this afternoon for your urgent, concerns 1 moment.
+8. [2026-06-23T22:41:08.780415+00:00] PATIENT: No, that time doesn't work for me. I need something this afternoon.
+9. [2026-06-23T22:41:23.352817+00:00] OFFICE: I checked for. There are no openings with Dr. Do the house today or tomorrow? Would you like to see another provider this week? Or should I connect you to the office for more help?
+10. [2026-06-23T22:41:24.066085+00:00] PATIENT: That doctor isn't available to me. Is there anyone else today?
+11. [2026-06-23T22:41:44.553580+00:00] OFFICE: There are no openings left today, but I can offer you several times tomorrow with Dr. Z big new Lakosky or Dr. Kelly Noble, would you like to hear the earliest options for tomorrow morning?
+12. [2026-06-23T22:41:45.296278+00:00] PATIENT: That doctor isn't available to me. Is there anyone else today?
+13. [2026-06-23T22:42:06.245507+00:00] OFFICE: There are no other providers with openings today at Pivot Point Orthopedics. Would you like to book the earliest available slot tomorrow? Or would you prefer to speak with someone at the office for more help?
+14. [2026-06-23T22:42:07.019247+00:00] PATIENT: I understand, but I really need today. Can you check one more time?
+15. [2026-06-23T22:42:24.552140+00:00] OFFICE: I'll check again for any last minute openings with any provider today, 1 moment.
+16. [2026-06-23T22:42:25.228403+00:00] PATIENT: I appreciate that, but I need something this afternoon.
+17. [2026-06-23T22:42:39.449526+00:00] OFFICE: But there are still no openings with any provider today. The soonest available is tomorrow morning at 8:45 with Dr. Z big new Lakosky. Would you like to book that? Or do you want to hear other times for tomorrow?
+18. [2026-06-23T22:42:40.174623+00:00] PATIENT: No, that time doesn't work for me. I need something this afternoon.
+19. [2026-06-23T22:43:00.454313+00:00] OFFICE: Tomorrow afternoon, I can offer you 1 p.m. 1:15 p.m. or 1:30 p.m. with Dr. Ziggy lucosky, would any of those work for you?
+20. [2026-06-23T22:43:01.085466+00:00] PATIENT: No, that time doesn't work for me. I need something this afternoon.
+21. [2026-06-23T22:43:23.958447+00:00] OFFICE: I understand you need something this afternoon but there are no openings left today with any provider. The earliest available is tomorrow afternoon, would you like me to connect you to the office for further help? Or would you like to book a slot for tomorrow?
+22. [2026-06-23T22:43:25.406288+00:00] PATIENT: Okay, I'll need to speak to someone who can actually help me get seen today.

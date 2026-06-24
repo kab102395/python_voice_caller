@@ -1,0 +1,44 @@
+call_sid: CA240313af8e037cea3d47f5e75015f5db
+scenario_id: scheduling_pivot_mid_flow
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T22:51:36.044158+00:00
+updated_at: 2026-06-23T22:53:45.235189+00:00
+status: completed
+turn_count: 12
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment
+optional_facts: preferred_reschedule_window, reason_for_cancellation
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - existing_appointment: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+  - reason_for_cancellation: a family conflict
+recent_office_questions:
+  - The birthday you gave doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+  - you know, if 2 up humming appointments, The 1 with Dr. Zig Nu lucoski is on Wednesday. June 24th. Is this the appointment you want to cancel? If so can you tell me the reason for cancelling?
+  - Can you share the reason for canceling? Your appointment with Dr. Z big new Lakosky.
+  - Just to confirm, you want to cancel your appointment with Dr. Zigu lucosky. On Wednesday, June 24th. Is that correct?
+  - Your appointment with Dr. Zig new Lakosky on Thursday, June 24th at 2 pm has been canceled. Is there anything else I can help you with? Your appointment with Dr. Zigu lucosky. On Wednesday, June 24th. At 2 pm has been canceled. What else can I help you with today?
+recent_patient_answers:
+  - I need to cancel my existing appointment first. It's on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+  - Yes, that's correct.
+  - I need to cancel due to a family conflict.
+  - Yes, that's correct.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-225136_scheduling-pivot-mid-flow_CA240313_RE1198d162bb4ce4b16bfb8618f275f0ed.mp3
+
+turns:
+1. [2026-06-23T22:51:49.675308+00:00] OFFICE: This call may be recorded for quality and training purposes. No. Thanks for calling Pivot. Point Orthopedics part of pretty good. AI my speaking with Alex
+2. [2026-06-23T22:51:49.675359+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need to book an appointment for next Tuesday.
+3. [2026-06-23T22:52:06.774419+00:00] OFFICE: The birthday you gave doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+4. [2026-06-23T22:52:08.030768+00:00] PATIENT: I need to cancel my existing appointment first. It's on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+5. [2026-06-23T22:52:34.670875+00:00] OFFICE: you know, if 2 up humming appointments, The 1 with Dr. Zig Nu lucoski is on Wednesday. June 24th. Is this the appointment you want to cancel? If so can you tell me the reason for cancelling?
+6. [2026-06-23T22:52:34.670982+00:00] PATIENT: Yes, that's correct.
+7. [2026-06-23T22:52:45.682836+00:00] OFFICE: Can you share the reason for canceling? Your appointment with Dr. Z big new Lakosky.
+8. [2026-06-23T22:52:47.110712+00:00] PATIENT: I need to cancel due to a family conflict.
+9. [2026-06-23T22:53:01.977677+00:00] OFFICE: Just to confirm, you want to cancel your appointment with Dr. Zigu lucosky. On Wednesday, June 24th. Is that correct?
+10. [2026-06-23T22:53:01.977760+00:00] PATIENT: Yes, that's correct.
+11. [2026-06-23T22:53:37.976574+00:00] OFFICE: Your appointment with Dr. Zig new Lakosky on Thursday, June 24th at 2 pm has been canceled. Is there anything else I can help you with? Your appointment with Dr. Zigu lucosky. On Wednesday, June 24th. At 2 pm has been canceled. What else can I help you with today?
+12. [2026-06-23T22:53:37.976677+00:00] PATIENT: No, that's all I needed. Thanks, bye!

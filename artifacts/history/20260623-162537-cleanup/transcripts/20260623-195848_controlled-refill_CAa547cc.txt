@@ -1,0 +1,24 @@
+call_sid: CAa547cc7cff1c4c7e943d486e3c4ba6d6
+scenario_id: controlled_refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T19:58:48.213372+00:00
+updated_at: 2026-06-23T19:59:32.404987+00:00
+status: completed
+turn_count: 2
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, controlled_medication, preferred_pharmacy
+optional_facts: preferred_pharmacy_address, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speak with Alex
+recent_patient_answers:
+  - Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.
+end_reason: remote_hangup
+recording_path: artifacts\recordings\20260623-195848_controlled-refill_CAa547cc_RE562b2257be24da2b50de71c23eba99f0.mp3
+
+turns:
+1. [2026-06-23T19:59:02.152576+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speak with Alex
+2. [2026-06-23T19:59:02.152635+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.

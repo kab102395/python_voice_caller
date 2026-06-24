@@ -1,0 +1,42 @@
+call_sid: CAa27a96dae0ba86933742df7f968f08cf
+scenario_id: insurance
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T16:39:05.812926+00:00
+updated_at: 2026-06-23T16:41:07.836826+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, insurance
+optional_facts: employer_plan, insurance_card_upload, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - insurance: Blue Cross PPO
+  - date_of_birth: January 12, 1990
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex
+  - Thank you, Alex. Can you please spell your last name for me? I want to make sure I have it correct before checking your insurance.
+  - Would you like me to look up your record using your phone number instead? If so, please tell me the number you have on file with us. If you're not sure, I can confirm your name and date of birth again, which would you prefer?
+  - I have your name as Alex Johnson, date of birth January, 12th, 1990 and your phone number as 320, 381 0451 Is all about correct.
+  - I'm unable to verify your insurance details right now. I'll connect you to our patient support team so they can help please stay on the line. Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. Do you take my insurance? I have Blue Cross PPO.
+  - Sure, it's J-O-H-N-S-O-N.
+  - I can confirm my name and date of birth again. It's Alex Johnson, January 12, 1990.
+  - Yes, that's all correct. Do you take my insurance, Blue Cross PPO?
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-163905_insurance_CAa27a96_RE6b5ea368a84a6597f5ee5939fe93cf4e.mp3
+
+turns:
+1. [2026-06-23T16:39:19.753900+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex
+2. [2026-06-23T16:39:19.753958+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. Do you take my insurance? I have Blue Cross PPO.
+3. [2026-06-23T16:39:41.652343+00:00] OFFICE: Thank you, Alex. Can you please spell your last name for me? I want to make sure I have it correct before checking your insurance.
+4. [2026-06-23T16:39:42.846404+00:00] PATIENT: Sure, it's J-O-H-N-S-O-N.
+5. [2026-06-23T16:40:06.163220+00:00] OFFICE: Would you like me to look up your record using your phone number instead? If so, please tell me the number you have on file with us. If you're not sure, I can confirm your name and date of birth again, which would you prefer?
+6. [2026-06-23T16:40:07.289546+00:00] PATIENT: I can confirm my name and date of birth again. It's Alex Johnson, January 12, 1990.
+7. [2026-06-23T16:40:32.347501+00:00] OFFICE: I have your name as Alex Johnson, date of birth January, 12th, 1990 and your phone number as 320, 381 0451 Is all about correct.
+8. [2026-06-23T16:40:33.405352+00:00] PATIENT: Yes, that's all correct. Do you take my insurance, Blue Cross PPO?
+9. [2026-06-23T16:41:00.963450+00:00] OFFICE: I'm unable to verify your insurance details right now. I'll connect you to our patient support team so they can help please stay on the line. Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+10. [2026-06-23T16:41:00.963544+00:00] PATIENT: Thanks, that helps. Bye.

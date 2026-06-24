@@ -1,0 +1,41 @@
+call_sid: CA80926d959db062ce435be9fc3bf811c1
+scenario_id: cancel
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T17:29:52.865394+00:00
+updated_at: 2026-06-23T17:31:10.709369+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, appointment_to_cancel
+optional_facts: reason_for_cancellation, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - reason_for_cancellation: a family conflict
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+  - Let me check your upcoming appointment so I can help you cancel the right 1 1 moment.
+  - This Dr. Doogie Howser
+  - June 26th is this the 1 you want to cancel? If so can you tell me the reason for cancelling?
+  - Your appointment with Dr. Judy Hower, on Friday, June 26th has been canceled. Is there anything else I can help you with today?
+recent_patient_answers:
+  - Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.
+  - Sure, thank you. I appreciate your help.
+  - No, my appointment is with Dr. Zbigniew Lukoski.
+  - Yes, that's the one I want to cancel. I need to cancel due to a family conflict.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-172952_cancel_CA80926d_RE9bf7b1bc20664a43142e24aba84a2aeb.mp3
+
+turns:
+1. [2026-06-23T17:30:06.314767+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+2. [2026-06-23T17:30:06.314834+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.
+3. [2026-06-23T17:30:31.316699+00:00] OFFICE: Let me check your upcoming appointment so I can help you cancel the right 1 1 moment.
+4. [2026-06-23T17:30:32.230888+00:00] PATIENT: Sure, thank you. I appreciate your help.
+5. [2026-06-23T17:30:35.814243+00:00] OFFICE: This Dr. Doogie Howser
+6. [2026-06-23T17:30:36.505925+00:00] PATIENT: No, my appointment is with Dr. Zbigniew Lukoski.
+7. [2026-06-23T17:30:44.410243+00:00] OFFICE: June 26th is this the 1 you want to cancel? If so can you tell me the reason for cancelling?
+8. [2026-06-23T17:30:45.278919+00:00] PATIENT: Yes, that's the one I want to cancel. I need to cancel due to a family conflict.
+9. [2026-06-23T17:31:03.419181+00:00] OFFICE: Your appointment with Dr. Judy Hower, on Friday, June 26th has been canceled. Is there anything else I can help you with today?
+10. [2026-06-23T17:31:03.419268+00:00] PATIENT: No, that's all I needed. Thanks, bye!

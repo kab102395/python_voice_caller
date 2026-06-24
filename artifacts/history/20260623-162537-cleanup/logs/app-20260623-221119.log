@@ -1,0 +1,3 @@
+2026-06-23 15:11:19,658 INFO python_voice_caller twiml_start {"call_sid": "CA-full-01-scheduling", "scenario_id": "scheduling", "to": "+18054398008"}
+2026-06-23 15:11:19,661 INFO python_voice_caller office_speech_buffered {"buffer_length": 60, "call_sid": "CA-full-01-scheduling", "fragment_count": 1, "scenario_id": "scheduling"}
+2026-06-23 15:11:19,666 INFO python_voice_caller voice_turn {"call_sid": "CA-full-01-scheduling", "reply": "Hi, this is Alex Johnson, date of birth January 12 1990. I need to set up an appointment for next week.", "scenario_id": "scheduling", "speech": "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?"}

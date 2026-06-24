@@ -1,0 +1,54 @@
+call_sid: CA47df0d83451103bea7fe5a2827c1c94c
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:59:48.789655+00:00
+updated_at: 2026-06-23T05:02:01.403408+00:00
+status: completed
+turn_count: 20
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - date_of_birth: January 12, 1990
+  - visit_reason: routine follow-up appointment
+  - preferred_provider: Dr. Doogie Howser
+  - doctor_preference: Dr. Doogie Howser
+  - appointment_to_cancel: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+  - preferred_time_window: Friday afternoon
+recent_office_questions:
+  - You already have a.
+  - I can help with that, but I'm unable to cancel appointments directly. I'll connect you with a team member who can assist you right away. Please hold while I transfer your request.
+  - I see.
+  - No problem.
+  - You'd like to reschedule your appointment to Friday afternoon instead of canceling. Let me check what's available with Dr. Dugga house. This Friday afternoon 1 moment.
+recent_patient_answers:
+  - I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+  - Okay, I'll hold.
+  - I'm ready to proceed with scheduling my appointment for next week.
+  - Actually, do you have anything Friday afternoon?
+  - Thank you, I'll wait.
+end_reason: completed
+recording_path: artifacts\recordings\20260623-045948_scheduling_CA47df0d_RE039169f8f090b993dceca4e276976187.mp3
+
+turns:
+1. [2026-06-23T05:00:03.079558+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling Civic Point Orthopedics, part of pretty good. AI my speaking with Alex.
+2. [2026-06-23T05:00:04.033483+00:00] PATIENT: Hi, I need to set up an appointment for next week.
+3. [2026-06-23T05:00:24.424386+00:00] OFFICE: Can you please provide your date of birth? Can you please tell me your date of birth?
+4. [2026-06-23T05:00:25.876319+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T05:00:41.423750+00:00] OFFICE: Thanks. When is the main reason for your visit? Are you coming in for a routine? Checkup? A new concern, a follow-up or something else.
+6. [2026-06-23T05:00:42.656194+00:00] PATIENT: I'm coming in for a routine follow-up appointment.
+7. [2026-06-23T05:00:54.919800+00:00] OFFICE: Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+8. [2026-06-23T05:00:55.517430+00:00] PATIENT: I prefer to see Dr. Doogie Howser.
+9. [2026-06-23T05:01:06.317803+00:00] OFFICE: Let me check available. Follow-up appointments with Dr. Duva house, or for next week?
+10. [2026-06-23T05:01:07.133234+00:00] PATIENT: I prefer to see Dr. Doogie Howser.
+11. [2026-06-23T05:01:10.213138+00:00] OFFICE: You already have a.
+12. [2026-06-23T05:01:11.405240+00:00] PATIENT: I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+13. [2026-06-23T05:01:30.918541+00:00] OFFICE: I can help with that, but I'm unable to cancel appointments directly. I'll connect you with a team member who can assist you right away. Please hold while I transfer your request.
+14. [2026-06-23T05:01:32.090588+00:00] PATIENT: Okay, I'll hold.
+15. [2026-06-23T05:01:35.011721+00:00] OFFICE: I see.
+16. [2026-06-23T05:01:35.683295+00:00] PATIENT: I'm ready to proceed with scheduling my appointment for next week.
+17. [2026-06-23T05:01:38.324607+00:00] OFFICE: No problem.
+18. [2026-06-23T05:01:38.849257+00:00] PATIENT: Actually, do you have anything Friday afternoon?
+19. [2026-06-23T05:01:54.726239+00:00] OFFICE: You'd like to reschedule your appointment to Friday afternoon instead of canceling. Let me check what's available with Dr. Dugga house. This Friday afternoon 1 moment.
+20. [2026-06-23T05:01:55.466169+00:00] PATIENT: Thank you, I'll wait.

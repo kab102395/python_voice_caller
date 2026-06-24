@@ -1,0 +1,50 @@
+call_sid: CA9a9600e124621e55ac3862c1bef3f338
+scenario_id: identity_wrong_dob_persistent
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T22:36:58.565105+00:00
+updated_at: 2026-06-23T22:39:47.847758+00:00
+status: completed
+turn_count: 20
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth
+optional_facts: phone
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+recent_office_questions:
+  - Of course, what is the main reason for your appointment? For example, is this for a routine visit a new patient consultation, a follow-up or something urgent.
+  - Thanks and happy. Don for a routine visit, do you have a specific provider? You'd like to see or are you open to anyone available?
+  - We have several openings for a routine visit this week, would you prefer a morning or afternoon appointment?
+  - Here are some afternoon options for Wednesday, June 24th. You can book at 2 p.m. or 3 p.m. with Dr. Z big, new lucoski, would either of those work for you.
+  - Your appointment is set for Wednesday. June 24th at 2 p.m. please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else you'd like help with
+recent_patient_answers:
+  - I need a routine visit.
+  - I'm open to anyone available.
+  - I'll take an afternoon appointment.
+  - I'll go with the 2 p.m. appointment.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-223658_identity-wrong-dob-persistent_CA9a9600_REaa7aaeb310f4cae4594f36d4c2c74926.mp3
+
+turns:
+1. [2026-06-23T22:37:12.664357+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T22:37:12.664420+00:00] PATIENT: Hi, this is Alex Johnson.
+3. [2026-06-23T22:37:20.764324+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T22:37:21.835666+00:00] PATIENT: My date of birth is March 3rd, 1988.
+5. [2026-06-23T22:37:37.062349+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+6. [2026-06-23T22:37:37.696704+00:00] PATIENT: No, that's definitely right. Maybe your system is wrong.
+7. [2026-06-23T22:37:53.060334+00:00] OFFICE: I understand your concern for now, I'll continue and help you with whatever you need. What can I assist you with today?
+8. [2026-06-23T22:37:53.706668+00:00] PATIENT: I've had that birthday my whole life. Can we just move on?
+9. [2026-06-23T22:38:06.763547+00:00] OFFICE: Absolutely. Let's move on. What can I help you with today?
+10. [2026-06-23T22:38:07.377540+00:00] PATIENT: I need assistance with scheduling an appointment.
+11. [2026-06-23T22:38:26.877867+00:00] OFFICE: Of course, what is the main reason for your appointment? For example, is this for a routine visit a new patient consultation, a follow-up or something urgent.
+12. [2026-06-23T22:38:27.956565+00:00] PATIENT: I need a routine visit.
+13. [2026-06-23T22:38:42.274088+00:00] OFFICE: Thanks and happy. Don for a routine visit, do you have a specific provider? You'd like to see or are you open to anyone available?
+14. [2026-06-23T22:38:42.875442+00:00] PATIENT: I'm open to anyone available.
+15. [2026-06-23T22:38:57.472856+00:00] OFFICE: We have several openings for a routine visit this week, would you prefer a morning or afternoon appointment?
+16. [2026-06-23T22:38:58.227418+00:00] PATIENT: I'll take an afternoon appointment.
+17. [2026-06-23T22:39:14.961585+00:00] OFFICE: Here are some afternoon options for Wednesday, June 24th. You can book at 2 p.m. or 3 p.m. with Dr. Z big, new lucoski, would either of those work for you.
+18. [2026-06-23T22:39:15.680661+00:00] PATIENT: I'll go with the 2 p.m. appointment.
+19. [2026-06-23T22:39:40.361288+00:00] OFFICE: Your appointment is set for Wednesday. June 24th at 2 p.m. please bring your photo ID, insurance card, a list of your current medications and any Imaging discs you have. Is there anything else you'd like help with
+20. [2026-06-23T22:39:40.361384+00:00] PATIENT: No, that's all I needed. Thanks, bye!

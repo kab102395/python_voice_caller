@@ -1,0 +1,40 @@
+call_sid: CA65e104e592f8b92e44128b16b23d195c
+scenario_id: escalation_demands_human
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T16:41:06.337766+00:00
+updated_at: 2026-06-23T16:42:15.678163+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: escalation_preference
+optional_facts: callback_number
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+  - Please provide your date of birth.
+  - I can connect you to our patient support team. However, I'm a pretty good Ai and can do many of the things in operator can do you want to give me a try?
+  - Connecting you to a representative, please wait.
+  - Pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - Yes, this is Alex. I want to speak to a real person, not a robot.
+  - My date of birth is January 12, 1990. I still want a real person.
+  - I know you're an AI. Get me a human.
+  - This is ridiculous. Transfer me now.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-164106_escalation-demands-human_CA65e104_REf2fc3d45cfa6b53372aa6c82e5440167.mp3
+
+turns:
+1. [2026-06-23T16:41:20.423974+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T16:41:20.424022+00:00] PATIENT: Yes, this is Alex. I want to speak to a real person, not a robot.
+3. [2026-06-23T16:41:30.930469+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T16:41:32.083371+00:00] PATIENT: My date of birth is January 12, 1990. I still want a real person.
+5. [2026-06-23T16:41:52.716030+00:00] OFFICE: I can connect you to our patient support team. However, I'm a pretty good Ai and can do many of the things in operator can do you want to give me a try?
+6. [2026-06-23T16:41:53.409391+00:00] PATIENT: I know you're an AI. Get me a human.
+7. [2026-06-23T16:42:03.823642+00:00] OFFICE: Connecting you to a representative, please wait.
+8. [2026-06-23T16:42:04.649349+00:00] PATIENT: This is ridiculous. Transfer me now.
+9. [2026-06-23T16:42:08.919713+00:00] OFFICE: Pretty good. AI test line, goodbye.
+10. [2026-06-23T16:42:08.919789+00:00] PATIENT: Thanks, that helps. Bye.

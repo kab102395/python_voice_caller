@@ -1,0 +1,421 @@
+{
+  "call_sid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+  "scenario_id": "refill",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "call_memory": {
+    "scenario_id": "refill",
+    "objective": "Request a routine medication refill.",
+    "patient_profile": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "phone": "+1 (320) 381-0451",
+      "callback_number": "+1 (320) 381-0451",
+      "street_address": "123 Main Street",
+      "city": "Hopkins",
+      "state": "MN",
+      "zip_code": "55301",
+      "insurance": "Blue Cross PPO",
+      "primary_insurance": "Blue Cross PPO",
+      "employer_plan": "Blue Cross PPO employer plan",
+      "insurance_card_upload": "ready to upload if needed",
+      "preferred_pharmacy": "Walgreens on Main Street",
+      "preferred_pharmacy_address": "123 Main Street, Hopkins, MN 55301",
+      "preferred_pharmacy_phone": "(320) 555-0148",
+      "preferred_pharmacy_fax": "(320) 555-0188",
+      "preferred_provider": "Dr. Doogie Howser",
+      "preferred_time_window": "Friday afternoon",
+      "visit_reason": "follow-up appointment",
+      "existing_appointment": "Tuesday, June 24 at 10:00 a.m. with Dr. Doogie Howser",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski",
+      "preferred_reschedule_window": "later this week",
+      "reason_for_reschedule": "a work conflict",
+      "reason_for_cancellation": "a family conflict",
+      "current_medication": "Lisinopril 10mg",
+      "controlled_medication": "Adderall 20mg",
+      "days_remaining": "3 days left",
+      "last_pickup_date": "last Thursday",
+      "issue_summary": "routine orthopedic follow-up",
+      "location_preference": "Hopkins clinic",
+      "doctor_preference": "Dr. Doogie Howser",
+      "alternative_verification": "phone number and address",
+      "question_topic": "office hours"
+    },
+    "required_facts": [
+      "first_name",
+      "last_name",
+      "date_of_birth",
+      "current_medication",
+      "days_remaining"
+    ],
+    "optional_facts": [
+      "callback_number",
+      "preferred_pharmacy"
+    ],
+    "phase": "patient_turn",
+    "turn_count": 14,
+    "recent_office_questions": [
+      "Thanks, Alex. How many days of life in a pearl? Do you have left? If you are already out, just let me know.",
+      "Almost done. I'd have your phone number as 320 381 0451. Is that the best number for a call back? If the clinic needs to reach you?",
+      "Could you please provide the name of the pharmacy you want to use for your medication? If you know, the address City or any details like cross streets or nearby stores? That would help too if you have their phone or fax number, please share that as well.",
+      "Could you tell me the city and state? Where this Walgreens on Main Street is located? That will help make sure your Pharmacy information is updated correctly.",
+      "If you are able to remember any nearby landmarks cross streets, or the zip code for that Walgreens that would help even the city or state is enough. If you are not sure you can check a recent prescription label or look it up online. Would you like to try that or do you want to use a different Pharmacy?"
+    ],
+    "recent_patient_answers": [
+      "I have 3 days left. Do I need to do anything else?",
+      "Yes, that's the best number for a callback.",
+      "I prefer Walgreens on Main Street. I don't have the address handy. What should I do next?",
+      "I don't have the city and state handy. What should I do next?",
+      "I don't have that information available. Can we proceed with the refill using Walgreens on Main Street?"
+    ],
+    "confirmed_facts": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "current_medication": "Lisinopril 10mg",
+      "days_remaining": "3 days left",
+      "preferred_pharmacy": "Walgreens on Main Street"
+    },
+    "last_office_question": "If you are able to remember any nearby landmarks cross streets, or the zip code for that Walgreens that would help even the city or state is enough. If you are not sure you can check a recent prescription label or look it up online. Would you like to try that or do you want to use a different Pharmacy?",
+    "last_patient_answer": "I don't have that information available. Can we proceed with the refill using Walgreens on Main Street?"
+  },
+  "started_at": "2026-06-23T19:23:46.844469+00:00",
+  "updated_at": "2026-06-23T19:26:44.265037+00:00",
+  "status": "completed",
+  "turn_count": 14,
+  "no_speech_count": 0,
+  "pending_prompt": "I don't have that information available. Can we proceed with the refill using Walgreens on Main Street?",
+  "recording_sid": "RE1d458f60f48e5ede4140b248a3ccb89f",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE1d458f60f48e5ede4140b248a3ccb89f",
+  "recording_path": "artifacts\\recordings\\20260623-192346_refill_CAb84a28_RE1d458f60f48e5ede4140b248a3ccb89f.mp3",
+  "end_reason": "killed_by_user",
+  "metadata": {
+    "source": "twilio",
+    "event_counts": {
+      "session_started": 1,
+      "transcript_line": 14,
+      "recording_ready": 1
+    },
+    "last_event": {
+      "call_sid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+      "event_type": "recording_ready",
+      "ts": "2026-06-23T19:26:45.988289+00:00",
+      "recording_sid": "RE1d458f60f48e5ede4140b248a3ccb89f",
+      "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE1d458f60f48e5ede4140b248a3ccb89f",
+      "recording_path": "artifacts\\recordings\\20260623-192346_refill_CAb84a28_RE1d458f60f48e5ede4140b248a3ccb89f.mp3"
+    },
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=refill"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?",
+      "raw": {
+        "Confidence": "0.9718337",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:24:00.758192+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Hi, this is Alex Johnson, date of birth January 12 1990. I'm calling to refill my prescription.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:24:00.758238+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Thanks, Alex. Just to confirm your date of birth is January 12th 1990.",
+      "raw": {
+        "Confidence": "0.98173714",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Thanks, Alex. Just to confirm your date of birth is January 12th 1990.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:24:22.657014+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's correct. It's for my Lisinopril 10mg prescription.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:24:23.654606+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Thanks, Alex. How many days of life in a pearl? Do you have left? If you are already out, just let me know.",
+      "raw": {
+        "Confidence": "0.8978155",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Thanks, Alex. How many days of life in a pearl? Do you have left? If you are already out, just let me know.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:24:41.458354+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I have 3 days left. Do I need to do anything else?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:24:42.268000+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Almost done. I'd have your phone number as 320 381 0451. Is that the best number for a call back? If the clinic needs to reach you?",
+      "raw": {
+        "Confidence": "0.99144197",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Almost done. I'd have your phone number as 320 381 0451.  Is that the best number for a call back? If the clinic needs to reach you?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:25:01.869513+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's the best number for a callback.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:25:03.095504+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Could you please provide the name of the pharmacy you want to use for your medication? If you know, the address City or any details like cross streets or nearby stores? That would help too if you have their phone or fax number, please share that as well.",
+      "raw": {
+        "Confidence": "0.9861648",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Could you please provide the name of the pharmacy you want to use for your medication? If you know, the address City or any details like cross streets or nearby stores? That would help too if you have their phone or fax number, please share that as well.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:25:24.461970+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I prefer Walgreens on Main Street. I don't have the address handy. What should I do next?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:25:25.202536+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Could you tell me the city and state? Where this Walgreens on Main Street is located? That will help make sure your Pharmacy information is updated correctly.",
+      "raw": {
+        "Confidence": "0.99536633",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Could you tell me the city and state? Where this Walgreens on Main Street is located? That will help make sure your Pharmacy information is updated correctly.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:25:44.958412+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I don't have the city and state handy. What should I do next?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:25:45.933574+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "If you are able to remember any nearby landmarks cross streets, or the zip code for that Walgreens that would help even the city or state is enough. If you are not sure you can check a recent prescription label or look it up online. Would you like to try that or do you want to use a different Pharmacy?",
+      "raw": {
+        "Confidence": "0.99461204",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "If you are able to remember any nearby landmarks cross streets, or the zip code for that Walgreens that would help even the city or state is enough. If you are not sure you can check a recent prescription label or look it up online. Would you like to try that or do you want to use a different Pharmacy?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAb84a284ccb8bbbd2ac81f7f33747a644",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:26:12.756914+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I don't have that information available. Can we proceed with the refill using Walgreens on Main Street?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:26:13.650449+00:00"
+    }
+  ]
+}

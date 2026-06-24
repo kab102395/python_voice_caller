@@ -1,0 +1,50 @@
+call_sid: CA8059510f104ed44963f8c616cf4d1814
+scenario_id: identity_wrong_dob_persistent
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T22:29:19.567515+00:00
+updated_at: 2026-06-23T22:32:04.753787+00:00
+status: completed
+turn_count: 20
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth
+optional_facts: phone
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+recent_office_questions:
+  - Of course, is this for a routine office, visit a new patient consultation, a follow-up or something else.
+  - Thanks for confirming. Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+  - We have openings this week in early next week. Do you have a preferred day or time of day for your appointment?
+  - We have 2 openings for a new patient consultation with Doogie, Howser on Thursday, June 25th. The first is at 3:45 p.m., and the second is at 4:30 p.m. would either of these times work for you.
+  - Would you like to book the 3:45 p.m. slot on Thursday June 25th with Doogie Howser?
+recent_patient_answers:
+  - I need a new patient consultation.
+  - I'm open to any available provider.
+  - I'm open to any available time.
+  - I'm open to any available time.
+  - Yes, let's book the 3:45 p.m. slot on Thursday, June 25th with Doogie Howser.
+end_reason: completed
+recording_path: artifacts\recordings\20260623-222919_identity-wrong-dob-persistent_CA805951_RE0c633851c5db53949592c7aac956d34a.mp3
+
+turns:
+1. [2026-06-23T22:29:33.175008+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T22:29:33.175059+00:00] PATIENT: Hi, this is Alex Johnson.
+3. [2026-06-23T22:29:41.467404+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T22:29:42.315890+00:00] PATIENT: My date of birth is March 3rd, 1988.
+5. [2026-06-23T22:29:57.468864+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+6. [2026-06-23T22:29:58.221455+00:00] PATIENT: No, that's definitely right. Maybe your system is wrong.
+7. [2026-06-23T22:30:11.971364+00:00] OFFICE: I understand your concern for now I'll continue with your request. What can I help you with today?
+8. [2026-06-23T22:30:13.687044+00:00] PATIENT: I've had that birthday my whole life. Can we just move on?
+9. [2026-06-23T22:30:24.372672+00:00] OFFICE: Absolutely, let's move on. What would you like help with today?
+10. [2026-06-23T22:30:25.155913+00:00] PATIENT: I need assistance with scheduling an appointment.
+11. [2026-06-23T22:30:40.367769+00:00] OFFICE: Of course, is this for a routine office, visit a new patient consultation, a follow-up or something else.
+12. [2026-06-23T22:30:41.336354+00:00] PATIENT: I need a new patient consultation.
+13. [2026-06-23T22:30:59.577326+00:00] OFFICE: Thanks for confirming. Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+14. [2026-06-23T22:31:00.495754+00:00] PATIENT: I'm open to any available provider.
+15. [2026-06-23T22:31:13.765634+00:00] OFFICE: We have openings this week in early next week. Do you have a preferred day or time of day for your appointment?
+16. [2026-06-23T22:31:14.384893+00:00] PATIENT: I'm open to any available time.
+17. [2026-06-23T22:31:38.678726+00:00] OFFICE: We have 2 openings for a new patient consultation with Doogie, Howser on Thursday, June 25th. The first is at 3:45 p.m., and the second is at 4:30 p.m. would either of these times work for you.
+18. [2026-06-23T22:31:39.609938+00:00] PATIENT: I'm open to any available time.
+19. [2026-06-23T22:31:52.474149+00:00] OFFICE: Would you like to book the 3:45 p.m. slot on Thursday June 25th with Doogie Howser?
+20. [2026-06-23T22:31:53.418860+00:00] PATIENT: Yes, let's book the 3:45 p.m. slot on Thursday, June 25th with Doogie Howser.

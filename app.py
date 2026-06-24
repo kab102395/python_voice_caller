@@ -873,6 +873,10 @@ def _clear_initial_office_buffer(session: CallSession) -> None:
     session.metadata.pop("initial_office_buffer_updated_at", None)
 
 
+# PGAI opens every call with a recorded disclaimer before the live agent speaks.
+# Twilio sometimes delivers this as two rapid Gather results rather than one complete turn.
+# This function holds the first fragment in a buffer and merges it with the next result
+# so the bot always replies to the full greeting, not a cut-off disclaimer fragment.
 def maybe_stage_office_speech(session: CallSession, speech: str) -> str | None:
     buffer_text = str(session.metadata.get("initial_office_buffer", "")).strip()
     fragment_count = int(session.metadata.get("initial_office_buffer_count", 0) or 0)

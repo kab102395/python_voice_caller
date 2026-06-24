@@ -1,0 +1,45 @@
+call_sid: CA39c055ad23ea38651c13c4b588d798e9
+scenario_id: reschedule
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T17:27:26.125697+00:00
+updated_at: 2026-06-23T17:29:56.498884+00:00
+status: completed
+turn_count: 14
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment, preferred_reschedule_window
+optional_facts: callback_number, reason_for_reschedule
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - preferred_reschedule_window: later this week
+recent_office_questions:
+  - The next available slot is Friday. June 26th at 10:00 a.m. with Doogie, Howser in Nashville, would you like to move your appointment to that time? Or would you prefer a different option?
+  - Can you tell me the reason you need to reschedule your appointment or get this updated for you?
+  - You'd like to move your appointment to Friday, June 26th at 10:00 a.m. with Doogie. Howser in Nashville, due to a scheduling conflict is that correct? Can I go ahead and reschedule it for you?
+  - Your appointment has been rescheduled to Friday June 26th at 10:00 a.m. with dudy, Howser in Nashville. Would you like me to send you a text message with the new appointment details?
+  - I've sent the new appointment details to your phone. Is there anything else? I can help you with today?
+recent_patient_answers:
+  - Yes, let's move my appointment to Friday, June 26th at 10:00 a.m. with Dr. Doogie Howser.
+  - I have a scheduling conflict, that's all.
+  - Yes, that's correct.
+  - Yes, that's correct. Please send me a text message with the new appointment details.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-172726_reschedule_CA39c055_REe140a972361ca546087cf0875e0c74ba.mp3
+
+turns:
+1. [2026-06-23T17:27:39.850284+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling to the point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T17:27:39.850337+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.
+3. [2026-06-23T17:28:07.358800+00:00] OFFICE: You have a follow-up appointment scheduled for Thursday June 25th at 10:00 a.m. with Duty Houser at Nashville, 220 Athens Way is this the appointment you want to reschedule?
+4. [2026-06-23T17:28:08.241991+00:00] PATIENT: Yes, that's the appointment I need to reschedule. Can we move it to later this week?
+5. [2026-06-23T17:28:33.459931+00:00] OFFICE: The next available slot is Friday. June 26th at 10:00 a.m. with Doogie, Howser in Nashville, would you like to move your appointment to that time? Or would you prefer a different option?
+6. [2026-06-23T17:28:34.198992+00:00] PATIENT: Yes, let's move my appointment to Friday, June 26th at 10:00 a.m. with Dr. Doogie Howser.
+7. [2026-06-23T17:28:49.348882+00:00] OFFICE: Can you tell me the reason you need to reschedule your appointment or get this updated for you?
+8. [2026-06-23T17:28:50.098988+00:00] PATIENT: I have a scheduling conflict, that's all.
+9. [2026-06-23T17:29:09.255475+00:00] OFFICE: You'd like to move your appointment to Friday, June 26th at 10:00 a.m. with Doogie. Howser in Nashville, due to a scheduling conflict is that correct? Can I go ahead and reschedule it for you?
+10. [2026-06-23T17:29:09.255617+00:00] PATIENT: Yes, that's correct.
+11. [2026-06-23T17:29:31.108547+00:00] OFFICE: Your appointment has been rescheduled to Friday June 26th at 10:00 a.m. with dudy, Howser in Nashville. Would you like me to send you a text message with the new appointment details?
+12. [2026-06-23T17:29:32.553001+00:00] PATIENT: Yes, that's correct. Please send me a text message with the new appointment details.
+13. [2026-06-23T17:29:48.051899+00:00] OFFICE: I've sent the new appointment details to your phone. Is there anything else? I can help you with today?
+14. [2026-06-23T17:29:48.051997+00:00] PATIENT: No, that's all I needed. Thanks, bye!

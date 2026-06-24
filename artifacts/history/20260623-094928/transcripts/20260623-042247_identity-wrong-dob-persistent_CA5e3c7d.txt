@@ -1,0 +1,41 @@
+call_sid: CA5e3c7dc75275b5445c6ba44b9cd04d2f
+scenario_id: identity_wrong_dob_persistent
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:22:47.588198+00:00
+updated_at: 2026-06-23T04:24:08.034701+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth
+optional_facts: phone
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - appointment_to_cancel: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+recent_office_questions:
+  - this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+  - Please provide your date of birth.
+  - The birth date doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+  - Let me check your plumbing appointment so I can make sure I have the right 1 to cancel.
+  - I can't cancel your appointment right now, but I'll connect you to our patient support team. Please stay on the line. Connecting you to a representative, please wait. hello, you are pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - Hi, this is Alex Johnson.
+  - My date of birth is March 3rd, 1988.
+  - I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+  - I don't have a plumbing appointment. I'm only looking to cancel the orthopedic appointment.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-042247_identity-wrong-dob-persistent_CA5e3c7d_RE4291bf412eb8ed5d2c4b3e9e387d7cce.mp3
+
+turns:
+1. [2026-06-23T04:23:02.497703+00:00] OFFICE: this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T04:23:03.225477+00:00] PATIENT: Hi, this is Alex Johnson.
+3. [2026-06-23T04:23:12.305499+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T04:23:13.010548+00:00] PATIENT: My date of birth is March 3rd, 1988.
+5. [2026-06-23T04:23:26.289593+00:00] OFFICE: The birth date doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+6. [2026-06-23T04:23:27.338522+00:00] PATIENT: I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+7. [2026-06-23T04:23:42.584010+00:00] OFFICE: Let me check your plumbing appointment so I can make sure I have the right 1 to cancel.
+8. [2026-06-23T04:23:43.396921+00:00] PATIENT: I don't have a plumbing appointment. I'm only looking to cancel the orthopedic appointment.
+9. [2026-06-23T04:24:01.191384+00:00] OFFICE: I can't cancel your appointment right now, but I'll connect you to our patient support team. Please stay on the line. Connecting you to a representative, please wait. hello, you are pretty good. AI test line, goodbye.
+10. [2026-06-23T04:24:01.191491+00:00] PATIENT: Thanks, that helps. Bye.

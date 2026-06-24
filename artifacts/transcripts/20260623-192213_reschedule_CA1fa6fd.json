@@ -1,0 +1,241 @@
+{
+  "call_sid": "CA1fa6fd351ec44ec657fd7a31210aa9b4",
+  "scenario_id": "reschedule",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "call_memory": {
+    "scenario_id": "reschedule",
+    "objective": "Move an existing appointment to a different time.",
+    "patient_profile": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "phone": "+1 (320) 381-0451",
+      "callback_number": "+1 (320) 381-0451",
+      "street_address": "123 Main Street",
+      "city": "Hopkins",
+      "state": "MN",
+      "zip_code": "55301",
+      "insurance": "Blue Cross PPO",
+      "primary_insurance": "Blue Cross PPO",
+      "employer_plan": "Blue Cross PPO employer plan",
+      "insurance_card_upload": "ready to upload if needed",
+      "preferred_pharmacy": "Walgreens on Main Street",
+      "preferred_pharmacy_address": "123 Main Street, Hopkins, MN 55301",
+      "preferred_pharmacy_phone": "(320) 555-0148",
+      "preferred_pharmacy_fax": "(320) 555-0188",
+      "preferred_provider": "Dr. Doogie Howser",
+      "preferred_time_window": "Friday afternoon",
+      "visit_reason": "follow-up appointment",
+      "existing_appointment": "Tuesday, June 24 at 10:00 a.m. with Dr. Doogie Howser",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski",
+      "preferred_reschedule_window": "later this week",
+      "reason_for_reschedule": "a work conflict",
+      "reason_for_cancellation": "a family conflict",
+      "current_medication": "Lisinopril 10mg",
+      "controlled_medication": "Adderall 20mg",
+      "days_remaining": "3 days left",
+      "last_pickup_date": "last Thursday",
+      "issue_summary": "routine orthopedic follow-up",
+      "location_preference": "Hopkins clinic",
+      "doctor_preference": "Dr. Doogie Howser",
+      "alternative_verification": "phone number and address",
+      "question_topic": "office hours"
+    },
+    "required_facts": [
+      "first_name",
+      "last_name",
+      "date_of_birth",
+      "existing_appointment",
+      "preferred_reschedule_window"
+    ],
+    "optional_facts": [
+      "callback_number",
+      "reason_for_reschedule"
+    ],
+    "phase": "patient_turn",
+    "turn_count": 6,
+    "recent_office_questions": [
+      "this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex",
+      "Thanks, Alex, can you please confirm your date of birth for me?",
+      "Alex, I see you have a follow-up appointment with Kelly Noble. MD on Friday, July, 10th at 1 pm at Nashville. 220 Athens Way is this the appointment you want to reschedule?"
+    ],
+    "recent_patient_answers": [
+      "Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.",
+      "My date of birth is January 12, 1990. Can we move my appointment to later this week?",
+      "Thanks, that helps. Bye."
+    ],
+    "confirmed_facts": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "preferred_reschedule_window": "later this week"
+    },
+    "last_office_question": "Alex, I see you have a follow-up appointment with Kelly Noble. MD on Friday, July, 10th at 1 pm at Nashville. 220 Athens Way is this the appointment you want to reschedule?",
+    "last_patient_answer": "Thanks, that helps. Bye."
+  },
+  "started_at": "2026-06-23T19:22:13.238254+00:00",
+  "updated_at": "2026-06-23T19:23:18.732631+00:00",
+  "status": "completed",
+  "turn_count": 6,
+  "no_speech_count": 0,
+  "pending_prompt": "Thanks, that helps. Bye.",
+  "recording_sid": "REfdd41abf3132968df0b2455acda0f5cb",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/REfdd41abf3132968df0b2455acda0f5cb",
+  "recording_path": "artifacts\\recordings\\20260623-192213_reschedule_CA1fa6fd_REfdd41abf3132968df0b2455acda0f5cb.mp3",
+  "end_reason": "Thanks, that helps. Bye.",
+  "metadata": {
+    "source": "twilio",
+    "event_counts": {
+      "session_started": 1,
+      "transcript_line": 6,
+      "call_completed": 1,
+      "recording_ready": 1
+    },
+    "last_event": {
+      "call_sid": "CA1fa6fd351ec44ec657fd7a31210aa9b4",
+      "event_type": "recording_ready",
+      "ts": "2026-06-23T19:23:19.579519+00:00",
+      "recording_sid": "REfdd41abf3132968df0b2455acda0f5cb",
+      "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/REfdd41abf3132968df0b2455acda0f5cb",
+      "recording_path": "artifacts\\recordings\\20260623-192213_reschedule_CA1fa6fd_REfdd41abf3132968df0b2455acda0f5cb.mp3"
+    },
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=reschedule"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex",
+      "raw": {
+        "Confidence": "0.9264734",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA1fa6fd351ec44ec657fd7a31210aa9b4",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:22:26.860178+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:22:26.860228+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Thanks, Alex, can you please confirm your date of birth for me?",
+      "raw": {
+        "Confidence": "0.9912177",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Thanks, Alex, can you please confirm your date of birth for me?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA1fa6fd351ec44ec657fd7a31210aa9b4",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:22:44.547922+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "My date of birth is January 12, 1990. Can we move my appointment to later this week?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T19:22:45.561653+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Alex, I see you have a follow-up appointment with Kelly Noble. MD on Friday, July, 10th at 1 pm at Nashville. 220 Athens Way is this the appointment you want to reschedule?",
+      "raw": {
+        "Confidence": "0.9093653",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Alex, I see you have a follow-up appointment with Kelly Noble. MD on Friday, July, 10th at 1 pm at Nashville. 220 Athens Way is this the appointment you want to reschedule?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA1fa6fd351ec44ec657fd7a31210aa9b4",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T19:23:11.856723+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Thanks, that helps. Bye.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-23T19:23:11.856811+00:00"
+    }
+  ]
+}

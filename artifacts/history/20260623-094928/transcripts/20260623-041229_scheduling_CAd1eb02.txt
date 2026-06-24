@@ -1,0 +1,54 @@
+call_sid: CAd1eb02425646f6fddd0edac796d192ad
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:12:29.429084+00:00
+updated_at: 2026-06-23T04:14:47.525043+00:00
+status: completed
+turn_count: 20
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - visit_reason: routine follow-up appointment
+  - preferred_provider: Dr. Doogie Howser
+  - doctor_preference: Dr. Doogie Howser
+  - appointment_to_cancel: Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski
+recent_office_questions:
+  - Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+  - It looks like you already have a follow-up appointment booked, if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for further help, what would you like to do?
+  - I'm not able to cancel appointments directly, but I can connect you to a team member who can help with that right away. Would you like me to transfer you now?
+  - Connecting you to a representative, please wait.
+  - AI test line. Goodbye.
+recent_patient_answers:
+  - I prefer to see Dr. Doogie Howser.
+  - I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+  - Yes, please transfer me to a team member who can help with that.
+  - Thank you. I'll hold.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-041229_scheduling_CAd1eb02_REf4c6fd0dc7ec24d6574a0fd77e5a6108.mp3
+
+turns:
+1. [2026-06-23T04:12:35.849749+00:00] OFFICE: This call may be recorded for quality and training purposes.
+2. [2026-06-23T04:12:37.653968+00:00] PATIENT: Hi, I need to set up an appointment for next week.
+3. [2026-06-23T04:12:44.349113+00:00] OFFICE: Part of pretty good AI. Am I speaking with Alex?
+4. [2026-06-23T04:12:45.426282+00:00] PATIENT: Yes, this is Alex.
+5. [2026-06-23T04:12:54.051607+00:00] OFFICE: Please provide your Dana birth.
+6. [2026-06-23T04:12:54.770377+00:00] PATIENT: My date of birth is January 12, 1990.
+7. [2026-06-23T04:13:08.552371+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+8. [2026-06-23T04:13:09.322952+00:00] PATIENT: I need to schedule a routine follow-up appointment for next week.
+9. [2026-06-23T04:13:27.170606+00:00] OFFICE: Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?
+10. [2026-06-23T04:13:27.948983+00:00] PATIENT: Yes, that's correct.
+11. [2026-06-23T04:13:40.345159+00:00] OFFICE: Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+12. [2026-06-23T04:13:41.808993+00:00] PATIENT: I prefer to see Dr. Doogie Howser.
+13. [2026-06-23T04:14:02.251583+00:00] OFFICE: It looks like you already have a follow-up appointment booked, if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for further help, what would you like to do?
+14. [2026-06-23T04:14:03.527936+00:00] PATIENT: I need to cancel my appointment on Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski.
+15. [2026-06-23T04:14:21.248307+00:00] OFFICE: I'm not able to cancel appointments directly, but I can connect you to a team member who can help with that right away. Would you like me to transfer you now?
+16. [2026-06-23T04:14:22.045904+00:00] PATIENT: Yes, please transfer me to a team member who can help with that.
+17. [2026-06-23T04:14:35.051676+00:00] OFFICE: Connecting you to a representative, please wait.
+18. [2026-06-23T04:14:35.832801+00:00] PATIENT: Thank you. I'll hold.
+19. [2026-06-23T04:14:40.445606+00:00] OFFICE: AI test line. Goodbye.
+20. [2026-06-23T04:14:40.445682+00:00] PATIENT: Thanks, that helps. Bye.

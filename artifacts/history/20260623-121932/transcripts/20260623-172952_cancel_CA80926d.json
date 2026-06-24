@@ -1,0 +1,331 @@
+{
+  "call_sid": "CA80926d959db062ce435be9fc3bf811c1",
+  "scenario_id": "cancel",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "call_memory": {
+    "scenario_id": "cancel",
+    "objective": "Cancel an appointment politely and clearly.",
+    "patient_profile": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "phone": "+1 (320) 381-0451",
+      "callback_number": "+1 (320) 381-0451",
+      "street_address": "123 Main Street",
+      "city": "Hopkins",
+      "state": "MN",
+      "zip_code": "55301",
+      "insurance": "Blue Cross PPO",
+      "primary_insurance": "Blue Cross PPO",
+      "employer_plan": "Blue Cross PPO employer plan",
+      "insurance_card_upload": "ready to upload if needed",
+      "preferred_pharmacy": "Walgreens on Main Street",
+      "preferred_pharmacy_address": "123 Main Street, Hopkins, MN 55301",
+      "preferred_pharmacy_phone": "(320) 555-0148",
+      "preferred_pharmacy_fax": "(320) 555-0188",
+      "preferred_provider": "Dr. Doogie Howser",
+      "preferred_time_window": "Friday afternoon",
+      "visit_reason": "follow-up appointment",
+      "existing_appointment": "Tuesday, June 24 at 10:00 a.m. with Dr. Doogie Howser",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski",
+      "preferred_reschedule_window": "later this week",
+      "reason_for_reschedule": "a work conflict",
+      "reason_for_cancellation": "a family conflict",
+      "current_medication": "Lisinopril 10mg",
+      "controlled_medication": "Adderall 20mg",
+      "days_remaining": "3 days left",
+      "last_pickup_date": "last Thursday",
+      "issue_summary": "routine orthopedic follow-up",
+      "location_preference": "Hopkins clinic",
+      "doctor_preference": "Dr. Doogie Howser",
+      "alternative_verification": "phone number and address",
+      "question_topic": "office hours"
+    },
+    "required_facts": [
+      "first_name",
+      "last_name",
+      "date_of_birth",
+      "appointment_to_cancel"
+    ],
+    "optional_facts": [
+      "reason_for_cancellation",
+      "callback_number"
+    ],
+    "phase": "patient_turn",
+    "turn_count": 10,
+    "recent_office_questions": [
+      "This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex",
+      "Let me check your upcoming appointment so I can help you cancel the right 1 1 moment.",
+      "This Dr. Doogie Howser",
+      "June 26th is this the 1 you want to cancel? If so can you tell me the reason for cancelling?",
+      "Your appointment with Dr. Judy Hower, on Friday, June 26th has been canceled. Is there anything else I can help you with today?"
+    ],
+    "recent_patient_answers": [
+      "Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.",
+      "Sure, thank you. I appreciate your help.",
+      "No, my appointment is with Dr. Zbigniew Lukoski.",
+      "Yes, that's the one I want to cancel. I need to cancel due to a family conflict.",
+      "No, that's all I needed. Thanks, bye!"
+    ],
+    "confirmed_facts": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "reason_for_cancellation": "a family conflict"
+    },
+    "last_office_question": "Your appointment with Dr. Judy Hower, on Friday, June 26th has been canceled. Is there anything else I can help you with today?",
+    "last_patient_answer": "No, that's all I needed. Thanks, bye!"
+  },
+  "started_at": "2026-06-23T17:29:52.865394+00:00",
+  "updated_at": "2026-06-23T17:31:10.709369+00:00",
+  "status": "completed",
+  "turn_count": 10,
+  "no_speech_count": 0,
+  "pending_prompt": "No, that's all I needed. Thanks, bye!",
+  "recording_sid": "RE9bf7b1bc20664a43142e24aba84a2aeb",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE9bf7b1bc20664a43142e24aba84a2aeb",
+  "recording_path": "artifacts\\recordings\\20260623-172952_cancel_CA80926d_RE9bf7b1bc20664a43142e24aba84a2aeb.mp3",
+  "end_reason": "No, that's all I needed. Thanks, bye!",
+  "metadata": {
+    "source": "twilio",
+    "event_counts": {
+      "session_started": 1,
+      "transcript_line": 10,
+      "call_completed": 1,
+      "recording_ready": 1
+    },
+    "last_event": {
+      "call_sid": "CA80926d959db062ce435be9fc3bf811c1",
+      "event_type": "recording_ready",
+      "ts": "2026-06-23T17:31:11.670444+00:00",
+      "recording_sid": "RE9bf7b1bc20664a43142e24aba84a2aeb",
+      "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE9bf7b1bc20664a43142e24aba84a2aeb",
+      "recording_path": "artifacts\\recordings\\20260623-172952_cancel_CA80926d_RE9bf7b1bc20664a43142e24aba84a2aeb.mp3"
+    },
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=cancel"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex",
+      "raw": {
+        "Confidence": "0.9105086",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA80926d959db062ce435be9fc3bf811c1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T17:30:06.314767+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T17:30:06.314834+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Let me check your upcoming appointment so I can help you cancel the right 1 1 moment.",
+      "raw": {
+        "Confidence": "0.9978409",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Let me check your upcoming appointment so I can help you cancel the right 1 1 moment.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA80926d959db062ce435be9fc3bf811c1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T17:30:31.316699+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Sure, thank you. I appreciate your help.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T17:30:32.230888+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "This Dr. Doogie Howser",
+      "raw": {
+        "Confidence": "0.39621878",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "This Dr. Doogie Howser",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA80926d959db062ce435be9fc3bf811c1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T17:30:35.814243+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "No, my appointment is with Dr. Zbigniew Lukoski.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T17:30:36.505925+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "June 26th is this the 1 you want to cancel? If so can you tell me the reason for cancelling?",
+      "raw": {
+        "Confidence": "0.927694",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "June 26th is this the 1 you want to cancel? If so can you tell me the reason for cancelling?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA80926d959db062ce435be9fc3bf811c1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T17:30:44.410243+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's the one I want to cancel. I need to cancel due to a family conflict.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T17:30:45.278919+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Your appointment with Dr. Judy Hower, on Friday, June 26th has been canceled. Is there anything else I can help you with today?",
+      "raw": {
+        "Confidence": "0.91710895",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Your appointment with Dr. Judy Hower, on Friday, June 26th has been canceled. Is there anything else I can help you with today?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA80926d959db062ce435be9fc3bf811c1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T17:31:03.419181+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "No, that's all I needed. Thanks, bye!",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-23T17:31:03.419268+00:00"
+    }
+  ]
+}

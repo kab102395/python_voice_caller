@@ -1,0 +1,41 @@
+call_sid: CAd8f7a4c6cb4a2bffd701abf48fbae4e4
+scenario_id: cancel
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T19:26:58.104796+00:00
+updated_at: 2026-06-23T19:28:46.057223+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, appointment_to_cancel
+optional_facts: reason_for_cancellation, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - date_of_birth: January 12, 1990
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+  - Can you please confirm your date of birth for me?
+  - You have an appointment with Kelly Noble on Friday July 10th. Is this the appointment you want to cancel?
+  - I do not see an upcoming appointment with Dr. Big moo Lukowski on Thursday June 26th. The only appointment I see is with Kelly Noble on Friday July 10th. Would you like to cancel that 1 or do you want to speak with someone from the office for more help?
+  - Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.
+  - My date of birth is January 12, 1990. I need to cancel my appointment.
+  - I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m.
+  - I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m. Can you just take me off the schedule?
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-192658_cancel_CAd8f7a4_REafbb113a7376feed0a73292ca7731653.mp3
+
+turns:
+1. [2026-06-23T19:27:12.165635+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+2. [2026-06-23T19:27:12.165683+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.
+3. [2026-06-23T19:27:26.113507+00:00] OFFICE: Can you please confirm your date of birth for me?
+4. [2026-06-23T19:27:27.143536+00:00] PATIENT: My date of birth is January 12, 1990. I need to cancel my appointment.
+5. [2026-06-23T19:27:46.272715+00:00] OFFICE: You have an appointment with Kelly Noble on Friday July 10th. Is this the appointment you want to cancel?
+6. [2026-06-23T19:27:47.230440+00:00] PATIENT: I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m.
+7. [2026-06-23T19:28:13.358768+00:00] OFFICE: I do not see an upcoming appointment with Dr. Big moo Lukowski on Thursday June 26th. The only appointment I see is with Kelly Noble on Friday July 10th. Would you like to cancel that 1 or do you want to speak with someone from the office for more help?
+8. [2026-06-23T19:28:14.472301+00:00] PATIENT: I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m. Can you just take me off the schedule?
+9. [2026-06-23T19:28:38.165526+00:00] OFFICE: Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+10. [2026-06-23T19:28:38.165630+00:00] PATIENT: Thanks, that helps. Bye.

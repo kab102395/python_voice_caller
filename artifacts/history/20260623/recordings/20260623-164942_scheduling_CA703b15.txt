@@ -1,0 +1,50 @@
+call_sid: CA703b15c49d7018d7b127c4bdfad2cd79
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T16:49:42.345389+00:00
+updated_at: 2026-06-23T16:52:52.047257+00:00
+status: completed
+turn_count: 18
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - visit_reason: routine follow-up appointment
+  - preferred_time_window: Friday afternoon
+recent_office_questions:
+  - It looks like you already have a routine. Follow-up appointment booked if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for more help. What would you like to do?
+  - I can help with that, let me check for available routine, follow-up appointments on Friday afternoon so we can reschedule 1 moment
+  - Unable to Res.
+  - You have 3 options for Friday afternoon, Friday July 10th at 1:00 p.m. Friday July 10th at 4 p.m. Friday. July 17th at 2 p.m. would any of these work for you?
+  - Got it. Can you tell me the reason you need to reschedule your original appointment? For example, is it a schedule conflict Transportation issue or something else?
+recent_patient_answers:
+  - I'd like to reschedule my routine follow-up appointment for Friday afternoon, please.
+  - Thank you! I'll wait.
+  - Can you please let me know what my options are for rescheduling?
+  - I'll take the appointment on Friday, July 10th at 1:00 p.m.
+  - I need to reschedule due to a schedule conflict.
+end_reason: max_call_seconds_reached
+recording_path: artifacts\recordings\20260623-164942_scheduling_CA703b15_RE7465edba4e058e56da0e1937d83720c5.mp3
+
+turns:
+1. [2026-06-23T16:49:56.659650+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+2. [2026-06-23T16:49:56.659707+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to set up an appointment for next week.
+3. [2026-06-23T16:50:24.152035+00:00] OFFICE: Hi, Alex, can you tell me a bit about the reason for your visit? For example, is this for a routine checkup, a new concern, a follow-up or something else.
+4. [2026-06-23T16:50:25.379075+00:00] PATIENT: This is for a routine follow-up appointment.
+5. [2026-06-23T16:50:39.554650+00:00] OFFICE: Thanks Alex. Do you have a specific provider? You'd like to see or are you open to any available provider?
+6. [2026-06-23T16:50:40.578028+00:00] PATIENT: I'm open to any available provider.
+7. [2026-06-23T16:50:52.446672+00:00] OFFICE: We have openings next week for a routine follow-up. Do you have a preferred day or time of day?
+8. [2026-06-23T16:50:53.409939+00:00] PATIENT: Actually, do you have anything Friday afternoon?
+9. [2026-06-23T16:51:17.154423+00:00] OFFICE: It looks like you already have a routine. Follow-up appointment booked if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for more help. What would you like to do?
+10. [2026-06-23T16:51:17.934988+00:00] PATIENT: I'd like to reschedule my routine follow-up appointment for Friday afternoon, please.
+11. [2026-06-23T16:51:34.955296+00:00] OFFICE: I can help with that, let me check for available routine, follow-up appointments on Friday afternoon so we can reschedule 1 moment
+12. [2026-06-23T16:51:36.293037+00:00] PATIENT: Thank you! I'll wait.
+13. [2026-06-23T16:51:39.547646+00:00] OFFICE: Unable to Res.
+14. [2026-06-23T16:51:40.546189+00:00] PATIENT: Can you please let me know what my options are for rescheduling?
+15. [2026-06-23T16:52:03.555654+00:00] OFFICE: You have 3 options for Friday afternoon, Friday July 10th at 1:00 p.m. Friday July 10th at 4 p.m. Friday. July 17th at 2 p.m. would any of these work for you?
+16. [2026-06-23T16:52:04.637755+00:00] PATIENT: I'll take the appointment on Friday, July 10th at 1:00 p.m.
+17. [2026-06-23T16:52:21.763228+00:00] OFFICE: Got it. Can you tell me the reason you need to reschedule your original appointment? For example, is it a schedule conflict Transportation issue or something else?
+18. [2026-06-23T16:52:22.580710+00:00] PATIENT: I need to reschedule due to a schedule conflict.

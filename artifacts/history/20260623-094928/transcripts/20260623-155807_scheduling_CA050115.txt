@@ -1,0 +1,50 @@
+call_sid: CA0501154cd6f9d33d2038104851c01e2c
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T15:58:07.523055+00:00
+updated_at: 2026-06-23T16:00:20.417877+00:00
+status: completed
+turn_count: 18
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - visit_reason: routine follow-up appointment
+  - preferred_time_window: Friday afternoon
+recent_office_questions:
+  - We have openings next week for a routine follow-up. Do you have a preferred day or time of day?
+  - It looks like you already have a routine. Follow-up appointment booked if you'd like I can help you reschedule or cancel your existing appointment. Or I can connect you to a team member for further help. What would you like to do?
+  - I'm not able to reschedule appointments directly, but I can connect you to a team member who can help with that. Would you like me to transfer you now?
+  - Connecting you to a representative, please wait.
+  - Line, goodbye.
+recent_patient_answers:
+  - Actually, do you have anything Friday afternoon?
+  - I'd like to reschedule my existing appointment for Friday afternoon, please.
+  - Yes, please transfer me to a team member who can help with that.
+  - Thank you. I'll hold.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-155807_scheduling_CA050115_RE2837832cff9421cfce845fa6b83a6fb9.mp3
+
+turns:
+1. [2026-06-23T15:58:20.861175+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+2. [2026-06-23T15:58:20.861236+00:00] PATIENT: Yes, this is Alex. Hi, I need to set up an appointment for next week.
+3. [2026-06-23T15:58:31.570030+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T15:58:32.650577+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T15:58:50.763484+00:00] OFFICE: Thanks. Alex. Can you tell me the reason for your visit? For example, is this for a routine checkup, a new patient consultation, a follow-up or something else.
+6. [2026-06-23T15:58:51.943668+00:00] PATIENT: This is for a routine follow-up appointment.
+7. [2026-06-23T15:59:04.166701+00:00] OFFICE: Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+8. [2026-06-23T15:59:04.933797+00:00] PATIENT: I'm open to any available provider.
+9. [2026-06-23T15:59:16.665321+00:00] OFFICE: We have openings next week for a routine follow-up. Do you have a preferred day or time of day?
+10. [2026-06-23T15:59:17.555742+00:00] PATIENT: Actually, do you have anything Friday afternoon?
+11. [2026-06-23T15:59:38.669059+00:00] OFFICE: It looks like you already have a routine. Follow-up appointment booked if you'd like I can help you reschedule or cancel your existing appointment. Or I can connect you to a team member for further help. What would you like to do?
+12. [2026-06-23T15:59:39.654482+00:00] PATIENT: I'd like to reschedule my existing appointment for Friday afternoon, please.
+13. [2026-06-23T15:59:55.965217+00:00] OFFICE: I'm not able to reschedule appointments directly, but I can connect you to a team member who can help with that. Would you like me to transfer you now?
+14. [2026-06-23T15:59:56.911020+00:00] PATIENT: Yes, please transfer me to a team member who can help with that.
+15. [2026-06-23T16:00:09.263777+00:00] OFFICE: Connecting you to a representative, please wait.
+16. [2026-06-23T16:00:09.989458+00:00] PATIENT: Thank you. I'll hold.
+17. [2026-06-23T16:00:13.458710+00:00] OFFICE: Line, goodbye.
+18. [2026-06-23T16:00:13.458786+00:00] PATIENT: Thanks, that helps. Bye.

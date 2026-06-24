@@ -1,0 +1,42 @@
+call_sid: CAc24e0f059761d50150fadaea2c1f5092
+scenario_id: controlled_refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T19:46:10.247508+00:00
+updated_at: 2026-06-23T19:50:11.785335+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, controlled_medication, preferred_pharmacy
+optional_facts: preferred_pharmacy_address, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - preferred_pharmacy: Walgreens on Main Street
+  - preferred_pharmacy_address: 123 Main Street, Hopkins, MN 55301
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+  - Thanks, Alex. How many days of Adderall do you have left?
+  - No problem. Call me to know about how many days of aider all you have left, even if it's just an estimate. You're already out. Just let me know. I'll also need a call back number in case the staff needs to reach you.
+  - I have your number as 320 381 0451. Is that the best number for a call back? And just to confirm, are you already out of that or all or do you have a few days left?
+  - Could you please provide the name of the pharmacy you want to use for your medication? If you know the address City or any details like cross streets or nearby stores that would help too if you have a photo or fax number, please share that as well.
+recent_patient_answers:
+  - Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.
+  - I don't have that handy. What do you need from me?
+  - I don't have a callback number handy. What do you need from me next?
+  - Yes, that's the best number for a callback. I'm already out of my Adderall.
+  - I want to use Walgreens on Main Street. The address is 123 Main Street, Hopkins, MN 55301.
+end_reason: killed_by_user
+recording_path: artifacts\recordings\20260623-194610_controlled-refill_CAc24e0f_REe336614baa3aef89c9e1a7065ce12a46.mp3
+
+turns:
+1. [2026-06-23T19:46:24.749359+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T19:46:24.749420+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.
+3. [2026-06-23T19:46:47.353508+00:00] OFFICE: Thanks, Alex. How many days of Adderall do you have left?
+4. [2026-06-23T19:46:48.374367+00:00] PATIENT: I don't have that handy. What do you need from me?
+5. [2026-06-23T19:47:07.553101+00:00] OFFICE: No problem. Call me to know about how many days of aider all you have left, even if it's just an estimate. You're already out. Just let me know. I'll also need a call back number in case the staff needs to reach you.
+6. [2026-06-23T19:47:08.845262+00:00] PATIENT: I don't have a callback number handy. What do you need from me next?
+7. [2026-06-23T19:47:31.252379+00:00] OFFICE: I have your number as 320 381 0451. Is that the best number for a call back? And just to confirm, are you already out of that or all or do you have a few days left?
+8. [2026-06-23T19:47:32.117317+00:00] PATIENT: Yes, that's the best number for a callback. I'm already out of my Adderall.
+9. [2026-06-23T19:47:55.848113+00:00] OFFICE: Could you please provide the name of the pharmacy you want to use for your medication? If you know the address City or any details like cross streets or nearby stores that would help too if you have a photo or fax number, please share that as well.
+10. [2026-06-23T19:47:57.219358+00:00] PATIENT: I want to use Walgreens on Main Street. The address is 123 Main Street, Hopkins, MN 55301.

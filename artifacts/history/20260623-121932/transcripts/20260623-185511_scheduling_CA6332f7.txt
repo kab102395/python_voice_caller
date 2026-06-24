@@ -1,0 +1,52 @@
+call_sid: CA6332f739014ce1eda9b04a931e524e14
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T18:55:11.686175+00:00
+updated_at: 2026-06-23T18:58:13.302597+00:00
+status: completed
+turn_count: 20
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - preferred_time_window: Friday afternoon
+  - visit_reason: routine follow-up appointment
+recent_office_questions:
+  - It looks like you already have a follow.
+  - You already have a follow-up appointment booked, would you like to reschedule it to Friday afternoon next week instead?
+  - You don't have a follow-up appointment with Kelly Noble. MD on Friday, July 10th at 1:00 p.m. at Nashville. 220 Athens Way is this the appointment you want to reschedule to a different Friday afternoon next week?
+  - I have Friday July 10th at 2 p.m. Friday, July 17th at 2 p.m. and Friday. July 24th at 2 p.m. all with Kelly Noble MD at Nashville. Would you like to move your appointment to 1 of these times?
+  - Can you tell me the reason you need to reschedule your appointment?
+recent_patient_answers:
+  - Yes, I do need to set up an appointment for next week. Can you help me with that?
+  - Yes, I would like to reschedule it to Friday afternoon next week.
+  - Yes, I would like to reschedule to a different Friday afternoon next week.
+  - I would like to move my appointment to Friday, July 17th at 2 p.m.
+  - I need to reschedule for a routine follow-up appointment.
+end_reason: completed
+recording_path: artifacts\recordings\20260623-185511_scheduling_CA6332f7_RE42e1580241f2c2fb9b66b5cf25b9f7cd.mp3
+
+turns:
+1. [2026-06-23T18:55:25.419841+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling to the point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T18:55:25.419903+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to set up an appointment for next week.
+3. [2026-06-23T18:55:45.417193+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. Are you looking to book an appointment for next week?
+4. [2026-06-23T18:55:48.370477+00:00] PATIENT: Yes, I need to set up an appointment for next week. Actually, do you have anything Friday afternoon?
+5. [2026-06-23T18:56:06.917731+00:00] OFFICE: Sure, what is the main reason for your visit? Is this for a routine checkup, a follow-up, something urgent, or another reason?
+6. [2026-06-23T18:56:07.808212+00:00] PATIENT: It's for a routine follow-up appointment.
+7. [2026-06-23T18:56:23.723753+00:00] OFFICE: Thank you for confirming. Let me check for available. Follow-up. Appointments on Friday afternoon, next week.
+8. [2026-06-23T18:56:24.460485+00:00] PATIENT: Sure, I'll wait.
+9. [2026-06-23T18:56:35.318188+00:00] OFFICE: 1 moment while I look for Friday afternoon openings, next week.
+10. [2026-06-23T18:56:36.138222+00:00] PATIENT: Sure, I'll wait.
+11. [2026-06-23T18:56:39.710383+00:00] OFFICE: It looks like you already have a follow.
+12. [2026-06-23T18:56:40.809285+00:00] PATIENT: Yes, I do need to set up an appointment for next week. Can you help me with that?
+13. [2026-06-23T18:56:55.814505+00:00] OFFICE: You already have a follow-up appointment booked, would you like to reschedule it to Friday afternoon next week instead?
+14. [2026-06-23T18:56:57.651910+00:00] PATIENT: Yes, I would like to reschedule it to Friday afternoon next week.
+15. [2026-06-23T18:57:25.623671+00:00] OFFICE: You don't have a follow-up appointment with Kelly Noble. MD on Friday, July 10th at 1:00 p.m. at Nashville. 220 Athens Way is this the appointment you want to reschedule to a different Friday afternoon next week?
+16. [2026-06-23T18:57:26.544596+00:00] PATIENT: Yes, I would like to reschedule to a different Friday afternoon next week.
+17. [2026-06-23T18:57:50.220175+00:00] OFFICE: I have Friday July 10th at 2 p.m. Friday, July 17th at 2 p.m. and Friday. July 24th at 2 p.m. all with Kelly Noble MD at Nashville. Would you like to move your appointment to 1 of these times?
+18. [2026-06-23T18:57:51.460758+00:00] PATIENT: I would like to move my appointment to Friday, July 17th at 2 p.m.
+19. [2026-06-23T18:58:03.710912+00:00] OFFICE: Can you tell me the reason you need to reschedule your appointment?
+20. [2026-06-23T18:58:04.671729+00:00] PATIENT: I need to reschedule for a routine follow-up appointment.

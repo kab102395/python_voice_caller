@@ -1,0 +1,42 @@
+call_sid: CAd126a0e5b7116036fe69ef15b09fbf56
+scenario_id: refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T17:31:08.551805+00:00
+updated_at: 2026-06-23T17:32:36.833505+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, current_medication, days_remaining
+optional_facts: callback_number, preferred_pharmacy
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - current_medication: Lisinopril 10mg
+  - days_remaining: 3 days left
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+  - Which medication would you like to refill today?
+  - How many days of less than approved? You have left? If you are already out, just let me know.
+  - I have your number as 320. 381 0451. Is that correct for a call back?
+  - Is there anything else you'd like the staff to know about your refill request, for example, any symptoms or urgency?
+recent_patient_answers:
+  - Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I'm calling to refill my prescription.
+  - I would like to refill my Lisinopril 10mg. Do I need to do anything else?
+  - I have 3 days left.
+  - Yes, that's correct.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-173108_refill_CAd126a0_RE2946925fb1ee906f8b811a1af66c19fa.mp3
+
+turns:
+1. [2026-06-23T17:31:22.686791+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T17:31:22.686841+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I'm calling to refill my prescription.
+3. [2026-06-23T17:31:46.680764+00:00] OFFICE: Which medication would you like to refill today?
+4. [2026-06-23T17:31:48.071284+00:00] PATIENT: I would like to refill my Lisinopril 10mg. Do I need to do anything else?
+5. [2026-06-23T17:32:01.886096+00:00] OFFICE: How many days of less than approved? You have left? If you are already out, just let me know.
+6. [2026-06-23T17:32:02.556866+00:00] PATIENT: I have 3 days left.
+7. [2026-06-23T17:32:16.388510+00:00] OFFICE: I have your number as 320. 381 0451. Is that correct for a call back?
+8. [2026-06-23T17:32:16.388588+00:00] PATIENT: Yes, that's correct.
+9. [2026-06-23T17:32:28.682265+00:00] OFFICE: Is there anything else you'd like the staff to know about your refill request, for example, any symptoms or urgency?
+10. [2026-06-23T17:32:28.682353+00:00] PATIENT: No, that's all I needed. Thanks, bye!

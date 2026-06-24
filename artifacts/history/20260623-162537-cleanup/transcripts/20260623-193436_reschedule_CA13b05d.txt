@@ -1,0 +1,41 @@
+call_sid: CA13b05d1b0e05373453b092ca51a15c01
+scenario_id: reschedule
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T19:34:36.922319+00:00
+updated_at: 2026-06-23T19:36:58.371758+00:00
+status: completed
+turn_count: 10
+end_reason: killed_by_user
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment, preferred_reschedule_window
+optional_facts: callback_number, reason_for_reschedule
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - preferred_reschedule_window: later this week
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+  - The birthday doesn't match our records but for demo purposes, I'll accept it. Are you looking to book a new appointment, reschedule or cancel an existing 1?
+  - I found a few options later this week, the soonest is Thursday June 25th at 2:00 p.m. with Kelly Noble at Nashville. Would you like to move your appointment to that time or hear other options? Your current appointment is Friday July 10th at 1:00 p.m. with Kelly Noble MD in Nashville. I can move it to Wednesday, June 24th at 1 p.m. Tuesday, June 30th at 2 pm or Thursday, July 2nd at 2, p.m. woul...
+  - Can you tell me the reason you need to reschedule your appointment?
+  - Just to confirm you want to move your appointment with Kelly Noble MD to Thursday June 25th at 2 p.m. in Nashville. Is that correct? You'll need to bring a photo ID and your insurance card.
+recent_patient_answers:
+  - Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.
+  - I need to reschedule my appointment. Can we move it to later this week?
+  - Let's move my appointment to Thursday, June 25th at 2:00 p.m. with Kelly Noble.
+  - I have a scheduling conflict, that's all.
+  - Yes, that's correct.
+recording_path: artifacts\recordings\20260623-193436_reschedule_CA13b05d_RE82a94002a78c81f65db30ed0c95dc0e1.mp3
+
+turns:
+1. [2026-06-23T19:34:51.124567+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T19:34:51.124625+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.
+3. [2026-06-23T19:35:12.617773+00:00] OFFICE: The birthday doesn't match our records but for demo purposes, I'll accept it. Are you looking to book a new appointment, reschedule or cancel an existing 1?
+4. [2026-06-23T19:35:13.499844+00:00] PATIENT: I need to reschedule my appointment. Can we move it to later this week?
+5. [2026-06-23T19:35:55.928590+00:00] OFFICE: I found a few options later this week, the soonest is Thursday June 25th at 2:00 p.m. with Kelly Noble at Nashville. Would you like to move your appointment to that time or hear other options? Your current appointment is Friday July 10th at 1:00 p.m. with Kelly Noble MD in Nashville. I can move it to Wednesday, June 24th at 1 p.m. Tuesday, June 30th at 2 pm or Thursday, July 2nd at 2, p.m. woul...
+6. [2026-06-23T19:35:56.769937+00:00] PATIENT: Let's move my appointment to Thursday, June 25th at 2:00 p.m. with Kelly Noble.
+7. [2026-06-23T19:36:10.416516+00:00] OFFICE: Can you tell me the reason you need to reschedule your appointment?
+8. [2026-06-23T19:36:11.826249+00:00] PATIENT: I have a scheduling conflict, that's all.
+9. [2026-06-23T19:36:33.017616+00:00] OFFICE: Just to confirm you want to move your appointment with Kelly Noble MD to Thursday June 25th at 2 p.m. in Nashville. Is that correct? You'll need to bring a photo ID and your insurance card.
+10. [2026-06-23T19:36:33.017749+00:00] PATIENT: Yes, that's correct.

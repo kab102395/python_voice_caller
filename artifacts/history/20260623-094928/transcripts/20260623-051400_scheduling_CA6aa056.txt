@@ -1,0 +1,48 @@
+call_sid: CA6aa05687de0d26edebec23bf4d2c5836
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T05:14:00.149269+00:00
+updated_at: 2026-06-23T05:16:11.278161+00:00
+status: completed
+turn_count: 16
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - preferred_time_window: Friday afternoon
+  - visit_reason: routine follow-up appointment
+recent_office_questions:
+  - The birthday doesn't match our records but for demo purposes, all accept it. How can I help you today?
+  - You like to book a follow-up consultation next week, preferably Friday afternoon. Is this for a recent visit or a specific concern. You'd like to discuss
+  - It looks like you already have a follow-up appointment, booked, if you want to reschedule or cancel it, I can help with that. Would you like to make a change to your existing appointment?
+  - I can't reschedule directly, but I can connect you to a team member who can help with that, please hold while I transfer you to Live Support.
+  - Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - I need to schedule a routine follow-up appointment for next week. Do you have anything available Friday afternoon?
+  - This is for a routine follow-up appointment. Can you confirm if there's availability Friday afternoon?
+  - Yes, I would like to reschedule my existing appointment. Can you help me find a time for Friday afternoon?
+  - Okay, thank you. I'll hold for the transfer.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-051400_scheduling_CA6aa056_RE959ab2ebc225fb9d7bccecc9bcdbf695.mp3
+
+turns:
+1. [2026-06-23T05:14:06.094801+00:00] OFFICE: this call may be recorded for quality and training purposes, but
+2. [2026-06-23T05:14:06.094856+00:00] PATIENT: Hi, I need to set up an appointment for next week.
+3. [2026-06-23T05:14:14.393258+00:00] OFFICE: Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+4. [2026-06-23T05:14:16.668364+00:00] PATIENT: Yes, this is Alex. I need to set up an appointment for next week.
+5. [2026-06-23T05:14:26.618519+00:00] OFFICE: Please tell me your date of birth.
+6. [2026-06-23T05:14:27.747728+00:00] PATIENT: My date of birth is January 12, 1990.
+7. [2026-06-23T05:14:40.593043+00:00] OFFICE: The birthday doesn't match our records but for demo purposes, all accept it. How can I help you today?
+8. [2026-06-23T05:14:41.259914+00:00] PATIENT: I need to schedule a routine follow-up appointment for next week. Do you have anything available Friday afternoon?
+9. [2026-06-23T05:15:00.746656+00:00] OFFICE: You like to book a follow-up consultation next week, preferably Friday afternoon. Is this for a recent visit or a specific concern. You'd like to discuss
+10. [2026-06-23T05:15:01.673783+00:00] PATIENT: This is for a routine follow-up appointment. Can you confirm if there's availability Friday afternoon?
+11. [2026-06-23T05:15:27.194797+00:00] OFFICE: It looks like you already have a follow-up appointment, booked, if you want to reschedule or cancel it, I can help with that. Would you like to make a change to your existing appointment?
+12. [2026-06-23T05:15:28.036671+00:00] PATIENT: Yes, I would like to reschedule my existing appointment. Can you help me find a time for Friday afternoon?
+13. [2026-06-23T05:15:46.095422+00:00] OFFICE: I can't reschedule directly, but I can connect you to a team member who can help with that, please hold while I transfer you to Live Support.
+14. [2026-06-23T05:15:46.664690+00:00] PATIENT: Okay, thank you. I'll hold for the transfer.
+15. [2026-06-23T05:16:04.307663+00:00] OFFICE: Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+16. [2026-06-23T05:16:04.307755+00:00] PATIENT: Thanks, that helps. Bye.

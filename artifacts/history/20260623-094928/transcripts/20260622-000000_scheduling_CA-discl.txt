@@ -1,0 +1,14 @@
+call_sid: CA-disclaimer
+scenario_id: scheduling
+from_number: +15551234567
+to_number: +18054398008
+started_at: 2026-06-22T00:00:00Z
+updated_at: 2026-06-23T15:56:07.847315+00:00
+status: started
+turn_count: 0
+call_memory_phase: opening
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+
+turns:
+  (none)

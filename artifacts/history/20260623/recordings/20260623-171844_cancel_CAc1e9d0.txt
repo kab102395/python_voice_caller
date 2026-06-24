@@ -1,0 +1,42 @@
+call_sid: CAc1e9d0e5186903edad1d9fae960f7bb1
+scenario_id: cancel
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T17:18:44.023084+00:00
+updated_at: 2026-06-23T17:21:27.284714+00:00
+status: completed
+turn_count: 12
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, appointment_to_cancel
+optional_facts: reason_for_cancellation, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+recent_office_questions:
+  - Let me check your upcoming appointment so I can help with the cancellation 1 moment. You have an appointment with Dr. Doogie Howser on Thursday, June 25th. Is this? The appointment you want to cancel?
+  - I do not see an upcoming appointment with Dr. Big Neve. Lukowski in your records. Only 1 with Dr. Doogie Howser on June 25th. Are you sure the appointment with Dr? Lukowski is scheduled at this clinic or could it be under a different name or location?
+  - I do not see any appointment with Dr. Big Neve Lukowski or Dr. Big on June 26th in your records. Only the 1 with Dr. Doogie Howser on June 25th. Would you like to cancel the appointment with Dr? Doogie Howser, or would you like to speak with a staff member for further help?
+  - I still do not see an appointment with Dr. Zed moo, on June 26th in your records. The only upcoming appointment. I see is with Dr. Doogie Howser on June 25th. Would you like me to connect you with a staff member to help sort this out?
+  - Connecting you to a representative. Please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - No, I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m.
+  - I'm sure I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m. Can you please help me with that?
+  - I need to cancel my appointment with Dr. Zbigniew Lukoski on June 26 at 2:00 p.m. Can you please assist me with that?
+  - I need to cancel my appointment with Dr. Zbigniew Lukoski on June 26 at 2:00 p.m. Can you just take me off the schedule?
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-171844_cancel_CAc1e9d0_REf150e1e49f7adfcb0916d87c1ba6ae10.mp3
+
+turns:
+1. [2026-06-23T17:18:57.587727+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T17:18:57.587787+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to cancel my appointment.
+3. [2026-06-23T17:19:26.688522+00:00] OFFICE: Let me check your upcoming appointment so I can help with the cancellation 1 moment. You have an appointment with Dr. Doogie Howser on Thursday, June 25th. Is this? The appointment you want to cancel?
+4. [2026-06-23T17:19:28.404921+00:00] PATIENT: No, I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m.
+5. [2026-06-23T17:19:55.278161+00:00] OFFICE: I do not see an upcoming appointment with Dr. Big Neve. Lukowski in your records. Only 1 with Dr. Doogie Howser on June 25th. Are you sure the appointment with Dr? Lukowski is scheduled at this clinic or could it be under a different name or location?
+6. [2026-06-23T17:19:57.033428+00:00] PATIENT: I'm sure I need to cancel my appointment with Dr. Zbigniew Lukoski on Thursday, June 26 at 2:00 p.m. Can you please help me with that?
+7. [2026-06-23T17:20:28.491239+00:00] OFFICE: I do not see any appointment with Dr. Big Neve Lukowski or Dr. Big on June 26th in your records. Only the 1 with Dr. Doogie Howser on June 25th. Would you like to cancel the appointment with Dr? Doogie Howser, or would you like to speak with a staff member for further help?
+8. [2026-06-23T17:20:30.044449+00:00] PATIENT: I need to cancel my appointment with Dr. Zbigniew Lukoski on June 26 at 2:00 p.m. Can you please assist me with that?
+9. [2026-06-23T17:20:56.885383+00:00] OFFICE: I still do not see an appointment with Dr. Zed moo, on June 26th in your records. The only upcoming appointment. I see is with Dr. Doogie Howser on June 25th. Would you like me to connect you with a staff member to help sort this out?
+10. [2026-06-23T17:20:58.111384+00:00] PATIENT: I need to cancel my appointment with Dr. Zbigniew Lukoski on June 26 at 2:00 p.m. Can you just take me off the schedule?
+11. [2026-06-23T17:21:19.992465+00:00] OFFICE: Connecting you to a representative. Please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+12. [2026-06-23T17:21:19.992555+00:00] PATIENT: Thanks, that helps. Bye.

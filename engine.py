@@ -11,6 +11,8 @@ from scenarios import build_patient_prompt
 
 GOODBYE_RE = re.compile(r"\b(bye|goodbye|see you|take care|have a good day|have a great day)\b", re.I)
 WRAP_UP_RE = re.compile(r"\b(is there anything else|anything else I can help|anything else for you)\b", re.I)
+# Prevents premature hangup when PGAI asks a mid-call confirmation question.
+# Without this, the LLM mistakes "is that correct?" for a closing cue and hangs up before the booking completes.
 CONFIRMATION_RE = re.compile(r"\b(is that correct|is this correct|is all (of )?that correct|does that (sound|look) right|is this the (appointment|one)|is that the (appointment|one))\b", re.I)
 REPETITION_GUARD_REPLY = "I think we've already covered that. What would you like me to do next?"
 def _first_turn_reply(

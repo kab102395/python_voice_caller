@@ -1,0 +1,46 @@
+call_sid: CA64ce02cfc662dadc9e824ffe2b47332c
+scenario_id: scheduling_impossible_constraint
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T16:23:18.671129+00:00
+updated_at: 2026-06-23T16:25:49.798790+00:00
+status: completed
+turn_count: 16
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, preferred_time_window
+optional_facts: location_preference, doctor_preference
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+recent_office_questions:
+  - Is this visit for an urgent concern like pain or injury? Or is it a routine office visit
+  - I was unable to find any openings today but there are several available tomorrow Wednesday. June 24th. Would you like to hear the earliest times available tomorrow morning?
+  - There are no available appointments today. If your concern is urgent and you need care right away. Please consider visiting an urgent care clinic or calling 911. If it is an emergency. Would you like to book the earliest slot tomorrow? Or do you want to speak with someone at the office for more help?
+  - I understand you need to be seen today. Since there are no openings, I can connect you to our patient support team for further help. Would you like me to transfer you now?
+  - Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - It's for an urgent concern. I still need an appointment today.
+  - I still need something today. Can you help me with that?
+  - I still need something today. Can you help me with that?
+  - Yes, please transfer me to the patient support team for further help.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-162318_scheduling-impossible-constraint_CA64ce02_REc5d0d50df0cb8e15d4cba3b3c243b9fb.mp3
+
+turns:
+1. [2026-06-23T16:23:32.251131+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T16:23:32.251183+00:00] PATIENT: Yes, this is Alex. I need an appointment today, in the next two hours.
+3. [2026-06-23T16:23:42.610494+00:00] OFFICE: Can you please provide your date of birth?
+4. [2026-06-23T16:23:44.168430+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T16:23:58.906315+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. Are you looking to book an appointment in the next 2 hours today?
+6. [2026-06-23T16:23:59.906349+00:00] PATIENT: Yes, I need an appointment today, in the next two hours.
+7. [2026-06-23T16:24:13.907895+00:00] OFFICE: Is this visit for an urgent concern like pain or injury? Or is it a routine office visit
+8. [2026-06-23T16:24:15.069285+00:00] PATIENT: It's for an urgent concern. I still need an appointment today.
+9. [2026-06-23T16:24:38.709128+00:00] OFFICE: I was unable to find any openings today but there are several available tomorrow Wednesday. June 24th. Would you like to hear the earliest times available tomorrow morning?
+10. [2026-06-23T16:24:39.707262+00:00] PATIENT: I still need something today. Can you help me with that?
+11. [2026-06-23T16:25:03.809052+00:00] OFFICE: There are no available appointments today. If your concern is urgent and you need care right away. Please consider visiting an urgent care clinic or calling 911. If it is an emergency. Would you like to book the earliest slot tomorrow? Or do you want to speak with someone at the office for more help?
+12. [2026-06-23T16:25:05.143255+00:00] PATIENT: I still need something today. Can you help me with that?
+13. [2026-06-23T16:25:22.110553+00:00] OFFICE: I understand you need to be seen today. Since there are no openings, I can connect you to our patient support team for further help. Would you like me to transfer you now?
+14. [2026-06-23T16:25:24.291280+00:00] PATIENT: Yes, please transfer me to the patient support team for further help.
+15. [2026-06-23T16:25:42.813238+00:00] OFFICE: Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+16. [2026-06-23T16:25:42.813328+00:00] PATIENT: Thanks, that helps. Bye.

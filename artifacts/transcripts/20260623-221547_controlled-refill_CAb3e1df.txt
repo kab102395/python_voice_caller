@@ -1,0 +1,40 @@
+call_sid: CAb3e1dfd4c8319bb6e0d476710946effe
+scenario_id: controlled_refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T22:15:47.792902+00:00
+updated_at: 2026-06-23T22:17:17.585829+00:00
+status: completed
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, controlled_medication, preferred_pharmacy
+optional_facts: preferred_pharmacy_address, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+  - Thanks Alex. Just to confirm you'd like a refill on adderal. Correct.
+  - How many days of Adderall do you have left? If you're already out, just let me know.
+  - I have their phone number as 320, 381 0451. Is that the best number for a call back?
+  - Is there anything else you'd like the team to know about your refill request, for example, any symptoms or urgency?
+recent_patient_answers:
+  - Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.
+  - Yes, that's correct. I'm hoping to pick it up today.
+  - I'm already out. What do you need from me?
+  - Yes, that's the best number for a call back.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-221547_controlled-refill_CAb3e1df_RE742b8fe51cc0b741d95051983d061d68.mp3
+
+turns:
+1. [2026-06-23T22:16:01.458017+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+2. [2026-06-23T22:16:01.458096+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.
+3. [2026-06-23T22:16:22.469627+00:00] OFFICE: Thanks Alex. Just to confirm you'd like a refill on adderal. Correct.
+4. [2026-06-23T22:16:24.271908+00:00] PATIENT: Yes, that's correct. I'm hoping to pick it up today.
+5. [2026-06-23T22:16:37.063469+00:00] OFFICE: How many days of Adderall do you have left? If you're already out, just let me know.
+6. [2026-06-23T22:16:37.775838+00:00] PATIENT: I'm already out. What do you need from me?
+7. [2026-06-23T22:16:55.066213+00:00] OFFICE: I have their phone number as 320, 381 0451. Is that the best number for a call back?
+8. [2026-06-23T22:16:56.134859+00:00] PATIENT: Yes, that's the best number for a call back.
+9. [2026-06-23T22:17:09.066250+00:00] OFFICE: Is there anything else you'd like the team to know about your refill request, for example, any symptoms or urgency?
+10. [2026-06-23T22:17:09.066350+00:00] PATIENT: No, that's all I needed. Thanks, bye!

@@ -1,0 +1,333 @@
+{
+  "call_sid": "CAa27a96dae0ba86933742df7f968f08cf",
+  "scenario_id": "insurance",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "call_memory": {
+    "scenario_id": "insurance",
+    "objective": "Ask an insurance coverage question.",
+    "patient_profile": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "phone": "+1 (320) 381-0451",
+      "callback_number": "+1 (320) 381-0451",
+      "street_address": "123 Main Street",
+      "city": "Hopkins",
+      "state": "MN",
+      "zip_code": "55301",
+      "insurance": "Blue Cross PPO",
+      "primary_insurance": "Blue Cross PPO",
+      "employer_plan": "Blue Cross PPO employer plan",
+      "insurance_card_upload": "ready to upload if needed",
+      "preferred_pharmacy": "Walgreens on Main Street",
+      "preferred_pharmacy_address": "123 Main Street, Hopkins, MN 55301",
+      "preferred_pharmacy_phone": "(320) 555-0148",
+      "preferred_pharmacy_fax": "(320) 555-0188",
+      "preferred_provider": "Dr. Doogie Howser",
+      "preferred_time_window": "Friday afternoon",
+      "visit_reason": "follow-up appointment",
+      "existing_appointment": "Tuesday, June 24 at 10:00 a.m. with Dr. Doogie Howser",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski",
+      "preferred_reschedule_window": "later this week",
+      "reason_for_reschedule": "a work conflict",
+      "reason_for_cancellation": "a family conflict",
+      "current_medication": "Lisinopril 10mg",
+      "controlled_medication": "Adderall 20mg",
+      "days_remaining": "3 days left",
+      "last_pickup_date": "last Thursday",
+      "issue_summary": "routine orthopedic follow-up",
+      "location_preference": "Hopkins clinic",
+      "doctor_preference": "Dr. Doogie Howser",
+      "alternative_verification": "phone number and address",
+      "question_topic": "office hours"
+    },
+    "required_facts": [
+      "first_name",
+      "last_name",
+      "date_of_birth",
+      "insurance"
+    ],
+    "optional_facts": [
+      "employer_plan",
+      "insurance_card_upload",
+      "callback_number"
+    ],
+    "phase": "patient_turn",
+    "turn_count": 10,
+    "recent_office_questions": [
+      "This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex",
+      "Thank you, Alex. Can you please spell your last name for me? I want to make sure I have it correct before checking your insurance.",
+      "Would you like me to look up your record using your phone number instead? If so, please tell me the number you have on file with us. If you're not sure, I can confirm your name and date of birth again, which would you prefer?",
+      "I have your name as Alex Johnson, date of birth January, 12th, 1990 and your phone number as 320, 381 0451 Is all about correct.",
+      "I'm unable to verify your insurance details right now. I'll connect you to our patient support team so they can help please stay on the line. Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye."
+    ],
+    "recent_patient_answers": [
+      "Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. Do you take my insurance? I have Blue Cross PPO.",
+      "Sure, it's J-O-H-N-S-O-N.",
+      "I can confirm my name and date of birth again. It's Alex Johnson, January 12, 1990.",
+      "Yes, that's all correct. Do you take my insurance, Blue Cross PPO?",
+      "Thanks, that helps. Bye."
+    ],
+    "confirmed_facts": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "insurance": "Blue Cross PPO",
+      "date_of_birth": "January 12, 1990"
+    },
+    "last_office_question": "I'm unable to verify your insurance details right now. I'll connect you to our patient support team so they can help please stay on the line. Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.",
+    "last_patient_answer": "Thanks, that helps. Bye."
+  },
+  "started_at": "2026-06-23T16:39:05.812926+00:00",
+  "updated_at": "2026-06-23T16:41:07.836826+00:00",
+  "status": "completed",
+  "turn_count": 10,
+  "no_speech_count": 0,
+  "pending_prompt": "Thanks, that helps. Bye.",
+  "recording_sid": "RE6b5ea368a84a6597f5ee5939fe93cf4e",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE6b5ea368a84a6597f5ee5939fe93cf4e",
+  "recording_path": "artifacts\\recordings\\20260623-163905_insurance_CAa27a96_RE6b5ea368a84a6597f5ee5939fe93cf4e.mp3",
+  "end_reason": "Thanks, that helps. Bye.",
+  "metadata": {
+    "source": "twilio",
+    "event_counts": {
+      "session_started": 1,
+      "transcript_line": 10,
+      "call_completed": 1,
+      "recording_ready": 1
+    },
+    "last_event": {
+      "call_sid": "CAa27a96dae0ba86933742df7f968f08cf",
+      "event_type": "recording_ready",
+      "ts": "2026-06-23T16:41:09.279511+00:00",
+      "recording_sid": "RE6b5ea368a84a6597f5ee5939fe93cf4e",
+      "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/RE6b5ea368a84a6597f5ee5939fe93cf4e",
+      "recording_path": "artifacts\\recordings\\20260623-163905_insurance_CAa27a96_RE6b5ea368a84a6597f5ee5939fe93cf4e.mp3"
+    },
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=insurance"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex",
+      "raw": {
+        "Confidence": "0.9596738",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "thanks for calling Pivot Point Orthopedics part of pretty good Ai and I speaking with Alex",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAa27a96dae0ba86933742df7f968f08cf",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T16:39:19.753900+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. Do you take my insurance? I have Blue Cross PPO.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T16:39:19.753958+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Thank you, Alex. Can you please spell your last name for me? I want to make sure I have it correct before checking your insurance.",
+      "raw": {
+        "Confidence": "0.9984875",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Thank you, Alex. Can you please spell your last name for me? I want to make sure I have it correct before checking your insurance.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAa27a96dae0ba86933742df7f968f08cf",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T16:39:41.652343+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Sure, it's J-O-H-N-S-O-N.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T16:39:42.846404+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Would you like me to look up your record using your phone number instead? If so, please tell me the number you have on file with us. If you're not sure, I can confirm your name and date of birth again, which would you prefer?",
+      "raw": {
+        "Confidence": "0.9981503",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Would you like me to look up your record using your phone number instead? If so, please tell me the number you have on file with us.  If you're not sure, I can confirm your name and date of birth again, which would you prefer?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAa27a96dae0ba86933742df7f968f08cf",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T16:40:06.163220+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I can confirm my name and date of birth again. It's Alex Johnson, January 12, 1990.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T16:40:07.289546+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "I have your name as Alex Johnson, date of birth January, 12th, 1990 and your phone number as 320, 381 0451 Is all about correct.",
+      "raw": {
+        "Confidence": "0.7811812",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "I have your name as Alex Johnson, date of birth January, 12th, 1990 and your phone number as 320, 381 0451  Is all about correct.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAa27a96dae0ba86933742df7f968f08cf",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T16:40:32.347501+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's all correct. Do you take my insurance, Blue Cross PPO?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T16:40:33.405352+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "I'm unable to verify your insurance details right now. I'll connect you to our patient support team so they can help please stay on the line. Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.",
+      "raw": {
+        "Confidence": "0.9847662",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "I'm unable to verify your insurance details right now. I'll connect you to our patient support team so they can help please stay on the line.  Connecting you to a representative, please wait.  Hello, you've reached the pretty good. AI test line, goodbye.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CAa27a96dae0ba86933742df7f968f08cf",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T16:41:00.963450+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Thanks, that helps. Bye.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-23T16:41:00.963544+00:00"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+call_sid: CAb1ac11bc39e0ca843f61a8f7fb537557
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:39:54.023961+00:00
+updated_at: 2026-06-23T04:42:48.118587+00:00
+status: completed
+turn_count: 16
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - visit_reason: routine follow-up appointment
+  - preferred_time_window: Friday afternoon
+recent_office_questions:
+  - We have openings next week with duvie, Howser your primary provider on Monday, June 29th. There are appointments at 3 p.m. and 4 p.m. with either of those work for you.
+  - It looks like there are no openings, this Friday afternoon but there are several on Monday. July 6th, would you like a Monday afternoon slot or should I check for next Friday, July 10th?
+  - On Monday, July 6th. There are openings at 1:00 p.m. 2, p.m. 3 p.m. and 4 p.m. with dubia Howser Would you like 1 of these times?
+  - Your follow-up appointment is set for Monday. July 6th at 3 p.m. with DUI. Howser please bring your photo ID, insurance card, a list of your current medications and any Imaging discs. If you have them, would you like a text confirmation?
+  - You'll get a text confirmation soon. Your number ending in 0451. Is there anything else? I can help you with today?
+recent_patient_answers:
+  - Actually, do you have anything Friday afternoon?
+  - Let's go with a Monday afternoon slot on July 6th. What times do you have available?
+  - I'll take the 3:00 p.m. slot on July 6th.
+  - Yes, I would like a text confirmation, please.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-043954_scheduling_CAb1ac11_RE543a209947dc2a6e351d60b8785e8f80.mp3
+
+turns:
+1. [2026-06-23T04:40:07.892621+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T04:40:09.339383+00:00] PATIENT: Hi, yes, this is Alex. I need to set up an appointment for next week.
+3. [2026-06-23T04:40:39.893210+00:00] OFFICE: Please provide your date of birth. Can you please tell me your date of birth? Are you still there?
+4. [2026-06-23T04:40:40.668757+00:00] PATIENT: My date of birth is January 12, 1990. Can we proceed with scheduling the appointment?
+5. [2026-06-23T04:41:01.388137+00:00] OFFICE: Thanks, Mike Alex. What is the main reason for your visit? For example is this for a routine checkup, a new patient consultation, a follow-up. Or something urgent.
+6. [2026-06-23T04:41:02.475963+00:00] PATIENT: This is for a routine follow-up appointment. Do you have anything available for me?
+7. [2026-06-23T04:41:23.997494+00:00] OFFICE: We have openings next week with duvie, Howser your primary provider on Monday, June 29th. There are appointments at 3 p.m. and 4 p.m. with either of those work for you.
+8. [2026-06-23T04:41:24.729879+00:00] PATIENT: Actually, do you have anything Friday afternoon?
+9. [2026-06-23T04:41:42.797583+00:00] OFFICE: It looks like there are no openings, this Friday afternoon but there are several on Monday. July 6th, would you like a Monday afternoon slot or should I check for next Friday, July 10th?
+10. [2026-06-23T04:41:43.521896+00:00] PATIENT: Let's go with a Monday afternoon slot on July 6th. What times do you have available?
+11. [2026-06-23T04:42:00.888272+00:00] OFFICE: On Monday, July 6th. There are openings at 1:00 p.m. 2, p.m. 3 p.m. and 4 p.m. with dubia Howser Would you like 1 of these times?
+12. [2026-06-23T04:42:01.841786+00:00] PATIENT: I'll take the 3:00 p.m. slot on July 6th.
+13. [2026-06-23T04:42:24.191430+00:00] OFFICE: Your follow-up appointment is set for Monday. July 6th at 3 p.m. with DUI. Howser please bring your photo ID, insurance card, a list of your current medications and any Imaging discs. If you have them, would you like a text confirmation?
+14. [2026-06-23T04:42:25.084767+00:00] PATIENT: Yes, I would like a text confirmation, please.
+15. [2026-06-23T04:42:40.191696+00:00] OFFICE: You'll get a text confirmation soon. Your number ending in 0451. Is there anything else? I can help you with today?
+16. [2026-06-23T04:42:40.191804+00:00] PATIENT: No, that's all I needed. Thanks, bye!

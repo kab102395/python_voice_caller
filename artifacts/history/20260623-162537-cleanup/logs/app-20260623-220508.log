@@ -1,0 +1,4 @@
+2026-06-23 15:05:08,922 INFO python_voice_caller twiml_start {"call_sid": "CA-smoke-controlled-refill", "scenario_id": "controlled_refill", "to": "+18054398008"}
+2026-06-23 15:05:08,925 INFO python_voice_caller office_speech_buffered {"buffer_length": 60, "call_sid": "CA-smoke-controlled-refill", "fragment_count": 1, "scenario_id": "controlled_refill"}
+2026-06-23 15:05:08,932 INFO python_voice_caller voice_turn {"call_sid": "CA-smoke-controlled-refill", "reply": "Hi, this is Alex Johnson, date of birth January 12 1990. I need a refill on my Adderall.", "scenario_id": "controlled_refill", "speech": "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics. Am I speaking with Alex?"}
+2026-06-23 15:05:08,934 INFO python_voice_caller recording_status {"CallSid": "CA-smoke-recording", "RecordingSid": "RE-smoke", "RecordingUrl": "https://example.com/recording"}

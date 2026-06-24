@@ -1,0 +1,22 @@
+call_sid: CA86a186214d0103caf0a5db16c3ab3287
+scenario_id: insurance
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T16:28:42.828429+00:00
+updated_at: 2026-06-23T16:29:05.432559+00:00
+status: started
+turn_count: 2
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, insurance
+optional_facts: employer_plan, insurance_card_upload, callback_number
+confirmed_facts:
+  - first_name: Alex
+recent_office_questions:
+  - this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+recent_patient_answers:
+  - Yes, this is Alex. Do you take my insurance?
+recording_path: artifacts\recordings\20260623-162842_insurance_CA86a186_RE3289087bc3ffd9264ae75e08deb19516.mp3
+
+turns:
+1. [2026-06-23T16:28:56.713944+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T16:28:56.713988+00:00] PATIENT: Yes, this is Alex. Do you take my insurance?

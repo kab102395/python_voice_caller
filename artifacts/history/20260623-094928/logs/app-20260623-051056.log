@@ -1,0 +1,2 @@
+2026-06-22 22:10:57,234 INFO python_voice_caller office_speech_buffered {"buffer_length": 19, "call_sid": "CA-buf", "fragment_count": 1, "scenario_id": "scheduling"}
+2026-06-22 22:10:57,234 INFO python_voice_caller reply_engine_disabled {"call_sid": "CA999", "error": "HTTP 429 from upstream", "reason": "quota", "scenario_id": "scheduling"}

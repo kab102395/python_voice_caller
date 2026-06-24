@@ -205,6 +205,9 @@ SCENARIOS: Dict[str, Dict[str, object]] = {'scheduling': {'objective': 'Book a r
                                                   'callback_number': '+1 (320) 381-0451'}}}
 
 
+# Identity is front-loaded in every scenario starter ("Hi, this is Alex Johnson, DOB January 12 1990...")
+# so PGAI can satisfy the identity gate on the first turn without a round-trip.
+# This prevents a buffer deadlock where PGAI waits 14 seconds for a DOB that never comes.
 def build_patient_prompt(
     *,
     objective: str,

@@ -1,0 +1,419 @@
+{
+  "call_sid": "CA49599474b721ad759e3c3b26c83cbbc1",
+  "scenario_id": "reschedule",
+  "to_number": "+18054398008",
+  "from_number": "+13203810451",
+  "call_memory": {
+    "scenario_id": "reschedule",
+    "objective": "Move an existing appointment to a different time.",
+    "patient_profile": {
+      "first_name": "Alex",
+      "last_name": "Johnson",
+      "date_of_birth": "January 12, 1990",
+      "phone": "+1 (320) 381-0451",
+      "callback_number": "+1 (320) 381-0451",
+      "street_address": "123 Main Street",
+      "city": "Hopkins",
+      "state": "MN",
+      "zip_code": "55301",
+      "insurance": "Blue Cross PPO",
+      "primary_insurance": "Blue Cross PPO",
+      "employer_plan": "Blue Cross PPO employer plan",
+      "insurance_card_upload": "ready to upload if needed",
+      "preferred_pharmacy": "Walgreens on Main Street",
+      "preferred_pharmacy_address": "123 Main Street, Hopkins, MN 55301",
+      "preferred_pharmacy_phone": "(320) 555-0148",
+      "preferred_pharmacy_fax": "(320) 555-0188",
+      "preferred_provider": "Dr. Doogie Howser",
+      "preferred_time_window": "Friday afternoon",
+      "visit_reason": "follow-up appointment",
+      "existing_appointment": "Tuesday, June 24 at 10:00 a.m. with Dr. Doogie Howser",
+      "appointment_to_cancel": "Thursday, June 26 at 2:00 p.m. with Dr. Zbigniew Lukoski",
+      "preferred_reschedule_window": "later this week",
+      "reason_for_reschedule": "a work conflict",
+      "reason_for_cancellation": "a family conflict",
+      "current_medication": "Lisinopril 10mg",
+      "controlled_medication": "Adderall 20mg",
+      "days_remaining": "3 days left",
+      "last_pickup_date": "last Thursday",
+      "issue_summary": "routine orthopedic follow-up",
+      "location_preference": "Hopkins clinic",
+      "doctor_preference": "Dr. Doogie Howser",
+      "alternative_verification": "phone number and address",
+      "question_topic": "office hours"
+    },
+    "required_facts": [
+      "first_name",
+      "last_name",
+      "date_of_birth",
+      "existing_appointment",
+      "preferred_reschedule_window"
+    ],
+    "optional_facts": [
+      "callback_number",
+      "reason_for_reschedule"
+    ],
+    "phase": "patient_turn",
+    "turn_count": 14,
+    "recent_office_questions": [
+      "The next available appointment is Wednesday, July 1st at 1 p.m. with Kelly Noble in Nashville. I also have Thursday July 2nd at 2 p.m. and Monday July 6th at 1 p.m. would you like to move your appointment to 1 of these times?",
+      "No problem. Can you tell me the reason you need to reschedule your appointment?",
+      "You'd like to move your appointment to Thursday, July 2nd at 2 pm, with Kelly Noble in Nashville due to a scheduling conflict is that correct. Once you confirm, I'll reschedule it for you remember to bring a photo ID in your insurance card to your appointment.",
+      "Your appointment has been rescheduled for Thursday July 2nd at 2 p.m. with Kelly Noble. MD, would you like me to send you a text message with these details?",
+      "You're going to text with your new appointment details soon. Is there anything else I can help you with today?"
+    ],
+    "recent_patient_answers": [
+      "Can we move it to Thursday, July 2nd at 2 p.m.?",
+      "I have a scheduling conflict, that's all.",
+      "Yes, that's correct.",
+      "Yes, that would be great.",
+      "No, that's all I needed. Thanks, bye!"
+    ],
+    "confirmed_facts": {
+      "first_name": "Alex",
+      "last_name": "Johnson"
+    },
+    "last_office_question": "You're going to text with your new appointment details soon. Is there anything else I can help you with today?",
+    "last_patient_answer": "No, that's all I needed. Thanks, bye!"
+  },
+  "started_at": "2026-06-23T23:58:09.037094+00:00",
+  "updated_at": "2026-06-24T00:00:35.347372+00:00",
+  "status": "completed",
+  "turn_count": 14,
+  "no_speech_count": 0,
+  "pending_prompt": "No, that's all I needed. Thanks, bye!",
+  "recording_sid": "REe59d08217b52ebdc7553486cdbc176d8",
+  "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/REe59d08217b52ebdc7553486cdbc176d8",
+  "recording_path": "artifacts\\recordings\\20260623-235809_reschedule_CA495994_REe59d08217b52ebdc7553486cdbc176d8.mp3",
+  "end_reason": "No, that's all I needed. Thanks, bye!",
+  "metadata": {
+    "source": "twilio",
+    "event_counts": {
+      "session_started": 1,
+      "transcript_line": 14,
+      "call_completed": 1,
+      "recording_ready": 1
+    },
+    "last_event": {
+      "call_sid": "CA49599474b721ad759e3c3b26c83cbbc1",
+      "event_type": "recording_ready",
+      "ts": "2026-06-24T00:00:36.855409+00:00",
+      "recording_sid": "REe59d08217b52ebdc7553486cdbc176d8",
+      "recording_url": "https://api.twilio.com/2010-04-01/Accounts/AC740dd09709b3435bd2a6606d9ef00a2b/Recordings/REe59d08217b52ebdc7553486cdbc176d8",
+      "recording_path": "artifacts\\recordings\\20260623-235809_reschedule_CA495994_REe59d08217b52ebdc7553486cdbc176d8.mp3"
+    },
+    "webhook": {
+      "twiml": "https://riptide-sublime-handwoven.ngrok-free.dev/twiml?scenario=reschedule"
+    }
+  },
+  "turns": [
+    {
+      "speaker": "office",
+      "text": "This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics art of pretty good AI. Am I speaking with Alex?",
+      "raw": {
+        "Confidence": "0.9493962",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Thanks for calling Pivot Point Orthopedics art of pretty good AI. Am I speaking with Alex?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA49599474b721ad759e3c3b26c83cbbc1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T23:58:22.821302+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T23:58:22.821358+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "You have a follow-up appointment scheduled for Thursday June 25th at 2:00 p.m. with Kelly Noble at Nashville. 220 Athens Way is this the appointment you want to reschedule?",
+      "raw": {
+        "Confidence": "0.94282675",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "You have a follow-up appointment scheduled for Thursday June 25th at 2:00 p.m. with Kelly Noble at Nashville. 220 Athens Way is this the appointment you want to reschedule?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA49599474b721ad759e3c3b26c83cbbc1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T23:58:55.720866+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's correct.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T23:58:55.720943+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "The next available appointment is Wednesday, July 1st at 1 p.m. with Kelly Noble in Nashville. I also have Thursday July 2nd at 2 p.m. and Monday July 6th at 1 p.m. would you like to move your appointment to 1 of these times?",
+      "raw": {
+        "Confidence": "0.93796694",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "The next available appointment is Wednesday, July 1st at 1 p.m. with Kelly Noble in Nashville. I also have Thursday July 2nd at 2 p.m. and Monday July 6th at 1 p.m. would you like to move your appointment to 1 of these times?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA49599474b721ad759e3c3b26c83cbbc1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T23:59:17.122407+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Can we move it to Thursday, July 2nd at 2 p.m.?",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T23:59:18.784726+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "No problem. Can you tell me the reason you need to reschedule your appointment?",
+      "raw": {
+        "Confidence": "0.9719477",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "No problem.  Can you tell me the reason you need to reschedule your appointment?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA49599474b721ad759e3c3b26c83cbbc1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T23:59:31.409516+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "I have a scheduling conflict, that's all.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T23:59:32.341726+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "You'd like to move your appointment to Thursday, July 2nd at 2 pm, with Kelly Noble in Nashville due to a scheduling conflict is that correct. Once you confirm, I'll reschedule it for you remember to bring a photo ID in your insurance card to your appointment.",
+      "raw": {
+        "Confidence": "0.94435316",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "You'd like to move your appointment to Thursday, July 2nd at 2 pm, with Kelly Noble in Nashville due to a scheduling conflict is that correct. Once you confirm, I'll reschedule it for you remember to bring a photo ID in your insurance card to your appointment.",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA49599474b721ad759e3c3b26c83cbbc1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-23T23:59:54.221343+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that's correct.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-23T23:59:54.221434+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "Your appointment has been rescheduled for Thursday July 2nd at 2 p.m. with Kelly Noble. MD, would you like me to send you a text message with these details?",
+      "raw": {
+        "Confidence": "0.96028864",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "Your appointment has been rescheduled for Thursday July 2nd at 2 p.m. with Kelly Noble. MD, would you like me to send you a text message with these details?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA49599474b721ad759e3c3b26c83cbbc1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-24T00:00:13.020317+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "Yes, that would be great.",
+      "raw": {
+        "source": "engine",
+        "should_hangup": false
+      },
+      "ts": "2026-06-24T00:00:13.757668+00:00"
+    },
+    {
+      "speaker": "office",
+      "text": "You're going to text with your new appointment details soon. Is there anything else I can help you with today?",
+      "raw": {
+        "Confidence": "0.98047924",
+        "Called": "+18054398008",
+        "ToState": "CA",
+        "CallerCountry": "US",
+        "Direction": "outbound-api",
+        "SpeechResult": "You're going to text with your new appointment details soon. Is there anything else I can help you with today?",
+        "CallerState": "MN",
+        "Language": "en-US",
+        "ToZip": "93401",
+        "CallSid": "CA49599474b721ad759e3c3b26c83cbbc1",
+        "To": "+18054398008",
+        "CallerZip": "",
+        "ToCountry": "US",
+        "CalledZip": "93401",
+        "ApiVersion": "2010-04-01",
+        "CalledCity": "SAN LUIS OBISPO",
+        "CallStatus": "in-progress",
+        "From": "+13203810451",
+        "AccountSid": "AC740dd09709b3435bd2a6606d9ef00a2b",
+        "CalledCountry": "US",
+        "CallerCity": "",
+        "ToCity": "SAN LUIS OBISPO",
+        "FromCountry": "US",
+        "Caller": "+13203810451",
+        "FromCity": "",
+        "CalledState": "CA",
+        "FromZip": "",
+        "FromState": "MN"
+      },
+      "ts": "2026-06-24T00:00:27.915635+00:00"
+    },
+    {
+      "speaker": "patient",
+      "text": "No, that's all I needed. Thanks, bye!",
+      "raw": {
+        "source": "engine",
+        "should_hangup": true
+      },
+      "ts": "2026-06-24T00:00:27.915727+00:00"
+    }
+  ]
+}

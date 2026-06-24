@@ -1,0 +1,48 @@
+call_sid: CAc044f96d117d2643e79d2e9027a2c6bf
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T17:37:34.731174+00:00
+updated_at: 2026-06-23T17:40:20.480467+00:00
+status: completed
+turn_count: 16
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - visit_reason: routine follow-up appointment
+  - preferred_time_window: Friday afternoon
+recent_office_questions:
+  - Let me check for Friday afternoon, openings with Kelly Noble next week.
+  - Afternoon openings with Kelly Noble next week but there are spots on Monday July 6th at 1 pm and 2 p.m. would either of those work for you or would you like me to check other days?
+  - Kelly Noble has openings on Friday July 10th at 1 p.m. and 2 p.m. Would you like to book 1 of those times?
+  - Your follow-up appointment is set for Friday. July 10th at 1:00 p.m. with Kelly Noble. Please bring your photo ID, insurance card, a list of your current medications and any Imaging discs. You have. Would you like a text message with your appointment details?
+  - I sent the appointment details to your phone. Is there anything else I can help you with today?
+recent_patient_answers:
+  - Thank you! I'll wait for your update.
+  - I’m looking for Friday afternoon. Can you check for that?
+  - Yes, let's book the appointment for Friday, July 10th at 1 p.m.
+  - Yes, please send me a text message with the appointment details.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-173734_scheduling_CAc044f9_REbec42c0c47757e7556e8628d8deb0b90.mp3
+
+turns:
+1. [2026-06-23T17:37:49.027893+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T17:37:49.027960+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to set up an appointment for next week.
+3. [2026-06-23T17:38:14.632298+00:00] OFFICE: Alex, what type of appointment do you need? Are you looking for a routine office? Visit a follow-up, something urgent or a procedure.
+4. [2026-06-23T17:38:15.536479+00:00] PATIENT: I need a routine follow-up appointment. Do you have anything available for next week?
+5. [2026-06-23T17:38:42.025745+00:00] OFFICE: We have several openings next week for a routine follow-up. Do you have a preferred provider? Doogie Howser Carl? Mens or Kelly Noble or would you like the first available?
+6. [2026-06-23T17:38:42.913482+00:00] PATIENT: I'll go with Kelly Noble. Actually, do you have anything Friday afternoon?
+7. [2026-06-23T17:38:57.829561+00:00] OFFICE: Let me check for Friday afternoon, openings with Kelly Noble next week.
+8. [2026-06-23T17:38:58.452386+00:00] PATIENT: Thank you! I'll wait for your update.
+9. [2026-06-23T17:39:11.741970+00:00] OFFICE: Afternoon openings with Kelly Noble next week but there are spots on Monday July 6th at 1 pm and 2 p.m. would either of those work for you or would you like me to check other days?
+10. [2026-06-23T17:39:12.545965+00:00] PATIENT: I’m looking for Friday afternoon. Can you check for that?
+11. [2026-06-23T17:39:29.834084+00:00] OFFICE: Kelly Noble has openings on Friday July 10th at 1 p.m. and 2 p.m. Would you like to book 1 of those times?
+12. [2026-06-23T17:39:30.509332+00:00] PATIENT: Yes, let's book the appointment for Friday, July 10th at 1 p.m.
+13. [2026-06-23T17:39:56.934324+00:00] OFFICE: Your follow-up appointment is set for Friday. July 10th at 1:00 p.m. with Kelly Noble. Please bring your photo ID, insurance card, a list of your current medications and any Imaging discs. You have. Would you like a text message with your appointment details?
+14. [2026-06-23T17:39:57.987280+00:00] PATIENT: Yes, please send me a text message with the appointment details.
+15. [2026-06-23T17:40:12.030074+00:00] OFFICE: I sent the appointment details to your phone. Is there anything else I can help you with today?
+16. [2026-06-23T17:40:12.030164+00:00] PATIENT: No, that's all I needed. Thanks, bye!

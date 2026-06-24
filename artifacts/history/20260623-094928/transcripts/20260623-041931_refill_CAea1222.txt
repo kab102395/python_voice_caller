@@ -1,0 +1,48 @@
+call_sid: CAea12222396dd036071fb8705cb223659
+scenario_id: refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:19:31.731675+00:00
+updated_at: 2026-06-23T04:21:17.105848+00:00
+status: completed
+turn_count: 16
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, current_medication, days_remaining
+optional_facts: callback_number, preferred_pharmacy
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - controlled_medication: Adderall 20mg
+  - days_remaining: 3 days left
+recent_office_questions:
+  - The birth date doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+  - Which medication would you like to refill today?
+  - How many days of outer all? Do you have left? If you were already out, just let me know.
+  - I have your number is 320 381 0451 is that correct for a call back?
+  - Is there anything else you'd like the clinic to know about your refill request, for example, any symptoms urgency or other notes?
+recent_patient_answers:
+  - I'm calling to refill my prescription.
+  - I need a refill for Adderall 20mg.
+  - I have 3 days left.
+  - Yes, that's correct.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-041931_refill_CAea1222_REa8ed41d96cb4824557fcfa5c0934b155.mp3
+
+turns:
+1. [2026-06-23T04:19:38.194462+00:00] OFFICE: This call may be recorded for quality and training purposes.
+2. [2026-06-23T04:19:39.096701+00:00] PATIENT: I'm calling to refill my prescription.
+3. [2026-06-23T04:19:47.089157+00:00] OFFICE: Point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+4. [2026-06-23T04:19:47.759820+00:00] PATIENT: Yes, this is Alex.
+5. [2026-06-23T04:19:56.396865+00:00] OFFICE: Please provide your date of birth.
+6. [2026-06-23T04:19:57.072954+00:00] PATIENT: My date of birth is January 12, 1990.
+7. [2026-06-23T04:20:12.093908+00:00] OFFICE: The birth date doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+8. [2026-06-23T04:20:12.776759+00:00] PATIENT: I'm calling to refill my prescription.
+9. [2026-06-23T04:20:27.095211+00:00] OFFICE: Which medication would you like to refill today?
+10. [2026-06-23T04:20:27.837809+00:00] PATIENT: I need a refill for Adderall 20mg.
+11. [2026-06-23T04:20:39.988972+00:00] OFFICE: How many days of outer all? Do you have left? If you were already out, just let me know.
+12. [2026-06-23T04:20:40.720158+00:00] PATIENT: I have 3 days left.
+13. [2026-06-23T04:20:54.793973+00:00] OFFICE: I have your number is 320 381 0451 is that correct for a call back?
+14. [2026-06-23T04:20:55.487781+00:00] PATIENT: Yes, that's correct.
+15. [2026-06-23T04:21:09.390764+00:00] OFFICE: Is there anything else you'd like the clinic to know about your refill request, for example, any symptoms urgency or other notes?
+16. [2026-06-23T04:21:09.390865+00:00] PATIENT: No, that's all I needed. Thanks, bye!

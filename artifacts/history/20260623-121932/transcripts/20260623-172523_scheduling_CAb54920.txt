@@ -1,0 +1,43 @@
+call_sid: CAb549209e2b4434af8cb257fc19a42891
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T17:25:23.998996+00:00
+updated_at: 2026-06-23T17:27:27.244362+00:00
+status: completed
+turn_count: 12
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - visit_reason: routine follow-up appointment
+recent_office_questions:
+  - Hi, Alex, can you tell me a bit about the reason for your visit? For example, is this for a routine checkup, a new concern, a follow-up or something else.
+  - Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?
+  - it looks like you already have a follow-up appointment, booked If you'd like, I can help you reschedule or cancel, your existing appointment, or I can connect you to a team member for more help, what would you like to do?
+  - I'm not able to reschedule appointments directly, but I can connect you to a team member who can help with that. Would you like me to transfer you now?
+  - Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+recent_patient_answers:
+  - This is for a routine follow-up appointment. Do you have anything available for next week?
+  - Yes, that's correct.
+  - I would like to reschedule my existing appointment. Can you help me with that?
+  - Yes, please transfer me to a team member who can help with rescheduling.
+  - Thanks, that helps. Bye.
+end_reason: Thanks, that helps. Bye.
+recording_path: artifacts\recordings\20260623-172523_scheduling_CAb54920_RE9da2dfb2dbd4437249944360e917d175.mp3
+
+turns:
+1. [2026-06-23T17:25:37.916031+00:00] OFFICE: this call may be recorded for quality and training purposes, but Thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T17:25:37.916094+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to set up an appointment for next week.
+3. [2026-06-23T17:26:06.813964+00:00] OFFICE: Hi, Alex, can you tell me a bit about the reason for your visit? For example, is this for a routine checkup, a new concern, a follow-up or something else.
+4. [2026-06-23T17:26:07.828210+00:00] PATIENT: This is for a routine follow-up appointment. Do you have anything available for next week?
+5. [2026-06-23T17:26:22.129562+00:00] OFFICE: Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?
+6. [2026-06-23T17:26:22.129710+00:00] PATIENT: Yes, that's correct.
+7. [2026-06-23T17:26:44.808395+00:00] OFFICE: it looks like you already have a follow-up appointment, booked If you'd like, I can help you reschedule or cancel, your existing appointment, or I can connect you to a team member for more help, what would you like to do?
+8. [2026-06-23T17:26:45.558383+00:00] PATIENT: I would like to reschedule my existing appointment. Can you help me with that?
+9. [2026-06-23T17:27:01.507062+00:00] OFFICE: I'm not able to reschedule appointments directly, but I can connect you to a team member who can help with that. Would you like me to transfer you now?
+10. [2026-06-23T17:27:02.410204+00:00] PATIENT: Yes, please transfer me to a team member who can help with rescheduling.
+11. [2026-06-23T17:27:20.220347+00:00] OFFICE: Connecting you to a representative, please wait. Hello, you've reached the pretty good. AI test line, goodbye.
+12. [2026-06-23T17:27:20.220432+00:00] PATIENT: Thanks, that helps. Bye.

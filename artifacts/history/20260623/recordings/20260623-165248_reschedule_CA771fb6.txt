@@ -1,0 +1,40 @@
+call_sid: CA771fb66d2a4885ca5e078b6332f4a384
+scenario_id: reschedule
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T16:52:48.769088+00:00
+updated_at: 2026-06-23T16:54:59.600148+00:00
+status: started
+turn_count: 10
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment, preferred_reschedule_window
+optional_facts: callback_number, reason_for_reschedule
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+  - preferred_reschedule_window: later this week
+recent_office_questions:
+  - This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+  - You have a follow-up appointment scheduled for Monday. July 6th at 3 p.m. at Nashville. 220 Athens Way with dubia Howser is this the appointment you want to reschedule?
+  - I look a few options related this week. The soonest is Wednesday, June 24th at 3 p.m. there are also openings on Thursday June 25th at 10:00 a.m. and 3 p.m. would any of these work for you?
+  - Caught it. Can you tell me the reason you need to reschedule your appointment?
+  - Thank you just to confirm, you want to move your follow-up appointment with Duty Howser to Thursday June 25th at 10:00 a.m. at Nashville 220 Athens way. Is that correct? You'll need to bring a photo ID and your insurance card.
+recent_patient_answers:
+  - Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.
+  - Yes, that's the appointment I want to reschedule. Can we move it to later this week?
+  - I would like to reschedule to Thursday, June 25th at 10:00 a.m.
+  - I have a scheduling conflict, that's all.
+  - Yes, that's correct. Thank you!
+recording_path: artifacts\recordings\20260623-165248_reschedule_CA771fb6_RE948e2ecef133625709039dc991356795.mp3
+
+turns:
+1. [2026-06-23T16:53:03.345067+00:00] OFFICE: This call may be recorded for quality and training purposes. thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+2. [2026-06-23T16:53:03.345119+00:00] PATIENT: Yes, this is Alex. Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.
+3. [2026-06-23T16:53:32.249640+00:00] OFFICE: You have a follow-up appointment scheduled for Monday. July 6th at 3 p.m. at Nashville. 220 Athens Way with dubia Howser is this the appointment you want to reschedule?
+4. [2026-06-23T16:53:33.360661+00:00] PATIENT: Yes, that's the appointment I want to reschedule. Can we move it to later this week?
+5. [2026-06-23T16:53:58.747076+00:00] OFFICE: I look a few options related this week. The soonest is Wednesday, June 24th at 3 p.m. there are also openings on Thursday June 25th at 10:00 a.m. and 3 p.m. would any of these work for you?
+6. [2026-06-23T16:53:59.843930+00:00] PATIENT: I would like to reschedule to Thursday, June 25th at 10:00 a.m.
+7. [2026-06-23T16:54:12.049448+00:00] OFFICE: Caught it. Can you tell me the reason you need to reschedule your appointment?
+8. [2026-06-23T16:54:12.871970+00:00] PATIENT: I have a scheduling conflict, that's all.
+9. [2026-06-23T16:54:34.750724+00:00] OFFICE: Thank you just to confirm, you want to move your follow-up appointment with Duty Howser to Thursday June 25th at 10:00 a.m. at Nashville 220 Athens way. Is that correct? You'll need to bring a photo ID and your insurance card.
+10. [2026-06-23T16:54:35.601769+00:00] PATIENT: Yes, that's correct. Thank you!

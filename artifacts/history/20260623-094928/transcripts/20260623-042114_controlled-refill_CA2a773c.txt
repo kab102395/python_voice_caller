@@ -1,0 +1,44 @@
+call_sid: CA2a773c1dc1128b2013c219fadc5cec84
+scenario_id: controlled_refill
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:21:14.634148+00:00
+updated_at: 2026-06-23T04:22:50.183714+00:00
+status: completed
+turn_count: 14
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, controlled_medication, preferred_pharmacy
+optional_facts: preferred_pharmacy_address, callback_number
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+recent_office_questions:
+  - Please provide your date of birth.
+  - The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+  - How many days of Adderall do you have left?
+  - I have 3 days left for your adderal. When is the best phone number for a call back? I had her number is 320, 381 0451. Is that correct?
+  - Is there anything else you'd like a clinic to know about your refill request? for example, any symptoms urgency or other notes,
+recent_patient_answers:
+  - My date of birth is January 12, 1990.
+  - I need a refill on my Adderall.
+  - I have about three days left.
+  - Yes, that's correct.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-042114_controlled-refill_CA2a773c_RE5fba039e40e8eae15bffcd24c000d2fc.mp3
+
+turns:
+1. [2026-06-23T04:21:21.102766+00:00] OFFICE: This call may be recorded for quality and training purposes.
+2. [2026-06-23T04:21:21.781935+00:00] PATIENT: I need a refill on my Adderall.
+3. [2026-06-23T04:21:29.598728+00:00] OFFICE: Pivot Point Orthopedics, part of pretty good AI. Am I speaking with Alex?
+4. [2026-06-23T04:21:31.741653+00:00] PATIENT: Yes, this is Alex.
+5. [2026-06-23T04:21:40.599080+00:00] OFFICE: Please provide your date of birth.
+6. [2026-06-23T04:21:41.571770+00:00] PATIENT: My date of birth is January 12, 1990.
+7. [2026-06-23T04:21:55.901612+00:00] OFFICE: The birthday doesn't match our records, but for demo purposes, I'll accept it. How can I help you today?
+8. [2026-06-23T04:21:56.707750+00:00] PATIENT: I need a refill on my Adderall.
+9. [2026-06-23T04:22:08.800858+00:00] OFFICE: How many days of Adderall do you have left?
+10. [2026-06-23T04:22:09.538646+00:00] PATIENT: I have about three days left.
+11. [2026-06-23T04:22:27.704021+00:00] OFFICE: I have 3 days left for your adderal. When is the best phone number for a call back? I had her number is 320, 381 0451. Is that correct?
+12. [2026-06-23T04:22:28.316540+00:00] PATIENT: Yes, that's correct.
+13. [2026-06-23T04:22:42.400422+00:00] OFFICE: Is there anything else you'd like a clinic to know about your refill request? for example, any symptoms urgency or other notes,
+14. [2026-06-23T04:22:42.400515+00:00] PATIENT: No, that's all I needed. Thanks, bye!

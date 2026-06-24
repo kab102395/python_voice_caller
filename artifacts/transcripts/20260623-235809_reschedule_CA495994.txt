@@ -1,0 +1,44 @@
+call_sid: CA49599474b721ad759e3c3b26c83cbbc1
+scenario_id: reschedule
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T23:58:09.037094+00:00
+updated_at: 2026-06-24T00:00:35.347372+00:00
+status: completed
+turn_count: 14
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, existing_appointment, preferred_reschedule_window
+optional_facts: callback_number, reason_for_reschedule
+confirmed_facts:
+  - first_name: Alex
+  - last_name: Johnson
+recent_office_questions:
+  - The next available appointment is Wednesday, July 1st at 1 p.m. with Kelly Noble in Nashville. I also have Thursday July 2nd at 2 p.m. and Monday July 6th at 1 p.m. would you like to move your appointment to 1 of these times?
+  - No problem. Can you tell me the reason you need to reschedule your appointment?
+  - You'd like to move your appointment to Thursday, July 2nd at 2 pm, with Kelly Noble in Nashville due to a scheduling conflict is that correct. Once you confirm, I'll reschedule it for you remember to bring a photo ID in your insurance card to your appointment.
+  - Your appointment has been rescheduled for Thursday July 2nd at 2 p.m. with Kelly Noble. MD, would you like me to send you a text message with these details?
+  - You're going to text with your new appointment details soon. Is there anything else I can help you with today?
+recent_patient_answers:
+  - Can we move it to Thursday, July 2nd at 2 p.m.?
+  - I have a scheduling conflict, that's all.
+  - Yes, that's correct.
+  - Yes, that would be great.
+  - No, that's all I needed. Thanks, bye!
+end_reason: No, that's all I needed. Thanks, bye!
+recording_path: artifacts\recordings\20260623-235809_reschedule_CA495994_REe59d08217b52ebdc7553486cdbc176d8.mp3
+
+turns:
+1. [2026-06-23T23:58:22.821302+00:00] OFFICE: This call may be recorded for quality and training purposes. Thanks for calling Pivot Point Orthopedics art of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T23:58:22.821358+00:00] PATIENT: Hi, this is Alex Johnson, date of birth January 12 1990. I need to reschedule my appointment.
+3. [2026-06-23T23:58:55.720866+00:00] OFFICE: You have a follow-up appointment scheduled for Thursday June 25th at 2:00 p.m. with Kelly Noble at Nashville. 220 Athens Way is this the appointment you want to reschedule?
+4. [2026-06-23T23:58:55.720943+00:00] PATIENT: Yes, that's correct.
+5. [2026-06-23T23:59:17.122407+00:00] OFFICE: The next available appointment is Wednesday, July 1st at 1 p.m. with Kelly Noble in Nashville. I also have Thursday July 2nd at 2 p.m. and Monday July 6th at 1 p.m. would you like to move your appointment to 1 of these times?
+6. [2026-06-23T23:59:18.784726+00:00] PATIENT: Can we move it to Thursday, July 2nd at 2 p.m.?
+7. [2026-06-23T23:59:31.409516+00:00] OFFICE: No problem. Can you tell me the reason you need to reschedule your appointment?
+8. [2026-06-23T23:59:32.341726+00:00] PATIENT: I have a scheduling conflict, that's all.
+9. [2026-06-23T23:59:54.221343+00:00] OFFICE: You'd like to move your appointment to Thursday, July 2nd at 2 pm, with Kelly Noble in Nashville due to a scheduling conflict is that correct. Once you confirm, I'll reschedule it for you remember to bring a photo ID in your insurance card to your appointment.
+10. [2026-06-23T23:59:54.221434+00:00] PATIENT: Yes, that's correct.
+11. [2026-06-24T00:00:13.020317+00:00] OFFICE: Your appointment has been rescheduled for Thursday July 2nd at 2 p.m. with Kelly Noble. MD, would you like me to send you a text message with these details?
+12. [2026-06-24T00:00:13.757668+00:00] PATIENT: Yes, that would be great.
+13. [2026-06-24T00:00:27.915635+00:00] OFFICE: You're going to text with your new appointment details soon. Is there anything else I can help you with today?
+14. [2026-06-24T00:00:27.915727+00:00] PATIENT: No, that's all I needed. Thanks, bye!

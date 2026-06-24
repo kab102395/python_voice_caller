@@ -1,0 +1,52 @@
+call_sid: CAa4a4c7b33ef13214ddbd7cde426606ce
+scenario_id: scheduling
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T15:38:57.729361+00:00
+updated_at: 2026-06-23T15:41:45.127756+00:00
+status: completed
+turn_count: 20
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, date_of_birth, visit_reason, preferred_time_window
+optional_facts: phone, insurance
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+  - visit_reason: routine follow-up appointment
+  - preferred_time_window: Friday afternoon
+recent_office_questions:
+  - Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+  - It looks like you already have a follow-up consultation booked if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for further assistance, what would you like to do?
+  - I can help with that. Could you tell me your preferred day or time of day next week for your rescheduled appointment?
+  - I'm unable to reschedule your follow-up consultation directly, All Connect you to a team member who can assist further, please hold for a moment.
+  - I have Friday June 26th at 3 p.m. available for your follow-up in Nashville. Would you like to reschedule to that time? Or would you prefer Friday? July 10th, or July 17th? At 3 p.m.
+recent_patient_answers:
+  - I'm open to any available provider.
+  - I'd like to reschedule the follow-up consultation.
+  - Actually, do you have anything Friday afternoon?
+  - Okay, I'll hold.
+  - I prefer Friday, July 10th at 3 p.m.
+end_reason: completed
+recording_path: artifacts\recordings\20260623-153857_scheduling_CAa4a4c7_REe035f49ec38475f5212c6dbf90d62afc.mp3
+
+turns:
+1. [2026-06-23T15:39:02.830910+00:00] OFFICE: This call may be recorded for quality and training purposes.
+2. [2026-06-23T15:39:02.830961+00:00] PATIENT: Hi, I need to set up an appointment for next week.
+3. [2026-06-23T15:39:11.427357+00:00] OFFICE: thanks for calling Pivot Point Orthopedics part of pretty good AI my speaking with Alex
+4. [2026-06-23T15:39:13.589569+00:00] PATIENT: Yes, this is Alex. I need to set up an appointment for next week.
+5. [2026-06-23T15:39:23.324424+00:00] OFFICE: Please provide your date of birth.
+6. [2026-06-23T15:39:24.335272+00:00] PATIENT: My date of birth is January 12, 1990.
+7. [2026-06-23T15:39:49.620877+00:00] OFFICE: Thanks Alex, what type of appointment? Would you like to schedule for next week? For example, is this a general office, visit a follow-up, a new patient consultation or something else.
+8. [2026-06-23T15:39:51.041497+00:00] PATIENT: This is for a routine follow-up appointment.
+9. [2026-06-23T15:40:03.015887+00:00] OFFICE: Just to confirm, you'd like to book a follow-up consultation for next week. Is that correct?
+10. [2026-06-23T15:40:04.219214+00:00] PATIENT: Yes, that's correct. I'd like to book a follow-up consultation for next week.
+11. [2026-06-23T15:40:18.919947+00:00] OFFICE: Do you have a specific provider? You'd like to see? Or are you open to any available provider?
+12. [2026-06-23T15:40:19.885277+00:00] PATIENT: I'm open to any available provider.
+13. [2026-06-23T15:40:44.713824+00:00] OFFICE: It looks like you already have a follow-up consultation booked if you'd like I can help you reschedule or cancel that appointment or I can connect you to a team member for further assistance, what would you like to do?
+14. [2026-06-23T15:40:45.639742+00:00] PATIENT: I'd like to reschedule the follow-up consultation.
+15. [2026-06-23T15:40:57.920461+00:00] OFFICE: I can help with that. Could you tell me your preferred day or time of day next week for your rescheduled appointment?
+16. [2026-06-23T15:40:58.537353+00:00] PATIENT: Actually, do you have anything Friday afternoon?
+17. [2026-06-23T15:41:15.627355+00:00] OFFICE: I'm unable to reschedule your follow-up consultation directly, All Connect you to a team member who can assist further, please hold for a moment.
+18. [2026-06-23T15:41:16.300435+00:00] PATIENT: Okay, I'll hold.
+19. [2026-06-23T15:41:36.821344+00:00] OFFICE: I have Friday June 26th at 3 p.m. available for your follow-up in Nashville. Would you like to reschedule to that time? Or would you prefer Friday? July 10th, or July 17th? At 3 p.m.
+20. [2026-06-23T15:41:37.824954+00:00] PATIENT: I prefer Friday, July 10th at 3 p.m.

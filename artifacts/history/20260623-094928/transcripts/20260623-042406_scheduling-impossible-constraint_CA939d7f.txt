@@ -1,0 +1,43 @@
+call_sid: CA939d7facd3d8cff335e2064fb3bc8ada
+scenario_id: scheduling_impossible_constraint
+from_number: +13203810451
+to_number: +18054398008
+started_at: 2026-06-23T04:24:06.281305+00:00
+updated_at: 2026-06-23T04:26:36.213738+00:00
+status: started
+turn_count: 14
+call_memory_phase: patient_turn
+required_facts: first_name, last_name, preferred_time_window
+optional_facts: location_preference, doctor_preference
+confirmed_facts:
+  - first_name: Alex
+  - date_of_birth: January 12, 1990
+recent_office_questions:
+  - The birth day doesn't match our records, but for devil purposes. I'll accept it. How can I help you in the next 2 hours? Are you looking to book an appointment or something else?
+  - Are you having an urgent issue or is this for a routine checkup?
+  - There are no openings tonight but I can offer you a routine checkup tomorrow with Dr. Zig mu lokosee the earliest times are 2:30 p.m. 3:00 p.m. or 3:30 p.m. would any of these work for you?
+  - I do not see any available appointments today. Would you like me to check for other providers later this week? Or would you prefer to speak with someone from the office for more help?
+  - Let me check if there are any other providers or last minute, openings, for today, 1 moment. I checked all providers and there is still no openings today the soonest available is tomorrow, would you like to book for tomorrow or should I connect you with the office for further help?
+recent_patient_answers:
+  - I need an appointment today, in the next two hours.
+  - This is for a routine checkup.
+  - That doctor doesn't work for me. I still need something today.
+  - I still need something today. Please help me find an appointment.
+  - I still need something today.
+recording_path: artifacts\recordings\20260623-042406_scheduling-impossible-constraint_CA939d7f_RE31d2797fb1a3de0bf8f3f4881f6b5133.mp3
+
+turns:
+1. [2026-06-23T04:24:21.377552+00:00] OFFICE: this call may be recorded for quality and training purposes, but thanks for calling Pivot Point Orthopedics. Part of pretty good AI. Am I speaking with Alex?
+2. [2026-06-23T04:24:22.332713+00:00] PATIENT: Yes, this is Alex. I need an appointment today, in the next two hours.
+3. [2026-06-23T04:24:33.457870+00:00] OFFICE: Please provide your date of birth.
+4. [2026-06-23T04:24:34.289762+00:00] PATIENT: My date of birth is January 12, 1990.
+5. [2026-06-23T04:24:51.362881+00:00] OFFICE: The birth day doesn't match our records, but for devil purposes. I'll accept it. How can I help you in the next 2 hours? Are you looking to book an appointment or something else?
+6. [2026-06-23T04:24:52.120548+00:00] PATIENT: I need an appointment today, in the next two hours.
+7. [2026-06-23T04:25:03.856334+00:00] OFFICE: Are you having an urgent issue or is this for a routine checkup?
+8. [2026-06-23T04:25:04.606487+00:00] PATIENT: This is for a routine checkup.
+9. [2026-06-23T04:25:27.660685+00:00] OFFICE: There are no openings tonight but I can offer you a routine checkup tomorrow with Dr. Zig mu lokosee the earliest times are 2:30 p.m. 3:00 p.m. or 3:30 p.m. would any of these work for you?
+10. [2026-06-23T04:25:28.537401+00:00] PATIENT: That doctor doesn't work for me. I still need something today.
+11. [2026-06-23T04:25:46.252070+00:00] OFFICE: I do not see any available appointments today. Would you like me to check for other providers later this week? Or would you prefer to speak with someone from the office for more help?
+12. [2026-06-23T04:25:47.035392+00:00] PATIENT: I still need something today. Please help me find an appointment.
+13. [2026-06-23T04:26:12.553615+00:00] OFFICE: Let me check if there are any other providers or last minute, openings, for today, 1 moment. I checked all providers and there is still no openings today the soonest available is tomorrow, would you like to book for tomorrow or should I connect you with the office for further help?
+14. [2026-06-23T04:26:31.772472+00:00] PATIENT: I still need something today.
