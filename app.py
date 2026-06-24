@@ -244,6 +244,14 @@ def log_event(event: str, payload: dict[str, Any]) -> None:
     logger.info("%s %s", event, json.dumps(payload, sort_keys=True))
 
 
+_LOG_TS_RE = re.compile(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})")
+
+
+def _log_sort_key(line: str) -> str:
+    m = _LOG_TS_RE.match(line)
+    return m.group(1) if m else ""
+
+
 def tail_text_file(path: Path, *, limit_lines: int = 120) -> list[str]:
     if not path.exists():
         return []
@@ -530,6 +538,7 @@ def call_summary(session: CallSession) -> dict[str, Any]:
         "status": session.status,
         "turn_count": session.turn_count,
         "no_speech_count": session.no_speech_count,
+        "elapsed_seconds": call_elapsed_seconds(session),
         "end_reason": session.end_reason,
         "recording_sid": session.recording_sid,
         "recording_url": session.recording_url,
@@ -1125,6 +1134,14 @@ async def voice(request: Request) -> Response:
             session.status = "completed"
             session.end_reason = "no_speech_timeout"
             session.save()
+            publish_call_event(
+                session,
+                "call_completed",
+                {
+                    "reason": session.end_reason,
+                    "status": session.status,
+                },
+            )
             return Response(
                 content=render_hard_stop_twiml(
                     voice=_settings.twilio_voice,
@@ -1143,6 +1160,7 @@ async def voice(request: Request) -> Response:
         )
         return Response(content=body, media_type="text/xml")
 
+    session.no_speech_count = 0
     staged_speech = maybe_stage_office_speech(session, speech)
     if staged_speech is None:
         session.updated_at = utc_now()
@@ -1397,13 +1415,11 @@ async def api_live_logs(source: str = "app", limit: int = 120) -> dict[str, Any]
     if source == "combined":
         items: list[dict[str, Any]] = []
         for name, path in LIVE_LOG_SOURCES.items():
-            items.extend(
-                {
-                    "source": name,
-                    "line": line,
-                }
-                for line in tail_text_file(path, limit_lines=limit)
-            )
+            for line in tail_text_file(path, limit_lines=limit):
+                items.append({"source": name, "line": line, "_ts": _log_sort_key(line)})
+        items.sort(key=lambda x: x["_ts"])
+        for item in items:
+            del item["_ts"]
         return {"items": items[-limit:]}
     path = LIVE_LOG_SOURCES.get(source)
     if not path:
